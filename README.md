@@ -3,183 +3,138 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dcyberx — CyberTech</title>
+  <title>Dcyberx — Kali Linux Glow</title>
 
-  <!-- Hacker font -->
+  <!-- Hacker Font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#050606;
-      --panel:#071012;
-      --green:#39ff14;
-      --muted:#9bdc9b;
+    :root {
+      --bg: #000000;
+      --glow: #00fff7;
+      --glow2: #00aaff;
+      --green: #39ff14;
     }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:"Fira Code", monospace;
-      background:radial-gradient(ellipse at top left, #041014 0%, var(--bg) 50%);
-      color:var(--green);
-      -webkit-font-smoothing:antialiased;
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(circle at center, #020608 0%, var(--bg) 100%);
+      font-family: "Fira Code", monospace;
+      color: var(--green);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
-    .container{
-      max-width:1000px;
-      margin:40px auto;
-      padding:28px;
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:28px;
+
+    .logo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 25px;
     }
-    header{display:flex;gap:16px;align-items:center}
-    .avatar{
-      width:88px;height:88px;border-radius:12px;overflow:hidden;
-      border:2px solid rgba(57,255,20,0.3);
-      background:linear-gradient(180deg, rgba(57,255,20,0.1), rgba(57,255,20,0.05));
+    svg {
+      width: 300px;
+      height: 300px;
+      filter: drop-shadow(0 0 15px var(--glow))
+              drop-shadow(0 0 30px var(--glow2))
+              drop-shadow(0 0 50px var(--glow));
+      animation: pulse 3s ease-in-out infinite;
     }
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    h1{margin:0;font-size:28px;letter-spacing:0.4px}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .card{
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(57,255,20,0.1);
-      padding:18px;
-      border-radius:10px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.6)
+    @keyframes pulse {
+      0%,100% {
+        filter: drop-shadow(0 0 15px var(--glow)) 
+                drop-shadow(0 0 30px var(--glow2)) 
+                drop-shadow(0 0 50px var(--glow));
+      }
+      50% {
+        filter: drop-shadow(0 0 25px var(--glow)) 
+                drop-shadow(0 0 50px var(--glow2)) 
+                drop-shadow(0 0 80px var(--glow));
+      }
     }
-    .contact{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-    .contact a{color:var(--green);text-decoration:none;font-weight:600}
-    .meta{margin-top:12px;color:var(--muted);font-size:14px}
-    .right-col{position:relative}
-    .binary-box{
-      width:100%;height:140px;background:#000;
-      border-radius:8px;padding:12px;overflow:hidden;
-      border:1px solid rgba(57,255,20,0.2);
-      box-shadow:inset 0 0 20px rgba(57,255,20,0.15);
-      font-family:"Fira Code", monospace;
-      color:var(--green);font-size:12px;line-height:14px;
-      position:relative;
+    h1 {
+      color: var(--glow);
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 15px;
+      text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow2);
     }
-    .binary-scroll{position:absolute;right:12px;top:12px;bottom:12px;width:40px;overflow:hidden}
-    .binary-scroll pre{animation:scrollbin 4s linear infinite;margin:0}
-    @keyframes scrollbin{from{transform:translateY(0)} to{transform:translateY(-100%)}}
-    .socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .socials a{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;
-      border-radius:8px;background:rgba(255,255,255,0.01);
-      border:1px solid rgba(57,255,20,0.08);
-      color:var(--green);text-decoration:none;font-weight:600;font-size:13px
+
+    .binary-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--glow2);
+      padding: 15px;
+      width: 90%;
+      max-width: 600px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 25px var(--glow2);
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 20px;
     }
-    .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-    .hobbies li{margin-bottom:6px}
-    .logo-ascii{font-family:"Fira Code", monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px;text-align:center;font-size:11px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    @media(max-width:880px){
-      .container{grid-template-columns:1fr;}
-      .binary-scroll{display:none}
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: var(--glow);
+      text-shadow: 0 0 10px var(--glow);
+    }
+    .footer a {
+      color: var(--glow2);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <main>
-      <header>
-        <div class="avatar card"><img src="me.png" alt="Dcyberx"></div>
-        <div>
-          <h1>CyberTech <small style="color:var(--muted);font-weight:600">— where code meets innovation</small></h1>
-          <p class="lead">Software engineering career. Love cats & eagles. Hobbies: camping, badminton, volleyball, horse riding.</p>
-          <div class="contact">
-            <a href="mailto:Dcyberx@proton.me">Dcyberx@proton.me</a>
-            <a href="tel:+256763753544">+256 763 753 544</a>
-          </div>
-        </div>
-      </header>
+  <!-- Glowing Kali Logo -->
+  <div class="logo-box">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00fff7"/>
+          <stop offset="100%" stop-color="#00aaff"/>
+        </linearGradient>
+      </defs>
+      <circle cx="250" cy="250" r="220" fill="none" stroke="url(#glowGrad)" stroke-width="2" opacity="0.2"/>
+      <path d="M95 300 C95 300 170 160 260 140 C360 120 420 200 395 270 C372 335 310 360 240 360 C180 360 120 340 95 300 Z"
+            fill="url(#glowGrad)" opacity="0.95"/>
+      <circle cx="312" cy="160" r="6" fill="#ffffff"/>
+    </svg>
+    <h1>KALI LINUX</h1>
+  </div>
 
-      <section class="card meta">
-        <strong>About me</strong>
-        <p style="margin:8px 0 0;color:var(--muted)">I build software with security and scale in mind. Best colour: green. Profile image: <code>me.png</code>. Logo file: <code>cyber.png</code></p>
-        <div class="sections">
-          <div>
-            <h4 style="margin:6px 0">Hobbies</h4>
-            <ul class="hobbies" style="color:var(--muted)">
-              <li>Camping</li>
-              <li>Badminton</li>
-              <li>Volleyball</li>
-              <li>Horse riding</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="margin:6px 0">Career</h4>
-            <p style="margin:6px 0;color:var(--muted)">Software engineering career. Passion for secure systems, embedded devices and creative tooling.</p>
-          </div>
-        </div>
+  <!-- Binary Stream Box -->
+  <div class="binary-box" id="binaryBox"></div>
 
-        <div style="margin-top:10px">
-          <strong>Socials</strong>
-          <div class="socials">
-            <a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a>
-            <a href="https://www.instagram.com/Dcyberx" target="_blank">Instagram</a>
-            <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
-            <a href="https://x.com/Dcyberx" target="_blank">X</a>
-            <a href="https://www.google.com/search?q=Dcyberx" target="_blank">Google</a>
-            <a href="https://www.tinkercad.com/users/Dcyberx" target="_blank">Tinkercad</a>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <small>Contact: Dcyberx@proton.me · +256 763 753 544</small>
-      </footer>
-    </main>
-
-    <aside class="right-col">
-      <div class="card">
-        <div class="binary-box">
-          <div style="position:absolute;left:12px;top:12px;right:60px;bottom:12px;overflow:hidden">
-            <pre id="binlines" style="margin:0;opacity:0.95"></pre>
-          </div>
-          <div class="binary-scroll">
-            <pre id="binscroll"></pre>
-          </div>
-        </div>
-
-        <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
-<pre>
-      ⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣤⣤⣀
-      ⠀⠀⠀⠀⢀⡾⠛⠉⠀⠀⠈⠙⢷⡀
-      ⠀⠀⠀⠀⢸⡇⠀⠀⣀⣀⠀⠀⢸⡇
-      ⠀⠀⠀⠀⢸⡇⠀⢸⣿⣿⡇⠀⢸⡇
-      ⠀⠀⠀⠀⢸⡇⠀⠈⠛⠛⠁⠀⢸⡇
-      ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇
-      ⠀⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀⢀⡾⠁
-      ⠀⠀⠀⠀⠀⠀⠉⠛⠻⠟⠛⠉
-</pre>
-        </div>
-      </div>
-    </aside>
+  <!-- Footer with contact info -->
+  <div class="footer">
+    <p>Email: <a href="mailto:dcyberx@example.com">dcyberx@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/Dcyberx" target="_blank">Dcyberx</a> | Telegram: @Dcyberx</p>
   </div>
 
   <script>
-    function randomBinLine(width){
-      let s='';
-      for(let i=0;i<width;i++) s += Math.random()>.5 ? '1' : '0';
-      return s;
+    const box = document.getElementById('binaryBox');
+    const chars = ['0', '1'];
+    let binaryText = '';
+
+    function addBinary() {
+      binaryText += chars[Math.floor(Math.random() * 2)];
+      if (binaryText.length > 1000) {
+        binaryText = binaryText.slice(20); // keep it moving fast
+      }
+      box.textContent = binaryText;
+      box.scrollTop = box.scrollHeight;
     }
-    const bin = document.getElementById('binlines');
-    const binscroll = document.getElementById('binscroll');
-    function refresh(){
-      const lines=[];
-      for(let i=0;i<25;i++) lines.push(randomBinLine(48));
-      bin.textContent = lines.join('\n');
-      let scroll='';
-      for(let r=0;r<80;r++) scroll += randomBinLine(6)+'\n';
-      binscroll.textContent = scroll;
-    }
-    refresh();
-    setInterval(()=>{
-      bin.style.opacity=0;
-      setTimeout(()=>{refresh();bin.style.opacity=1},80);
-    },500);
+
+    setInterval(addBinary, 5); // fast binary
   </script>
 </body>
 </html>
