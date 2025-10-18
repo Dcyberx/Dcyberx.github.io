@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CyberTech — where code meets innovation</title>
+  <title>Dcyberx — CyberTech</title>
+
+  <!-- Hacker font -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#050606;
@@ -14,7 +18,7 @@
     html,body{height:100%;}
     body{
       margin:0;
-      font-family:Inter,ui-sans-serif,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      font-family:"Fira Code", monospace;
       background:radial-gradient(ellipse at top left, #041014 0%, var(--bg) 50%);
       color:var(--green);
       -webkit-font-smoothing:antialiased;
@@ -52,10 +56,12 @@
       border-radius:8px;padding:12px;overflow:hidden;
       border:1px solid rgba(57,255,20,0.2);
       box-shadow:inset 0 0 20px rgba(57,255,20,0.15);
-      font-family:monospace;color:var(--green);font-size:12px;line-height:14px
+      font-family:"Fira Code", monospace;
+      color:var(--green);font-size:12px;line-height:14px;
+      position:relative;
     }
     .binary-scroll{position:absolute;right:12px;top:12px;bottom:12px;width:40px;overflow:hidden}
-    .binary-scroll pre{animation:scrollbin 8s linear infinite;margin:0}
+    .binary-scroll pre{animation:scrollbin 4s linear infinite;margin:0}
     @keyframes scrollbin{from{transform:translateY(0)} to{transform:translateY(-100%)}}
     .socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .socials a{
@@ -66,7 +72,7 @@
     }
     .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
     .hobbies li{margin-bottom:6px}
-    .logo-ascii{font-family:monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px}
+    .logo-ascii{font-family:"Fira Code", monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px;text-align:center;font-size:11px}
     footer{margin-top:18px;color:var(--muted);font-size:13px}
     @media(max-width:880px){
       .container{grid-template-columns:1fr;}
@@ -128,7 +134,6 @@
 
     <aside class="right-col">
       <div class="card">
-        <h3 style="margin-top:0">Binary stream</h3>
         <div class="binary-box">
           <div style="position:absolute;left:12px;top:12px;right:60px;bottom:12px;overflow:hidden">
             <pre id="binlines" style="margin:0;opacity:0.95"></pre>
@@ -138,23 +143,18 @@
           </div>
         </div>
 
-        <div style="margin-top:12px">
-          <h4 style="margin:6px 0">Kali-style ASCII logo</h4>
-          <div class="logo-ascii card" aria-hidden="true">
-            <pre>
-               /\     
-              /  \    
-             /----\   
-            / |  | \  
-           /  |  |  \ 
-          /   |  |   \
-         /    |  |    \
-        /_____|__|_____\
-            </pre>
-            <p style="color:var(--muted);margin:8px 0 0">Logo file: <code>cyber.png</code></p>
-          </div>
+        <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
+<pre>
+      ⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣤⣤⣀
+      ⠀⠀⠀⠀⢀⡾⠛⠉⠀⠀⠈⠙⢷⡀
+      ⠀⠀⠀⠀⢸⡇⠀⠀⣀⣀⠀⠀⢸⡇
+      ⠀⠀⠀⠀⢸⡇⠀⢸⣿⣿⡇⠀⢸⡇
+      ⠀⠀⠀⠀⢸⡇⠀⠈⠛⠛⠁⠀⢸⡇
+      ⠀⠀⠀⠀⢸⡇⠀⠀⠀⠀⠀⠀⢸⡇
+      ⠀⠀⠀⠀⠈⢷⡀⠀⠀⠀⠀⢀⡾⠁
+      ⠀⠀⠀⠀⠀⠀⠉⠛⠻⠟⠛⠉
+</pre>
         </div>
-
       </div>
     </aside>
   </div>
@@ -162,24 +162,24 @@
   <script>
     function randomBinLine(width){
       let s='';
-      for(let i=0;i<width;i++) s += Math.random()>.7 ? '1' : '0';
+      for(let i=0;i<width;i++) s += Math.random()>.5 ? '1' : '0';
       return s;
     }
     const bin = document.getElementById('binlines');
     const binscroll = document.getElementById('binscroll');
     function refresh(){
       const lines=[];
-      for(let i=0;i<20;i++) lines.push(randomBinLine(48));
-      bin.textContent = lines.join('\\n');
+      for(let i=0;i<25;i++) lines.push(randomBinLine(48));
+      bin.textContent = lines.join('\n');
       let scroll='';
-      for(let r=0;r<50;r++) scroll += randomBinLine(6)+'\\n';
+      for(let r=0;r<80;r++) scroll += randomBinLine(6)+'\n';
       binscroll.textContent = scroll;
     }
     refresh();
     setInterval(()=>{
       bin.style.opacity=0;
-      setTimeout(()=>{refresh();bin.style.opacity=1},120);
-    },1500);
+      setTimeout(()=>{refresh();bin.style.opacity=1},80);
+    },500);
   </script>
 </body>
 </html>
