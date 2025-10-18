@@ -9,87 +9,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #000000;
-      --glow: #00fff7;
-      --glow2: #00aaff;
-      --green: #39ff14;
+    :root{
+      --bg:#05080a;
+      --glow:#00fff7;
+      --glow2:#00aaff;
+      --text:#39ff14;
     }
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: radial-gradient(circle at center, #020608 0%, var(--bg) 100%);
-      font-family: "Fira Code", monospace;
-      color: var(--green);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    html,body{
+      height:100%;
+      margin:0;
+      background:radial-gradient(circle at center, #020608 0%, #000000 100%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      font-family:"Fira Code", monospace;
+      color:var(--text);
     }
-
-    .logo-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 25px;
+    .logo-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      margin-bottom:25px;
     }
-    svg {
-      width: 300px;
-      height: 300px;
-      filter: drop-shadow(0 0 15px var(--glow))
-              drop-shadow(0 0 30px var(--glow2))
-              drop-shadow(0 0 50px var(--glow));
-      animation: pulse 3s ease-in-out infinite;
+    svg{
+      width:300px;
+      height:300px;
+      filter:drop-shadow(0 0 15px var(--glow))
+             drop-shadow(0 0 30px var(--glow2))
+             drop-shadow(0 0 50px var(--glow));
+      animation:pulse 3s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0%,100% {
-        filter: drop-shadow(0 0 15px var(--glow)) 
-                drop-shadow(0 0 30px var(--glow2)) 
-                drop-shadow(0 0 50px var(--glow));
+    @keyframes pulse{
+      0%,100%{
+        filter:drop-shadow(0 0 15px var(--glow))
+               drop-shadow(0 0 30px var(--glow2))
+               drop-shadow(0 0 50px var(--glow));
       }
-      50% {
-        filter: drop-shadow(0 0 25px var(--glow)) 
-                drop-shadow(0 0 50px var(--glow2)) 
-                drop-shadow(0 0 80px var(--glow));
+      50%{
+        filter:drop-shadow(0 0 25px var(--glow))
+               drop-shadow(0 0 50px var(--glow2))
+               drop-shadow(0 0 80px var(--glow));
       }
     }
-    h1 {
-      color: var(--glow);
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-top: 15px;
-      text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow2);
+    h1{
+      color:var(--glow);
+      font-size:1.8rem;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      margin-top:15px;
+      text-shadow:0 0 10px var(--glow),0 0 20px var(--glow2);
     }
-
-    .binary-box {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--glow2);
-      padding: 15px;
-      width: 90%;
-      max-width: 600px;
-      height: 180px;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 0 25px var(--glow2);
-      font-size: 13px;
-      line-height: 1.4;
-      margin-bottom: 20px;
+    .binary-box{
+      background:rgba(0,0,0,0.4);
+      border:1px solid var(--glow2);
+      padding:15px;
+      width:90%;
+      max-width:600px;
+      height:180px;
+      overflow:hidden;
+      border-radius:10px;
+      box-shadow:0 0 25px var(--glow2);
+      font-size:13px;
+      line-height:1.4;
+      margin-bottom:20px;
+      color:var(--text);
+      white-space:pre-wrap;
     }
-
-    .footer {
-      text-align: center;
-      font-size: 14px;
-      color: var(--glow);
-      text-shadow: 0 0 10px var(--glow);
+    .footer{
+      text-align:center;
+      font-size:14px;
+      color:var(--glow);
+      text-shadow:0 0 10px var(--glow);
+      margin-top:10px;
     }
-    .footer a {
-      color: var(--glow2);
-      text-decoration: none;
+    .footer a{
+      color:var(--glow2);
+      text-decoration:none;
     }
-    .footer a:hover {
-      text-decoration: underline;
+    .footer a:hover{
+      text-decoration:underline;
     }
   </style>
 </head>
@@ -104,7 +104,11 @@
         </linearGradient>
       </defs>
       <circle cx="250" cy="250" r="220" fill="none" stroke="url(#glowGrad)" stroke-width="2" opacity="0.2"/>
-      <path d="M95 300 C95 300 170 160 260 140 C360 120 420 200 395 270 C372 335 310 360 240 360 C180 360 120 340 95 300 Z"
+      <path d="M95 300
+               C95 300 170 160 260 140
+               C360 120 420 200 395 270
+               C372 335 310 360 240 360
+               C180 360 120 340 95 300 Z"
             fill="url(#glowGrad)" opacity="0.95"/>
       <circle cx="312" cy="160" r="6" fill="#ffffff"/>
     </svg>
@@ -114,7 +118,7 @@
   <!-- Binary Stream Box -->
   <div class="binary-box" id="binaryBox"></div>
 
-  <!-- Footer with contact info -->
+  <!-- Footer -->
   <div class="footer">
     <p>Email: <a href="mailto:dcyberx@example.com">dcyberx@example.com</a></p>
     <p>GitHub: <a href="https://github.com/Dcyberx" target="_blank">Dcyberx</a> | Telegram: @Dcyberx</p>
@@ -122,13 +126,13 @@
 
   <script>
     const box = document.getElementById('binaryBox');
-    const chars = ['0', '1'];
+    const chars = ['0','1'];
     let binaryText = '';
 
-    function addBinary() {
-      binaryText += chars[Math.floor(Math.random() * 2)];
-      if (binaryText.length > 1000) {
-        binaryText = binaryText.slice(20); // keep it moving fast
+    function addBinary(){
+      binaryText += chars[Math.floor(Math.random()*2)];
+      if(binaryText.length > 1000){
+        binaryText = binaryText.slice(30);
       }
       box.textContent = binaryText;
       box.scrollTop = box.scrollHeight;
