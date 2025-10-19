@@ -156,6 +156,10 @@
             <a href="https://x.com/Dcyberx" target="_blank">X</a>
             <a href="https://www.google.com/search?q=Dcyberx" target="_blank">Google</a>
             <a href="https://www.tinkercad.com/users/Dcyberx" target="_blank">Tinkercad</a>
+            <a href="https://www.paypal.com/users/Dcyberx" target="_blank">Paypal</a>
+            <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
+            <a href="http://www.gumroad.com/users/Dcyberx" target="_blank">Gumroad</a>
+            
           </div>
         </div>
       </section>
@@ -178,9 +182,10 @@
 
         <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
 <pre>  
+  
   ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⣀⡤⠶⠚⠋⠉⠁⠀⠀⠀⣨⣿⣷⣶⣶⣬⣗⡦⣄⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠈⠉⠛⢿⣧⡀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⠆⠀⠀⠀
@@ -353,3 +358,4 @@
   </script>
 </body>
 </html>
+
