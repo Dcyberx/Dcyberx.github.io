@@ -82,12 +82,6 @@
 </head>
 <body>
 
-  <!-- 🔊 Audio added -->
-  <audio autoplay>
-    <source src="welcome.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
   <div class="container">
     <main>
       <header>
@@ -191,6 +185,15 @@
       bin.style.opacity=0;
       setTimeout(()=>{refresh();bin.style.opacity=1},80);
     },500);
+
+    // ✅ Web Speech API: Speak message on load
+    window.addEventListener('load', () => {
+      const msg = new SpeechSynthesisUtterance("Welcome to Cybertech, where code meets innovation");
+      msg.rate = 1;
+      msg.pitch = 1;
+      msg.volume = 1;
+      speechSynthesis.speak(msg);
+    });
   </script>
 </body>
 </html>
