@@ -125,7 +125,8 @@
             <a href="https://x.com/Dcyberx" target="_blank">X</a>
             <a href="https://www.google.com/search?q=Dcyberx" target="_blank">Google</a>
             <a href="https://www.tinkercad.com/users/Dcyberx" target="_blank">Tinkercad</a>
-            <a href="https://www.discord.com/users/Dcyberx" target="_blank">Discord</a>
+            <a href="https://discord.gg/833GaF3R" target="_blank">Join CyberTech Discord</a>
+            
           </div>
         </div>
       </section>
