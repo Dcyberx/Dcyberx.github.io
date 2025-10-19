@@ -81,6 +81,13 @@
   </style>
 </head>
 <body>
+
+  <!-- 🔊 Audio added -->
+  <audio autoplay>
+    <source src="welcome.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="container">
     <main>
       <header>
@@ -187,5 +194,3 @@
   </script>
 </body>
 </html>
-
-
