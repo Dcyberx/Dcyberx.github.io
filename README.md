@@ -88,7 +88,7 @@
         <div class="avatar card"><img src="me.png" alt="Dcyberx"></div>
         <div>
           <h1>CyberTech <small style="color:var(--muted);font-weight:600">— where code meets innovation</small></h1>
-          <p class="lead">Software engineering career. Love cats & eagles. Hobbies: camping, badminton, volleyball, horse riding.</p>
+          <p class="lead">Software engineering career. Love cats & eagles. Hobbies: camping, target training, budminton, volleyball, horse riding.</p>
           <div class="contact">
             <a href="mailto:Dcyberx@proton.me">Dcyberx@proton.me</a>
             <a href="tel:+256763753544">+256 763 753 544</a>
