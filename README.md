@@ -367,6 +367,94 @@
 </body>
 </html>
 
+<!--html  auto scroll ascii -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ASCII Box Auto Scroll</title>
+<style>
+:root{
+  --green:#00bfff; /* blue text */
+}
+
+body{
+  background:#050606;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* ASCII Box */
+.logo-ascii{
+  font-family:"Fira Code", monospace;
+  color:var(--green);
+  white-space:pre;
+  overflow:hidden;         /* hide scrollbars */
+  max-height:220px;        /* box height unchanged */
+  text-align:center;
+  font-size:11px;
+  position:relative;
+  background:transparent;
+  width:400px;
+  border:1px solid rgba(0,191,255,0.3);
+  border-radius:8px;
+  box-shadow:inset 0 0 20px rgba(0,191,255,0.2);
+  padding:10px;
+}
+
+.logo-ascii pre{
+  position:absolute;
+  top:100%;
+  width:100%;
+  animation:scrollUp 20s linear infinite;
+  margin:0;
+}
+
+@keyframes scrollUp{
+  0% { top: 100%; }
+  100% { top: -100%; }
+}
+
+/* hide scrollbars */
+.logo-ascii::-webkit-scrollbar { display: none; }
+.logo-ascii { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</head>
+<body>
+
+<div class="logo-ascii">
+  <pre>
+  ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣀⡤⠶⠚⠋⠉⠁⠀⠀⠀⣨⣿⣷⣶⣶⣬⣗⡦⣄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠈⠉⠛⢿⣧⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⠆⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣦⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠿⣶⣶⢦⣤⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣌⠻⣦⠀⠀
+⠀⠀⠀               ⠀Dcyberx⠀ ⠀⠹⣦⠈⢇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀
+⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠞⠛⠛⠛⠶⣄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡤⠖⠒⠒⢤⡀⠀⠀⠀⢠⠞⠁⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠈⢢⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⢠⣿⠃⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⢹⠇⠀⠀⠀⠀⠀⠀⠀⢠⣿⠏⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢻⡄   I love you ⠀⠀ ⣴⣿⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⢄⠀⠀⠀⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+  </pre>
+</div>
+
+</body>
+</html>
 
 
 
+s
