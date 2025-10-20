@@ -103,7 +103,28 @@
     }
     .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
     .hobbies li{margin-bottom:6px}
-    .logo-ascii{font-family:"Fira Code", monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px;text-align:center;font-size:11px}
+
+    /* ✅ Updated ASCII box style */
+    .logo-ascii {
+      font-family: "Fira Code", monospace;
+      color: var(--green);
+      white-space: pre;
+      max-height: 220px;
+      text-align: center;
+      font-size: 11px;
+      overflow: hidden;
+      position: relative;
+    }
+    .logo-ascii pre {
+      margin: 0;
+      display: inline-block;
+      animation: scrollUp 20s linear infinite;
+    }
+    @keyframes scrollUp {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
+
     footer{margin-top:18px;color:var(--muted);font-size:13px}
     @media(max-width:880px){
       .container{grid-template-columns:1fr;}
@@ -155,7 +176,6 @@
             <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
             <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
             <a href="https://megoodworld.gumroad.com/" target="_blank">Gumroad</a>
-            
           </div>
         </div>
       </section>
@@ -168,9 +188,7 @@
     <aside class="right-col">
       <div class="card">
         <div class="binary-box">
-          <!-- preserved inner wrapper coordinates; script will populate .binary-canvas -->
           <div class="binary-canvas" id="binaryCanvas"></div>
-
           <div class="binary-scroll">
             <pre id="binscroll"></pre>
           </div>
@@ -178,7 +196,6 @@
 
         <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
 <pre>  
-  
   ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -203,41 +220,30 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-</pre>                 
-        </div>           
-      </div>         
+</pre>
+        </div>
+      </div>
     </aside>
   </div>
 
   <script>
-    // -----------------------
-    // HOLLYWOOD / LINUX BINARY STREAM
-    // Replaces the old line-based animation with vertical falling columns.
-    // -----------------------
-
     (function(){
       const canvas = document.getElementById('binaryCanvas');
       const binscroll = document.getElementById('binscroll');
+      const COLUMN_COUNT = 18;
+      const MIN_SPEED = 40;
+      const MAX_SPEED = 220;
+      const MIN_LENGTH = 6;
+      const MAX_LENGTH = 28;
+      const CHAR_SET = ['0','1'];
+      const FONT_SIZE = 12;
+      const cols = [];
 
-      // Parameters — tuned for Hollywood-style effect
-      const COLUMN_COUNT = 18;          // how many vertical streams
-      const MIN_SPEED = 40;            // px per second (min)
-      const MAX_SPEED = 220;           // px per second (max)
-      const MIN_LENGTH = 6;            // minimum chars in a stream
-      const MAX_LENGTH = 28;           // maximum chars in a stream
-      const CHAR_SET = ['0','1'];      // binary characters
-      const REFRESH_INTERVAL = 50;     // ms for creating new head char
-      const FONT_SIZE = 12;            // matches page font-size
-      const PADDING_LEFT = 12;         // same as CSS to align
-
-      // Ensure canvas size matches container computed area
       function computeArea(){
         const rect = canvas.getBoundingClientRect();
         return { width: rect.width, height: rect.height };
       }
 
-      // create columns
-      const cols = [];
       function initColumns(){
         const area = computeArea();
         cols.length = 0;
@@ -256,41 +262,23 @@
         }
       }
 
-      // generate random binary string of length n
-      function randBin(n){
-        let s='';
-        for(let i=0;i<n;i++) s += CHAR_SET[Math.random()>.5 ? 0 : 1];
-        return s;
-      }
-
-      // update columns positions & contents
       function update(now){
         const area = computeArea();
         for(const c of cols){
-          if(now < (c.delay + c.lastUpdate)) {
-            // still in delay period; small flicker
-            continue;
-          }
+          if(now < (c.delay + c.lastUpdate)) continue;
           const dt = (now - c.lastUpdate)/1000;
           c.lastUpdate = now;
           c.y += c.speed * dt;
-          // Occasionally vary speed slightly
           if(Math.random() < 0.02) c.speed *= (0.95 + Math.random()*0.1);
-
-          // If column off bottom, reset to top with new params
           if(c.y - (c.length*FONT_SIZE) > area.height){
             c.y = -Math.random()*100;
             c.length = Math.floor(MIN_LENGTH + Math.random()*(MAX_LENGTH - MIN_LENGTH));
             c.speed = MIN_SPEED + Math.random()*(MAX_SPEED - MIN_SPEED);
             c.el.style.opacity = (0.6 + Math.random()*0.45).toString();
           }
-
-          // Build visual: head brighter, tail dimmer
-          const headIndex = Math.floor(c.y / FONT_SIZE);
           const chars = [];
           for(let i=0;i<c.length;i++){
             const ch = CHAR_SET[Math.random()>.5 ? 0 : 1];
-            // head element
             if(i === c.length-1){
               chars.push(`<span class="lead">${ch}</span>`);
             } else {
@@ -304,7 +292,6 @@
         requestAnimationFrame(update);
       }
 
-      // Keep right-hand small scroll column for compatibility (old binscroll behavior)
       function refreshBinscroll(){
         const width = 6;
         let scroll='';
@@ -315,59 +302,30 @@
         binscroll.textContent = scroll;
       }
 
-      // init
       function start(){
-        // clean canvas
         canvas.innerHTML = '';
         initColumns();
         refreshBinscroll();
         requestAnimationFrame(ts => { cols.forEach(c=>c.lastUpdate=ts); update(ts); });
-        // refresh the small scroll occasionally
         setInterval(refreshBinscroll, 1200);
-        // handle resize
         window.addEventListener('resize', () => {
-          // remove existing columns and recreate to fit new width
           canvas.innerHTML = '';
           initColumns();
         });
       }
-
       start();
     })();
 
-    // -----------------------
-    // existing Web Speech API (unchanged)
-    // (keeps the voice greeting you already had)
-    // -----------------------
     window.addEventListener('load', () => {
       try {
         const msg = new SpeechSynthesisUtterance("Welcome to Cybertech, where code meets innovation");
         msg.rate = 1.55;
         msg.pitch = 0.65;
         msg.volume = 1;
-        // pick a male voice if available
         speechSynthesis.onvoiceschanged = () => {
           const voices = speechSynthesis.getVoices();
           const prefer = voices.find(v => /David|Male|Google UK English Male|British Male/i.test(v.name));
           if(prefer) msg.voice = prefer;
           speechSynthesis.speak(msg);
         };
-        // fallback if voiceschanged doesn't fire
-        if(speechSynthesis.getVoices().length) {
-          const voices = speechSynthesis.getVoices();
-          const prefer = voices.find(v => /David|Male|Google UK English Male|British Male/i.test(v.name));
-          if(prefer) msg.voice = prefer;
-          speechSynthesis.speak(msg);
-        }
-      } catch (e) {
-        // silent fail if browser blocks autoplay
-      }
-    });
-  </script>
-</body>
-</html>
-
-
-
-
-s
+        if(speechSynthesis.getVoices().length)
