@@ -120,8 +120,11 @@
       display: inline-block;
       animation: scrollUp 20s linear infinite;
     }
-    @keyframes scrollbin{from{transform:translateY(0) to{transform:translateY(-100)}}
+    @keyframes scrollUp {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
     }
+
     footer{margin-top:18px;color:var(--muted);font-size:13px}
     @media(max-width:880px){
       .container{grid-template-columns:1fr;}
