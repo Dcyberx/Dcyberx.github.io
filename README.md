@@ -104,12 +104,12 @@
     .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
     .hobbies li{margin-bottom:6px}
 
-    /* ✅ Updated ASCII box style */
+    /* ✅ Updated ASCII box s
     .logo-ascii {
       font-family: "Fira Code", monospace;
       color: var(--green);
       white-space: pre;
-      max-height: 220px;
+      max-height: 219px;
       text-align: center;
       font-size: 11px;
       overflow: hidden;
