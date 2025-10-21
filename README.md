@@ -65,9 +65,9 @@
     .binary-canvas{
       position:absolute;
       left:12px;
-      top:12px;
+      top:10px;
       right:60px;
-      bottom:12px;
+      bottom:10px;
       pointer-events:none;
       overflow:hidden;
     }
