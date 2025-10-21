@@ -3,329 +3,145 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dcyberx — CyberTech</title>
+  <title>Kali Linux — Dcyberx</title>
 
   <!-- Hacker font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#050606;
-      --panel:#071012;
-      --green:#39ff14;
-      --muted:#9bdc9b;
+      --bg:#05080a;
+      --glow:#00fff7;
+      --glow2:#00aaff;
     }
-    html,body{height:100%;}
-    body{
+    html,body{
+      height:100%;
       margin:0;
+      background:radial-gradient(circle at center, #020608 0%, #000000 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
       font-family:"Fira Code", monospace;
-      background:radial-gradient(ellipse at top left, #041014 0%, var(--bg) 50%);
-      color:var(--green);
-      -webkit-font-smoothing:antialiased;
+      color:var(--glow);
     }
-    .container{
-      max-width:1000px;
-      margin:40px auto;
-      padding:28px;
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:28px;
+    .logo-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
     }
-    header{display:flex;gap:16px;align-items:center}
-    .avatar{
-      width:88px;height:88px;border-radius:12px;overflow:hidden;
-      border:2px solid rgba(57,255,20,0.3);
-      background:linear-gradient(180deg, rgba(57,255,20,0.1), rgba(57,255,20,0.05));
+    svg{
+      width:300px;
+      height:300px;
+      filter:drop-shadow(0 0 15px var(--glow))
+             drop-shadow(0 0 30px var(--glow2))
+             drop-shadow(0 0 50px var(--glow));
+      animation: pulse 3s ease-in-out infinite;
     }
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    h1{margin:0;font-size:28px;letter-spacing:0.4px}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .card{
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(57,255,20,0.1);
-      padding:18px;
-      border-radius:10px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.6)
+    @keyframes pulse{
+      0%,100%{filter:drop-shadow(0 0 15px var(--glow)) drop-shadow(0 0 30px var(--glow2)) drop-shadow(0 0 50px var(--glow));}
+      50%{filter:drop-shadow(0 0 25px var(--glow)) drop-shadow(0 0 50px var(--glow2)) drop-shadow(0 0 80px var(--glow));}
     }
-    .contact{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-    .contact a{color:var(--green);text-decoration:none;font-weight:600}
-    .meta{margin-top:12px;color:var(--muted);font-size:14px}
-    .right-col{position:relative}
-    .binary-box{
-      width:100%;height:140px;background:#000;
-      border-radius:8px;padding:12px;overflow:hidden;
-      border:1px solid rgba(57,255,20,0.2);
-      box-shadow:inset 0 0 20px rgba(57,255,20,0.15);
+    h1{
       font-family:"Fira Code", monospace;
-      color:var(--green);font-size:12px;line-height:14px;
-      position:relative;
-    }
-
-    /* NEW: Hollywood / Linux-style falling binary CSS (only for binary effect) */
-    .binary-canvas{
-      position:absolute;
-      left:12px;
-      top:10px;
-      right:60px;
-      bottom:10px;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .column {
-      position:absolute;
-      bottom:100%;
-      white-space:nowrap;
-      will-change:transform;
-      color:var(--green);
-      text-shadow:0 0 6px rgba(57,255,20,0.6);
-      font-weight:600;
+      color:var(--glow);
+      font-size:1.6rem;
+      text-transform:uppercase;
       letter-spacing:2px;
+      margin-top:15px;
+      text-shadow:0 0 10px var(--glow),0 0 20px var(--glow2);
+    }
+    .binary-box{
+      margin-top:20px;
+      width:320px;
+      height:150px;
+      background:rgba(0,0,0,0.6);
+      border:1px solid var(--glow2);
+      box-shadow:inset 0 0 20px var(--glow2), 0 0 10px var(--glow);
+      border-radius:10px;
+      padding:12px;
+      overflow:hidden;
+      position:relative;
+      color:var(--glow);
       font-size:12px;
       line-height:14px;
-      opacity:0.95;
     }
-    .column .lead {
-      display:block;
-      color:#bfffdc;
-      text-shadow:0 0 10px rgba(0,255,180,0.8);
+    .binary-scroll{
+      position:absolute;
+      right:12px;
+      top:12px;
+      bottom:12px;
+      width:40px;
+      overflow:hidden;
     }
-
-    .binary-scroll{position:absolute;right:12px;top:12px;bottom:12px;width:40px;overflow:hidden}
-    .binary-scroll pre{animation:scrollbin 4s linear infinite;margin:0}
-    @keyframes scrollbin{from{transform:translateY(0)} to{transform:translateY(-100%)}}
-
-    .socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .socials a{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;
-      border-radius:8px;background:rgba(255,255,255,0.01);
-      border:1px solid rgba(57,255,20,0.08);
-      color:var(--green);text-decoration:none;font-weight:600;font-size:13px
+    .binary-scroll pre{
+      animation: scrollbin 4s linear infinite;
+      margin:0;
     }
-    .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-    .hobbies li{margin-bottom:6px}
-
-    /* ✅ Updated ASCII box s
-    .logo-ascii {
-      font-family: "Fira Code", monospace;
-      color: var(--green);
-      white-space: pre;
-      max-height: 219px;
-      text-align: center;
-      font-size: 11px;
-      overflow: hidden;
-      position: relative;
+    @keyframes scrollbin{
+      from{transform:translateY(0);}
+      to{transform:translateY(-100%);}
     }
-    .logo-ascii pre {
-      margin: 0;
-      display: inline-block;
-      animation: scrollUp 20s linear infinite;
-    }
-    @keyframes scrollUp {
-      0% { transform: translateY(100%); }
-      100% { transform: translateY(-100%); }
-    }
-
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    @media(max-width:880px){
-      .container{grid-template-columns:1fr;}
-      .binary-scroll{display:none}
-      .binary-canvas{right:12px;} /* ensure fit on small screens */
-    }
+    pre#binlines{margin:0;opacity:0.95;white-space:pre;}
   </style>
 </head>
 <body>
+  <div class="logo-box">
+    <!-- Glowing Kali-like dragon SVG -->
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="glowGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#00fff7"/>
+          <stop offset="100%" stop-color="#00aaff"/>
+        </linearGradient>
+      </defs>
 
-  <div class="container">
-    <main>
-      <header>
-        <div class="avatar card"><img src="me.png" alt="Dcyberx"></div>
-        <div>
-          <h1>CyberTech <small style="color:var(--muted);font-weight:600">— where code meets innovation</small></h1>
-          <p class="lead">Software engineering career. Love cats & eagles. Hobbies: camping, badminton, volleyball, horse riding.</p>
-          <div class="contact">
-            <a href="mailto:Dcyberx@proton.me">Dcyberx@proton.me</a>
-            <a href="tel:+256763753544">+256 763 753 544</a>
-          </div>
-        </div>
-      </header>
+      <circle cx="250" cy="250" r="220" fill="none" stroke="url(#glowGrad)" stroke-width="2" opacity="0.2"/>
 
-      <section class="card meta">
-        <strong>About me</strong>
-        <p style="margin:8px 0 0;color:var(--muted)">I build software with security and scale in mind. Best colour: green. Profile image: <code>me.png</code>. Logo file: <code>cyber.png</code></p>
-        <div class="sections">
-          <div>
-            <h4 style="margin:6px 0">Hobbies</h4>
-            <ul class="hobbies" style="color:var(--muted)">
-              <li>Camping</li>
-              <li>Badminton</li>
-              <li>Volleyball</li>
-              <li>Horse riding</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="margin:6px 0">Career</h4>
-            <p style="margin:6px 0;color:var(--muted)">Software engineering career. Passion for secure systems, embedded devices and creative tooling.</p>
-          </div>
-        </div>
+      <path d="M95 300
+               C95 300 170 160 260 140
+               C360 120 420 200 395 270
+               C372 335 310 360 240 360
+               C180 360 120 340 95 300 Z"
+            fill="url(#glowGrad)" opacity="0.95"/>
 
-        <div style="margin-top:10px">
-          <strong>Socials</strong>
-          <div class="socials">
-            <a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a>
-            <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
-            <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
-            <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
-            <a href="https://megoodworld.gumroad.com/" target="_blank">Gumroad</a>
-          </div>
-        </div>
-      </section>
+      <circle cx="312" cy="160" r="6" fill="#ffffff"/>
+    </svg>
+    <h1>KALI LINUX</h1>
 
-      <footer>
-        <small>Contact: Dcyberx@proton.me · +256 763 753 544</small>
-      </footer>
-    </main>
-
-    <aside class="right-col">
-      <div class="card">
-        <div class="binary-box">
-          <div class="binary-canvas" id="binaryCanvas"></div>
-          <div class="binary-scroll">
-            <pre id="binscroll"></pre>
-          </div>
-        </div>
-
-        <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
-<pre>  
-  ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣀⡤⠶⠚⠋⠉⠁⠀⠀⠀⣨⣿⣷⣶⣶⣬⣗⡦⣄⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠈⠉⠛⢿⣧⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⠆⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣦⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠿⣶⣶⢦⣤⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣌⠻⣦⠀⠀
-⠀⠀⠀               ⠀Dcyberx⠀ ⠀⠹⣦⠈⢇⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀
-⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
-  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠞⠛⠛⠛⠶⣄⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⡤⠖⠒⠒⢤⡀⠀⠀⠀⢠⠞⠁⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀
-⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠈⢢⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⢠⣿⠃⠀⠀⠀⠀
-⠀⠀⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⢹⠇⠀⠀⠀⠀⠀⠀⠀⢠⣿⠏⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢻⡄   I love you ⠀⠀ ⣴⣿⠏⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⢄⠀⠀⠀⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-</pre>
-        </div>
+    <div class="binary-box">
+      <div style="position:absolute;left:12px;top:12px;right:60px;bottom:12px;overflow:hidden">
+        <pre id="binlines"></pre>
       </div>
-    </aside>
+      <div class="binary-scroll">
+        <pre id="binscroll"></pre>
+      </div>
+    </div>
   </div>
 
   <script>
-    (function(){
-      const canvas = document.getElementById('binaryCanvas');
-      const binscroll = document.getElementById('binscroll');
-      const COLUMN_COUNT = 18;
-      const MIN_SPEED = 40;
-      const MAX_SPEED = 220;
-      const MIN_LENGTH = 6;
-      const MAX_LENGTH = 28;
-      const CHAR_SET = ['0','1'];
-      const FONT_SIZE = 12;
-      const cols = [];
+    function randomBinLine(width){
+      let s='';
+      for(let i=0;i<width;i++) s += Math.random()>.5 ? '1' : '0';
+      return s;
+    }
+    const bin = document.getElementById('binlines');
+    const binscroll = document.getElementById('binscroll');
 
-      function computeArea(){
-        const rect = canvas.getBoundingClientRect();
-        return { width: rect.width, height: rect.height };
-      }
-
-      function initColumns(){
-        const area = computeArea();
-        cols.length = 0;
-        for(let i=0;i<COLUMN_COUNT;i++){
-          const x = Math.floor((area.width / COLUMN_COUNT) * i + (Math.random()*8));
-          const speed = MIN_SPEED + Math.random()*(MAX_SPEED - MIN_SPEED);
-          const length = Math.floor(MIN_LENGTH + Math.random()*(MAX_LENGTH - MIN_LENGTH));
-          const delay = Math.random()*2000;
-          const el = document.createElement('div');
-          el.className = 'column';
-          el.style.left = x + 'px';
-          el.style.fontSize = FONT_SIZE + 'px';
-          el.style.opacity = (0.6 + Math.random()*0.45).toString();
-          canvas.appendChild(el);
-          cols.push({ el, x, speed, length, chars: [], y: -Math.random()*area.height - 20, lastUpdate: performance.now(), delay });
-        }
-      }
-
-      function update(now){
-        const area = computeArea();
-        for(const c of cols){
-          if(now < (c.delay + c.lastUpdate)) continue;
-          const dt = (now - c.lastUpdate)/1000;
-          c.lastUpdate = now;
-          c.y += c.speed * dt;
-          if(Math.random() < 0.02) c.speed *= (0.95 + Math.random()*0.1);
-          if(c.y - (c.length*FONT_SIZE) > area.height){
-            c.y = -Math.random()*100;
-            c.length = Math.floor(MIN_LENGTH + Math.random()*(MAX_LENGTH - MIN_LENGTH));
-            c.speed = MIN_SPEED + Math.random()*(MAX_SPEED - MIN_SPEED);
-            c.el.style.opacity = (0.6 + Math.random()*0.45).toString();
-          }
-          const chars = [];
-          for(let i=0;i<c.length;i++){
-            const ch = CHAR_SET[Math.random()>.5 ? 0 : 1];
-            if(i === c.length-1){
-              chars.push(`<span class="lead">${ch}</span>`);
-            } else {
-              const shade = Math.max(0.15, (i / c.length) * 0.9);
-              chars.push(`<span style="opacity:${shade}">${ch}</span>`);
-            }
-          }
-          c.el.innerHTML = chars.join('');
-          c.el.style.transform = `translateY(${c.y}px)`;
-        }
-        requestAnimationFrame(update);
-      }
-
-      function refreshBinscroll(){
-        const width = 6;
-        let scroll='';
-        for(let r=0;r<80;r++) {
-          for(let k=0;k<width;k++) scroll += CHAR_SET[Math.random()>.5 ? 0 : 1];
-          scroll += '\n';
-        }
-        binscroll.textContent = scroll;
-      }
-
-      function start(){
-        canvas.innerHTML = '';
-        initColumns();
-        refreshBinscroll();
-        requestAnimationFrame(ts => { cols.forEach(c=>c.lastUpdate=ts); update(ts); });
-        setInterval(refreshBinscroll, 1200);
-        window.addEventListener('resize', () => {
-          canvas.innerHTML = '';
-          initColumns();
-        });
-      }
-      start();
-    })();
-
-    window.addEventListener('load', () => {
-      try {
-        const msg = new SpeechSynthesisUtterance("Welcome to Cybertech, where code meets innovation");
-        msg.rate = 1.55;
-        msg.pitch = 0.65;
-        msg.volume = 1;
-        speechSynthesis.onvoiceschanged = () => {
-          const voices = speechSynthesis.getVoices();
-          const prefer = voices.find(v => /David|Male|Google UK English Male|British Male/i.test(v.name));
-          if(prefer) msg.voice = prefer;
-          speechSynthesis.speak(msg);
-        };
-        if(speechSynthesis.getVoices().length)
+    function refresh(){
+      const lines=[];
+      for(let i=0;i<25;i++) lines.push(randomBinLine(48));
+      bin.textContent = lines.join('\n');
+      let scroll='';
+      for(let r=0;r<80;r++) scroll += randomBinLine(6)+'\n';
+      binscroll.textContent = scroll;
+    }
+    refresh();
+    setInterval(()=>{
+      bin.style.opacity=0;
+      setTimeout(()=>{refresh();bin.style.opacity=1},80);
+    },500);
+  </script>
+</body>
+</html>
