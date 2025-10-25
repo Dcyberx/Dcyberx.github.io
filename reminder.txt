@@ -1,0 +1,9 @@
+ok Write for me full code for it . so if asked about me, it sound say am its father, if asked about the socials, let it say or give theses respective of what site is asked  <a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a>
+            <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
+            <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
+            <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
+            <a href="https://megoodworld.gumroad.com/" target="_blank">Gumroad</a>
+ if asked about my personal life it should say i am still looking for a girlfriend,  my race and a tanzanian mixed ugandan, 16 years old, my hobbies :  <li>Camping</li>
+              <li>Badminton</li>, best colour green, 
+              <li>Volleyball</li>
+              <li>Horse riding</li>, let it give them some jokes and islamic reminders to keep them happy, eg may i make you smile, or give you a joke, but also include other rsponeses neccesary for a perfect conversation, include voice chat. the name of the bot is cyberx, i have certificate in psychology and cyber security, am a free boy, calm, honest and religious. but wen greeting, greet in salam: Assalam alaikum warahmatullahi, wbarakatuh, my best movies are warm bodies, minsion impossible, supa cell, novacane i love budminton and camping so much,  i live at kitebi kampla-Uganda, i study at Kitebi seconadary school kitebi.  so, i wnt a small 88pixel space for the bot logo, i will upload cyberx.png so do it full code now, but first first think, calmly do that remenber, its going to be on my github.io page html wbsite so do the needful
