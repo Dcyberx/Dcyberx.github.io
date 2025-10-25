@@ -1,153 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dcyberx — CyberTech</title>
+<meta charset="UTF-8">
+<title>Hollywood Binary + ASCII Auto Scroll</title>
+<style>
+:root{
+  --bg:#050606;
+  --panel:#071012;
+  --green:#00bfff;         /* blue binary */
+  --muted:#7db9ff;
+}
 
-  <!-- Hacker font -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+body{
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:var(--muted);
+  font-family:monospace;
+  position:relative;
+}
 
-  <style>
-    :root{
-      --bg:#050606;
-      --panel:#071012;
-      --green:#39ff14;
-      --muted:#9bdc9b;
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:"Fira Code", monospace;
-      background:radial-gradient(ellipse at top left, #041014 0%, var(--bg) 50%);
-      color:var(--green);
-      -webkit-font-smoothing:antialiased;
-    }
-    .container{
-      max-width:1000px;
-      margin:40px auto;
-      padding:28px;
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:28px;
-    }
-    header{display:flex;gap:16px;align-items:center}
-    .avatar{
-      width:88px;height:88px;border-radius:12px;overflow:hidden;
-      border:2px solid rgba(57,255,20,0.3);
-      background:linear-gradient(180deg, rgba(57,255,20,0.1), rgba(57,255,20,0.05));
-    }
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    h1{margin:0;font-size:28px;letter-spacing:0.4px}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .card{
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(57,255,20,0.1);
-      padding:18px;
-      border-radius:10px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.6)
-    }
-    .contact{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-    .contact a{color:var(--green);text-decoration:none;font-weight:600}
-    .meta{margin-top:12px;color:var(--muted);font-size:14px}
-    .right-col{position:relative}
-    .binary-box{
-      width:100%;height:140px;background:#000;
-      border-radius:8px;padding:12px;overflow:hidden;
-      border:1px solid rgba(57,255,20,0.2);
-      box-shadow:inset 0 0 20px rgba(57,255,20,0.15);
-      font-family:"Fira Code", monospace;
-      color:var(--green);font-size:12px;line-height:14px;
-      position:relative;
-    }
+.container{
+  width:400px;
+  background:var(--panel);
+  border-radius:8px;
+  padding:10px;
+  box-shadow:0 0 20px rgba(0,191,255,0.2);
+}
 
-    /* NEW: Hollywood / Linux-style falling binary CSS (only for binary effect) */
-    .binary-canvas{
-      position:absolute;
-      left:12px;
-      top:12px;
-      right:60px;
-      bottom:12px;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .column {
-      position:absolute;
-      bottom:100%;
-      white-space:nowrap;
-      will-change:transform;
-      color:var(--green);
-      text-shadow:0 0 6px rgba(57,255,20,0.6);
-      font-weight:600;
-      letter-spacing:2px;
-      font-size:12px;
-      line-height:14px;
-      opacity:0.95;
-    }
-    .column .lead {
-      display:block;
-      color:#bfffdc;
-      text-shadow:0 0 10px rgba(0,255,180,0.8);
-    }
+/* Logo space (top-right corner) */
+.logo-space{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:88px;
+  height:88px;
+  background:rgba(0,191,255,0.05);
+  border:1px dashed rgba(0,191,255,0.3);
+  border-radius:8px;
+}
 
-    .binary-scroll{position:absolute;right:12px;top:12px;bottom:12px;width:40px;overflow:hidden}
-    .binary-scroll pre{animation:scrollbin 4s linear infinite;margin:0}
-    @keyframes scrollbin{from{transform:translateY(0)} to{transform:translateY(-100%)}}
+/* Binary Matrix */
+.binary-box{
+  width:100%;
+  height:140px;
+  background:rgba(0,0,0,0.3);
+  border-radius:8px;
+  padding:12px;
+  overflow:hidden;
+  border:1px solid rgba(0,191,255,0.3);
+  box-shadow:inset 0 0 20px rgba(0,191,255,0.2);
+  display:flex;
+}
 
-    .socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .socials a{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;
-      border-radius:8px;background:rgba(255,255,255,0.01);
-      border:1px solid rgba(57,255,20,0.08);
-      color:var(--green);text-decoration:none;font-weight:600;font-size:13px
-    }
-    .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-    .hobbies li{margin-bottom:6px}
-    .logo-ascii{font-family:"Fira Code", monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px;text-align:center;font-size:11px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    @media(max-width:880px){
-      .container{grid-template-columns:1fr;}
-      .binary-scroll{display:none}
-      .binary-canvas{right:12px;} /* ensure fit on small screens */
-    }
+.column{
+  display:flex;
+  flex-direction:column;
+  font-size:14px;
+  color:var(--green);
+  white-space:nowrap;
+  margin-right:5px;
+  animation:fall 3s linear infinite;
+}
 
-    /* ✅ Added: CyberX logo space (top-right corner) */
-    #cyberx-logo-space {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      width: 88px;
-      height: 88px;
-      border-radius: 12px;
-      border: 2px solid rgba(57,255,20,0.3);
-      background: rgba(57,255,20,0.05) url('cyberx.png') center/cover no-repeat;
-      box-shadow: 0 0 8px rgba(57,255,20,0.4);
-      z-index: 999;
-    }
-  </style>
+.column .lead{
+  display:block;
+  color:#aee4ff;
+  text-shadow:0 0 10px rgba(0,191,255,0.8);
+}
+
+@keyframes fall{
+  0%{transform:translateY(-100%);}
+  100%{transform:translateY(100%);}
+}
+
+/* ASCII Logo Box */
+.logo-ascii{
+  font-family:"Fira Code", monospace;
+  color:var(--green);
+  white-space:pre;
+  overflow:hidden;
+  max-height:220px;
+  text-align:center;
+  font-size:11px;
+  position:relative;
+  margin-top:10px;
+}
+
+.logo-ascii pre{
+  position:absolute;
+  top:100%;
+  width:100%;
+  animation:scrollUp 20s linear infinite;
+  margin:0;
+}
+
+@keyframes scrollUp{
+  0% { top: 100%; }
+  100% { top: -100%; }
+}
+
+/* scrollbar hide */
+.logo-ascii::-webkit-scrollbar { display: none; }
+.logo-ascii { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
 </head>
 <body>
 
-  <!-- ✅ CyberX logo space added -->
-  <div id="cyberx-logo-space" title="CyberX Bot"></div>
+<!-- Top-right logo space -->
+<div class="logo-space" id="cyberxLogo"></div>
 
-  <div class="container">
-    <main>
-      <header>
-        <div class="avatar card"><img src="me.png" alt="Dcyberx"></div>
-        <div>
-          <h1>CyberTech <small style="color:var(--muted);font-weight:600">— where code meets innovation</small></h1>
-          <p class="lead">Software engineering career. Love cats & eagles. Hobbies: camping, badminton, volleyball, horse riding.</p>
-          <div class="contact">
-            <a href="mailto:Dcyberx@proton.me">Dcyberx@proton.me</a>
-            <a href="tel:+256763753544">+256 763 753 544</a>
-          </div>
-        </div>
-      </header>
+<div class="container">
 
-      <!-- (rest of your code remains exactly the same) -->
-      <!-- unchanged content below -->
-      ...
+  <!-- Binary Box -->
+  <div class="binary-box" id="binaryBox"></div>
+
+  <!-- ASCII Logo -->
+  <div class="logo-ascii">
+    <pre>
+  ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣀⡤⠶⠚⠋⠉⠁⠀⠀⠀⣨⣿⣷⣶⣶⣬⣗⡦⣄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠈⠉⠛⢿⣧⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠈⠙⠷⠆⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣦⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠛⠛⠛⠿⣶⣶⢦⣤⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣌⠻⣦⠀⠀
+⠀⠀⠀               ⠀Dcyberx⠀ ⠀⠹⣦⠈⢇⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀
+⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
+  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠞⠛⠛⠛⠶⣄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡤⠖⠒⠒⢤⡀⠀⠀⠀⢠⠞⠁⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⡟⠀⠀⠀⠀⠀⠈⢢⠀⢠⠃⠀⠀⠀⠀⠀⠀⠀⢠⣿⠃⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⢹⠇⠀⠀⠀⠀⠀⠀⠀⢠⣿⠏⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢻⡄   I love you ⠀⠀ ⣴⣿⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠳⣄⡀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⢄⠀⠀⠀⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    </pre>
   </div>
+
+</div>
+
+<script>
+const binaryBox = document.getElementById('binaryBox');
+const columns = 40; // number of binary columns
+const rows = 20;    // digits per column
+
+for(let i=0;i<columns;i++){
+  const col=document.createElement('div');
+  col.className='column';
+  const lead=document.createElement('span');
+  lead.className='lead';
+  lead.textContent=Math.round(Math.random());
+  col.appendChild(lead);
+  for(let j=0;j<rows;j++){
+    const bit=document.createElement('span');
+    bit.textContent=Math.round(Math.random());
+    col.appendChild(bit);
+  }
+  binaryBox.appendChild(col);
+}
+</script>
 </body>
 </html>
