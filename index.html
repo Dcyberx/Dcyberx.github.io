@@ -60,40 +60,23 @@
       color:var(--green);font-size:12px;line-height:14px;
       position:relative;
     }
-
-    /* NEW: Hollywood / Linux-style falling binary CSS (only for binary effect) */
     .binary-canvas{
       position:absolute;
-      left:12px;
-      top:12px;
-      right:60px;
-      bottom:12px;
-      pointer-events:none;
-      overflow:hidden;
+      left:12px;top:12px;right:60px;bottom:12px;
+      pointer-events:none;overflow:hidden;
     }
     .column {
-      position:absolute;
-      bottom:100%;
-      white-space:nowrap;
-      will-change:transform;
+      position:absolute;bottom:100%;
+      white-space:nowrap;will-change:transform;
       color:var(--green);
       text-shadow:0 0 6px rgba(57,255,20,0.6);
-      font-weight:600;
-      letter-spacing:2px;
-      font-size:12px;
-      line-height:14px;
-      opacity:0.95;
+      font-weight:600;letter-spacing:2px;
+      font-size:12px;line-height:14px;opacity:0.95;
     }
-    .column .lead {
-      display:block;
-      color:#bfffdc;
-      text-shadow:0 0 10px rgba(0,255,180,0.8);
-    }
-
+    .column .lead {color:#bfffdc;text-shadow:0 0 10px rgba(0,255,180,0.8);}
     .binary-scroll{position:absolute;right:12px;top:12px;bottom:12px;width:40px;overflow:hidden}
     .binary-scroll pre{animation:scrollbin 4s linear infinite;margin:0}
     @keyframes scrollbin{from{transform:translateY(0)} to{transform:translateY(-100%)}}
-
     .socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .socials a{
       display:inline-flex;align-items:center;gap:8px;padding:8px 10px;
@@ -108,7 +91,62 @@
     @media(max-width:880px){
       .container{grid-template-columns:1fr;}
       .binary-scroll{display:none}
-      .binary-canvas{right:12px;} /* ensure fit on small screens */
+      .binary-canvas{right:12px;}
+    }
+
+    /* Chatbot box styles */
+    #chat-box {
+      position:fixed;
+      bottom:30px;right:30px;
+      width:300px;
+      height:380px;
+      background:#071012;
+      border:1px solid rgba(57,255,20,0.3);
+      border-radius:10px;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 0 16px rgba(57,255,20,0.4);
+      z-index:999;
+    }
+    #chat-messages {
+      flex:1;
+      overflow-y:auto;
+      padding:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    #chat-messages p{margin:6px 0;}
+    #chat-input {
+      display:flex;
+      border-top:1px solid rgba(57,255,20,0.2);
+    }
+    #chat-input input {
+      flex:1;
+      background:transparent;
+      border:none;
+      color:var(--green);
+      padding:10px;
+      font-family:"Fira Code", monospace;
+      outline:none;
+    }
+    #chat-input button {
+      background:var(--green);
+      border:none;
+      color:#000;
+      padding:10px 12px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    #chat-header {
+      text-align:center;
+      font-weight:600;
+      padding:8px;
+      border-bottom:1px solid rgba(57,255,20,0.2);
+      background:rgba(57,255,20,0.1);
+    }
+    #chat-header img {
+      width:30px;height:30px;border-radius:50%;
+      vertical-align:middle;margin-right:6px;
     }
   </style>
 </head>
@@ -155,7 +193,6 @@
             <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
             <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
             <a href="https://megoodworld.gumroad.com/" target="_blank">Gumroad</a>
-            
           </div>
         </div>
       </section>
@@ -168,17 +205,12 @@
     <aside class="right-col">
       <div class="card">
         <div class="binary-box">
-          <!-- preserved inner wrapper coordinates; script will populate .binary-canvas -->
           <div class="binary-canvas" id="binaryCanvas"></div>
-
-          <div class="binary-scroll">
-            <pre id="binscroll"></pre>
-          </div>
+          <div class="binary-scroll"><pre id="binscroll"></pre></div>
         </div>
 
         <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
 <pre>  
-  
   ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣉⣉⣉⣙⣛⣳⣶⣤⠀⠀⠀⠀"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠠⠖⠚⠚⠛⠋⠉⠉⠉⣉⣩⣭⣭⣿⢿⡀⠀⢀"⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -190,7 +222,7 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢷⣌⠻⣦⠀⠀
 ⠀⠀⠀               ⠀Dcyberx⠀ ⠀⠹⣦⠈⢇⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⡆⠀⠀
-⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠃⠀
   ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠞⠛⠛⠛⠶⣄⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢀⡤⠖⠒⠒⢤⡀⠀⠀⠀⢠⠞⠁⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀
@@ -202,172 +234,63 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠢⢄⠀⠀⠀⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-</pre>                 
-        </div>           
-      </div>         
+</pre>
+        </div>
+
+        <!-- ✅ NEW: CyberX Logo -->
+        <div style="margin-top:14px; text-align:center;">
+          <img src="cyberx.png" alt="CyberX Logo" width="88" height="88"
+               style="border-radius:12px; border:2px solid rgba(57,255,20,0.3);
+                      box-shadow:0 0 8px rgba(57,255,20,0.5);">
+          <p style="color:var(--muted);font-size:12px;margin-top:4px;">CyberX Logo</p>
+        </div>
+      </div>
     </aside>
   </div>
 
+  <!-- ✅ CyberX Chatbot -->
+  <div id="chat-box">
+    <div id="chat-header"><img src="cyberx.png" alt="CyberX"> CyberX Assistant</div>
+    <div id="chat-messages">
+      <p><b>CyberX:</b> Assalam alaikum warahmatullahi wabarakatuh 🌙<br>
+      I'm CyberX — your calm, honest, and friendly assistant. Ask me anything about my father Dcyberx!</p>
+    </div>
+    <div id="chat-input">
+      <input id="user-text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()">Send</button>
+    </div>
+  </div>
+
   <script>
-    // -----------------------
-    // HOLLYWOOD / LINUX BINARY STREAM
-    // Replaces the old line-based animation with vertical falling columns.
-    // -----------------------
-
-    (function(){
-      const canvas = document.getElementById('binaryCanvas');
-      const binscroll = document.getElementById('binscroll');
-
-      // Parameters — tuned for Hollywood-style effect
-      const COLUMN_COUNT = 18;          // how many vertical streams
-      const MIN_SPEED = 40;            // px per second (min)
-      const MAX_SPEED = 220;           // px per second (max)
-      const MIN_LENGTH = 6;            // minimum chars in a stream
-      const MAX_LENGTH = 28;           // maximum chars in a stream
-      const CHAR_SET = ['0','1'];      // binary characters
-      const REFRESH_INTERVAL = 50;     // ms for creating new head char
-      const FONT_SIZE = 12;            // matches page font-size
-      const PADDING_LEFT = 12;         // same as CSS to align
-
-      // Ensure canvas size matches container computed area
-      function computeArea(){
-        const rect = canvas.getBoundingClientRect();
-        return { width: rect.width, height: rect.height };
+    // Chatbot logic
+    const chat = document.getElementById("chat-messages");
+    function append(sender, text){
+      const p=document.createElement("p");
+      p.innerHTML=`<b>${sender}:</b> ${text}`;
+      chat.appendChild(p);
+      chat.scrollTop=chat.scrollHeight;
+      if(sender==="CyberX"){
+        const s=new SpeechSynthesisUtterance(text.replace(/<[^>]*>?/gm,''));
+        s.lang="en";s.pitch=1;s.rate=1;
+        speechSynthesis.speak(s);
       }
-
-      // create columns
-      const cols = [];
-      function initColumns(){
-        const area = computeArea();
-        cols.length = 0;
-        for(let i=0;i<COLUMN_COUNT;i++){
-          const x = Math.floor((area.width / COLUMN_COUNT) * i + (Math.random()*8));
-          const speed = MIN_SPEED + Math.random()*(MAX_SPEED - MIN_SPEED);
-          const length = Math.floor(MIN_LENGTH + Math.random()*(MAX_LENGTH - MIN_LENGTH));
-          const delay = Math.random()*2000;
-          const el = document.createElement('div');
-          el.className = 'column';
-          el.style.left = x + 'px';
-          el.style.fontSize = FONT_SIZE + 'px';
-          el.style.opacity = (0.6 + Math.random()*0.45).toString();
-          canvas.appendChild(el);
-          cols.push({ el, x, speed, length, chars: [], y: -Math.random()*area.height - 20, lastUpdate: performance.now(), delay });
-        }
-      }
-
-      // generate random binary string of length n
-      function randBin(n){
-        let s='';
-        for(let i=0;i<n;i++) s += CHAR_SET[Math.random()>.5 ? 0 : 1];
-        return s;
-      }
-
-      // update columns positions & contents
-      function update(now){
-        const area = computeArea();
-        for(const c of cols){
-          if(now < (c.delay + c.lastUpdate)) {
-            // still in delay period; small flicker
-            continue;
-          }
-          const dt = (now - c.lastUpdate)/1000;
-          c.lastUpdate = now;
-          c.y += c.speed * dt;
-          // Occasionally vary speed slightly
-          if(Math.random() < 0.02) c.speed *= (0.95 + Math.random()*0.1);
-
-          // If column off bottom, reset to top with new params
-          if(c.y - (c.length*FONT_SIZE) > area.height){
-            c.y = -Math.random()*100;
-            c.length = Math.floor(MIN_LENGTH + Math.random()*(MAX_LENGTH - MIN_LENGTH));
-            c.speed = MIN_SPEED + Math.random()*(MAX_SPEED - MIN_SPEED);
-            c.el.style.opacity = (0.6 + Math.random()*0.45).toString();
-          }
-
-          // Build visual: head brighter, tail dimmer
-          const headIndex = Math.floor(c.y / FONT_SIZE);
-          const chars = [];
-          for(let i=0;i<c.length;i++){
-            const ch = CHAR_SET[Math.random()>.5 ? 0 : 1];
-            // head element
-            if(i === c.length-1){
-              chars.push(`<span class="lead">${ch}</span>`);
-            } else {
-              const shade = Math.max(0.15, (i / c.length) * 0.9);
-              chars.push(`<span style="opacity:${shade}">${ch}</span>`);
-            }
-          }
-          c.el.innerHTML = chars.join('');
-          c.el.style.transform = `translateY(${c.y}px)`;
-        }
-        requestAnimationFrame(update);
-      }
-
-      // Keep right-hand small scroll column for compatibility (old binscroll behavior)
-      function refreshBinscroll(){
-        const width = 6;
-        let scroll='';
-        for(let r=0;r<80;r++) {
-          for(let k=0;k<width;k++) scroll += CHAR_SET[Math.random()>.5 ? 0 : 1];
-          scroll += '\n';
-        }
-        binscroll.textContent = scroll;
-      }
-
-      // init
-      function start(){
-        // clean canvas
-        canvas.innerHTML = '';
-        initColumns();
-        refreshBinscroll();
-        requestAnimationFrame(ts => { cols.forEach(c=>c.lastUpdate=ts); update(ts); });
-        // refresh the small scroll occasionally
-        setInterval(refreshBinscroll, 1200);
-        // handle resize
-        window.addEventListener('resize', () => {
-          // remove existing columns and recreate to fit new width
-          canvas.innerHTML = '';
-          initColumns();
-        });
-      }
-
-      start();
-    })();
-
-    // -----------------------
-    // existing Web Speech API (unchanged)
-    // (keeps the voice greeting you already had)
-    // -----------------------
-    window.addEventListener('load', () => {
-      try {
-        const msg = new SpeechSynthesisUtterance("Welcome to Cybertech, where code meets innovation, meet Dcyberx");
-        msg.rate = 1.55;
-        msg.pitch = 0.65;
-        msg.volume = 1;
-        // pick a male voice if available
-        speechSynthesis.onvoiceschanged = () => {
-          const voices = speechSynthesis.getVoices();
-          const prefer = voices.find(v => /David|Male|Google UK English Male|British Male/i.test(v.name));
-          if(prefer) msg.voice = prefer;
-          speechSynthesis.speak(msg);
-        };
-        // fallback if voiceschanged doesn't fire
-        if(speechSynthesis.getVoices().length) {
-          const voices = speechSynthesis.getVoices();
-          const prefer = voices.find(v => /David|Male|Google UK English Male|British Male/i.test(v.name));
-          if(prefer) msg.voice = prefer;
-          speechSynthesis.speak(msg);
-        }
-      } catch (e) {
-        // silent fail if browser blocks autoplay
-      }
-    });
-  </script>
-</body>
-</html>
-
-
-
-
-
+    }
+    function sendMsg(){
+      const inp=document.getElementById("user-text");
+      const msg=inp.value.trim();
+      if(!msg)return;
+      append("You",msg);
+      inp.value="";
+      setTimeout(()=>reply(msg.toLowerCase()),600);
+    }
+    function reply(m){
+      let r="";
+      if(m.includes("who")&&m.includes("you"))r="I’m CyberX, the virtual son of Dcyberx. He’s my father 👨‍💻.";
+      else if(m.includes("father")||m.includes("creator"))r="My father is Dcyberx — a 16-year-old Tanzanian–Ugandan developer from Kitebi, Kampala.";
+      else if(m.includes("social"))r=`Here are my father's socials:<br><a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a> · <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a> · <a href="https://github.com/Dcyberx" target="_blank">GitHub</a> · <a href="https://discord.gg/833GaF3R" target="_blank">Discord</a> · <a href="https://megoodworld.gumroad.com/" target="_blank">Gumroad</a>`;
+      else if(m.includes("personal")||m.includes("life"))r="He’s still looking for a girlfriend 😅, Tanzanian mixed Ugandan, 16 years old, lives in Kitebi Kampala, calm, honest, and religious.";
+      else if(m.includes("hobby"))r="He loves camping, badminton, volleyball, and horse riding — and his best color is green 💚.";
+      else if(m.includes("movie"))r="Favorite movies: Warm Bodies, Mission Impossible, Supa Cell, and Novacane 🎬.";
+      else if(m.includes("certificate")||m.includes("education"))r="He holds certificates in Psychology and Cyber Security 🎓.";
+      else if(m.includes("joke")){const j=["Why did the computer get cold? Because it forgot to close Windows 😂","Never trust an atom, they make up everything 😄","I told my AI to tell a joke... it said: '404 Humor Not Found!'"];r=j[Math.floor(Math.random()*j.length)];}
+      else if(m.includes("islam")
