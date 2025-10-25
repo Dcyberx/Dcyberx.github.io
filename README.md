@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cyberx — Hollywood Binary + Terminal Chat</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cyberx — Hollywood Binary + Terminal Chat</title>
 <style>
 :root{
   --bg:#050606;
@@ -47,9 +47,9 @@ html,body{
 
 /* 88px top-right logo area (clickable) */
 .logo-space{
-  position:absolute;
-  top:10px;
-  right:10px;
+  position:fixed;
+  top:12px;
+  right:12px;
   width:88px;
   height:88px;
   background:var(--glass);
@@ -60,6 +60,7 @@ html,body{
   align-items:center;
   cursor:pointer;
   overflow:hidden;
+  z-index:60;
 }
 .logo-space img{
   width:100%;
@@ -140,6 +141,7 @@ html,body{
   justify-content:center;
   align-items:flex-end;
   pointer-events:none;
+  z-index:70;
 }
 .chat-panel{
   width:480px;
@@ -249,7 +251,7 @@ html,body{
 
   <div class="container" id="mainContainer">
 
-    <!-- Top-right logo space -->
+    <!-- Top-right logo space (88x88) -->
     <div class="logo-space" id="cyberxLogo" title="Open Cyberx terminal">
       <!-- If you place cyberx.png next to this HTML, it will show here -->
       <img id="logoImg" src="cyberx.png" alt="Cyberx logo" onerror="this.style.display='none'"/>
@@ -298,7 +300,7 @@ html,body{
     </div>
 
     <div class="chat-body" id="chatBody">
-      <!-- initial bot greeting -->
+      <!-- initial bot greeting inserted dynamically -->
     </div>
 
     <div class="controls">
@@ -318,7 +320,7 @@ html,body{
 </div>
 
 <script>
-/* Binary generation (kept from original) */
+/* Binary generation */
 const binaryBox = document.getElementById('binaryBox');
 const columns = 40; // number of binary columns
 const rows = 20;    // digits per column
@@ -352,11 +354,11 @@ let lastBotSpeech = '';
 let recognition = null;
 let listening = false;
 
-/* Personality & data (per your request) */
+/* Personality & data */
 const BOT = {
   name: 'Cyberx',
   greeting: 'Assalam alaikum warahmatullahi wabarakatuh — I am Cyberx. I am calm, honest and religious. How may I help?',
-  aboutIfAskedAboutYou: 'I am its father.', // per your instruction: respond with "I am its father."
+  aboutIfAskedAboutYou: 'I am its father.',
   socials: {
     tiktok: 'https://www.tiktok.com/@Dcyberx',
     instagram: 'https://www.instagram.com/dcyberx.1',
@@ -378,11 +380,28 @@ const BOT = {
   movies: ['Warm Bodies','Mission Impossible','Supa Cell','Novacane']
 };
 
-/* helper: append message */
+/* helper: append message (supports links for known socials) */
 function appendMessage(text, who='bot') {
   const div = document.createElement('div');
   div.className = 'msg ' + (who === 'bot' ? 'bot' : 'user');
-  div.textContent = text;
+
+  // create html-safe text but replace known socials with anchors
+  let safe = document.createElement('div');
+  safe.textContent = text;
+  let html = safe.innerHTML;
+
+  // replace known socials with anchor tags (safe because URLs are hard-coded)
+  for(const label in BOT.socials){
+    const url = BOT.socials[label];
+    const display = url;
+    const link = `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:underline">${display}</a>`;
+    html = html.split(url).join(link);
+  }
+
+  // newlines to <br>
+  html = html.replace(/\n/g,'<br>');
+
+  div.innerHTML = html;
   chatBody.appendChild(div);
   chatBody.scrollTop = chatBody.scrollHeight;
 }
@@ -412,30 +431,28 @@ function initialGreeting(){
 function processInput(message){
   const msg = message.toLowerCase().trim();
 
-  // direct simple responses prioritized
+  // Islamic greeting
   if(/^(assalam|salaam|salam)/i.test(msg)){
     return 'Wa alaikum assalam warahmatullahi wabarakatuh. How can I assist you today?';
   }
 
-  // asked about "me" specifically
+  // asked about "me" specifically -> per your instruction
   if(/\babout me\b|\bwho am i\b|\bwho are i\b|\btell me about me\b/.test(msg)){
     return BOT.aboutIfAskedAboutYou;
   }
 
   // who made you / who are you
   if(/\bwho (made|created) you\b|\bwho are you\b|\bwho created you\b/.test(msg)){
-    // per your instruction, sound like "I am its father" when asked about the user? but here handle both:
     return 'I am Cyberx — created by Dcyberx. If you ask about him, I say: ' + BOT.aboutIfAskedAboutYou;
   }
 
-  // socials: check site keywords
-  if(/\b(tiktok)\b/.test(msg)) return `TikTok: ${BOT.socials.tiktok}`;
-  if(/\b(instagram|ig)\b/.test(msg)) return `Instagram: ${BOT.socials.instagram}`;
-  if(/\b(github|git)\b/.test(msg)) return `GitHub: ${BOT.socials.github}`;
-  if(/\b(discord|server)\b/.test(msg)) return `Discord: ${BOT.socials.discord}`;
-  if(/\b(gumroad)\b/.test(msg)) return `Gumroad: ${BOT.socials.gumroad}`;
+  // socials: check site keywords and return anchor links
+  if(/\btiktok\b/.test(msg)) return `TikTok: ${BOT.socials.tiktok}`;
+  if(/\binstagram\b|\big\b/.test(msg)) return `Instagram: ${BOT.socials.instagram}`;
+  if(/\bgithub\b|\bgit\b/.test(msg)) return `GitHub: ${BOT.socials.github}`;
+  if(/\bdiscord\b|\bserver\b/.test(msg)) return `Discord: ${BOT.socials.discord}`;
+  if(/\bgumroad\b/.test(msg)) return `Gumroad: ${BOT.socials.gumroad}`;
   if(/\bsocials\b|\bsocial\b|\bprofile\b/.test(msg)){
-    // list all
     return `Socials:\nTikTok: ${BOT.socials.tiktok}\nInstagram: ${BOT.socials.instagram}\nGitHub: ${BOT.socials.github}\nDiscord: ${BOT.socials.discord}\nGumroad: ${BOT.socials.gumroad}`;
   }
 
@@ -443,7 +460,7 @@ function processInput(message){
   if(/\b(girlfriend|dating|relationship)\b/.test(msg)) return BOT.personal.status;
   if(/\brace\b|\bethnic\b/.test(msg)) return BOT.personal.race;
   if(/\bage\b|\bhow old\b/.test(msg)) return BOT.personal.age;
-  if(/\bhobby|hobbies|what do you like|likes\b/.test(msg)) return `Hobbies: ${BOT.personal.hobbies.join(', ')}. Best color: ${BOT.personal.bestColor}.`;
+  if(/\bhobby|hobbies|what do you like|likes\b/.test(msg)) return `Hobbies:\n- ${BOT.personal.hobbies.join('\n- ')}\nBest color: ${BOT.personal.bestColor}.`;
   if(/\blocation|live|where (do|are) you\b/.test(msg)) return `I live at ${BOT.personal.location} and study at ${BOT.personal.school}.`;
   if(/\bcertificate|certificates|qualification\b/.test(msg)) return `Certificates: ${BOT.personal.certificates.join(', ')}.`;
   if(/\bmovies\b|\bfavourite movie\b|\bfavs\b/.test(msg)) return `Favorite movies: ${BOT.movies.join(', ')}`;
@@ -471,7 +488,6 @@ function processInput(message){
   }
 
   // fallback polite answer
-  // include short prompt to offer jokes or reminders
   return "I didn't quite catch that. Ask me for socials, a joke, or an Islamic reminder. May I make you smile or give a reminder?";
 }
 
@@ -553,55 +569,9 @@ document.addEventListener('keydown',(e)=>{
   if(e.key==='Escape') overlay.classList.add('hidden');
 });
 
-/* clickable links handling: create clickable links when bot returns socials */
-const origProcessInput = processInput;
-/* override to auto create clickable links in bot messages */
-function processInput(message){
-  let reply = origProcessInput(message);
-  // convert plain URLs to clickable elements in message bubble by splitting and rendering HTML safely
-  // We'll append as text but if reply contains 'http' convert to <a>
-  // To avoid XSS, only allow known domains from BOT.socials
-  const allowed = Object.values(BOT.socials);
-  allowed.forEach(u => {
-    if(reply.includes(u)){
-      reply = reply.split(u).join(u); // keep same, will render link in appendMessageHTML
-    }
-  });
-  return reply;
-}
-
-/* Modified append to support links for known socials */
-function appendMessage(text, who='bot'){
-  const div = document.createElement('div');
-  div.className = 'msg ' + (who === 'bot' ? 'bot' : 'user');
-
-  // create html-safe text but replace known socials with anchors
-  let safe = document.createElement('div');
-  safe.textContent = text;
-  let html = safe.innerHTML;
-
-  // replace known socials with anchor tags (safe because URLs are hard-coded)
-  for(const label in BOT.socials){
-    const url = BOT.socials[label];
-    const display = url;
-    const link = `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:underline">${display}</a>`;
-    html = html.split(url).join(link);
-  }
-
-  // newlines to <br>
-  html = html.replace(/\n/g,'<br>');
-
-  div.innerHTML = html;
-  chatBody.appendChild(div);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-/* override the earlier references to use new append */
+/* Expose appendMessage and speak to window (if needed elsewhere) */
 window.appendMessage = appendMessage;
 window.speak = speak;
-
-/* Small accessibility: focus input when overlay shown */
-overlay.addEventListener('transitionend', ()=>{ userInput.focus(); });
 
 </script>
 </body>
