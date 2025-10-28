@@ -103,7 +103,22 @@
     }
     .sections{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
     .hobbies li{margin-bottom:6px}
-    .logo-ascii{font-family:"Fira Code", monospace;color:var(--green);white-space:pre;overflow:auto;max-height:220px;text-align:center;font-size:11px}
+    .logo-ascii{
+      font-family:"Fira Code", monospace;
+      color:var(--green);
+      white-space:pre;
+      overflow:auto;max-height:220px;
+      text-align:center;
+      font-size:11px;
+      overflow: hidden;
+      position: inline-block;
+      animation: scrollUp 20s linera infinite;
+    }
+
+    @keyframes scrollUp {
+      0% {transform: translateY(100%); }
+      100% {transform: translate Y(-100%); }
+    }
     footer{margin-top:18px;color:var(--muted);font-size:13px}
     @media(max-width:880px){
       .container{grid-template-columns:1fr;}
@@ -176,7 +191,7 @@
           </div>
         </div>
 
-        <div style="margin-top:12px" class="logo-ascii card" aria-hidden="false">
+        <div style="margin-top:12px" class="logo-ascii card" aria-hidden="true">
 <pre>  
   
   ⠀⠠⠠⢄⢤⣠⣀⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -366,4 +381,5 @@
   </script>
 </body>
 </html>
+
 
