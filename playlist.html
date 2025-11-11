@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dcyberx Nexus Player</title>
+<title>Dcyberx Player</title>
 <style>
   body {
     background: #000;
@@ -71,7 +71,7 @@
 </head>
 <body>
 
-<h2>Dcyberx Nexus Player</h2>
+<h2>Dcyberx  Player</h2>
 <audio id="music-player" controls></audio><br>
 
 <button onclick="prevSong()">⏮ Prev</button>
@@ -79,6 +79,7 @@
 <button onclick="pauseAudio()">⏸ Pause</button>
 <button onclick="nextSong()">⏭ Next</button>
 <button onclick="shuffleSong()">🔀 Shuffle</button>
+<button onclick="downloadSong()">📥 Download</button>
 
 <div id="now-playing">Now Playing: None</div>
 
@@ -113,7 +114,7 @@ const nowPlaying = document.getElementById("now-playing");
 const bars = document.querySelectorAll(".bar");
 
 function updateNowPlaying() {
-  nowPlaying.textContent = "Now Playing: " + songs[currentSong].src;
+  nowPlaying.textContent = "Now Playing: " + songs[currentSong].name,src;
 }
 
 function playAudio() {
@@ -157,4 +158,5 @@ audio.addEventListener("ended", () => {
 
 </body>
 </html>
+
 
