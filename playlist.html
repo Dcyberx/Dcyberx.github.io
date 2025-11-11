@@ -99,7 +99,12 @@ const songs = [
   { name: "Song 4", src: "music/intoxicated sam02.mp3" },
   { name: "Song 5", src: "music/Girl with quiet fire.mp3" },
   { name: "Song 6", src: "music/europhia sam02.mp3" },
-  { name: "Song 7", src: "music/bittersweet sam02.mp3" }
+  { name: "Song 7", src: "music/bittersweet sam02.mp3" },
+  { name: "Song 8", src: "music/Biber - Intensions.mp3" },
+  { name: "Song 9", src: "music/Helplessly_Tatiana.mp3" },
+  { name: "Song 10", src: "music/central_cee_band4band.mp3" },
+  { name: "Song 11", src: "music/all mine sam02.mp3" },
+  { name: "Song 12", src: "music/Tides sam02.mp3" },
 ];
 
 let currentSong = 0;
@@ -108,7 +113,7 @@ const nowPlaying = document.getElementById("now-playing");
 const bars = document.querySelectorAll(".bar");
 
 function updateNowPlaying() {
-  nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
+  nowPlaying.textContent = "Now Playing: " + songs[currentSong].src;
 }
 
 function playAudio() {
@@ -152,3 +157,4 @@ audio.addEventListener("ended", () => {
 
 </body>
 </html>
+
