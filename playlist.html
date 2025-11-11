@@ -81,6 +81,19 @@
 <button onclick="shuffleSong()">🔀 Shuffle</button>
 <button onclick="downloadSong()">📥 Download</button>
 
+ <script>
+        // Function to trigger file download
+        function downloadSong() {
+            const link = document.createElement('a');
+            link.href = 'music/Song.mp3';  // Replace with your file path
+            link.download = 'Song.mp3';  // The name the file will have
+            link.click();
+            console.log('Dcyberx downloading song...');
+        }
+    </script>
+
+</body>
+
 <div id="now-playing">Now Playing: None</div>
 
 <!-- Sound wave animation -->
@@ -114,7 +127,7 @@ const nowPlaying = document.getElementById("now-playing");
 const bars = document.querySelectorAll(".bar");
 
 function updateNowPlaying() {
-  nowPlaying.textContent = "Now Playing: " + songs[currentSong].name,src;
+  nowPlaying.textContent = "Now Playing: " + songs[currentSong].src;
 }
 
 function playAudio() {
@@ -158,5 +171,6 @@ audio.addEventListener("ended", () => {
 
 </body>
 </html>
+
 
 
