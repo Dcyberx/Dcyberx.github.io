@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dcyberx Nexus Music Player</title>
+<title>Dcyberx Music Player</title>
 <style>
   body {
     background: #000;
@@ -39,7 +39,7 @@
 <body>
 
 <div id="player-container">
-  <h2>Dcyberx Nexus Player</h2>
+  <h2>Dcyberx Music Player</h2>
   <audio id="music"></audio>
   <div>
     <button onclick="prevSong()">Prev</button>
@@ -54,9 +54,13 @@
 <script>
 // List of songs
 const songs = [
-  { name: "Song 1", src: "song1.mp3" },
-  { name: "Song 2", src: "song2.mp3" },
-  { name: "Song 3", src: "song3.mp3" }
+  { name: "Song 1", src: "little bit sam02.mp3" },
+  { name: "Song 2", src: "pretend sam 02.mp3" },
+  { name: "Song 3", src: "good things sam02.mp3" },
+  { name: "Song 4", src: "intoxicated sam02.mp3" },
+  { name: "Song 5", src: "Girl with quiet fire.mp3" },
+  { name: "Song 6", src: "europhia sam02.mp3" },
+  { name: "Song 7", src: "bittersweet sam02.mp3" }
 ];
 
 let currentSong = 0;
@@ -103,3 +107,4 @@ audio.addEventListener('ended', nextSong);
 
 </body>
 </html>
+
