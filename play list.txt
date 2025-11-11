@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dcyberx Nexus Music Player</title>
+<style>
+  body {
+    background: #000;
+    color: #0f0;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #player-container {
+    max-width: 400px;
+    padding: 20px;
+    border: 2px solid #0f0;
+    border-radius: 15px;
+    text-align: center;
+  }
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    background: #0f0;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #0a0;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<div id="player-container">
+  <h2>Dcyberx Nexus Player</h2>
+  <audio id="music"></audio>
+  <div>
+    <button onclick="prevSong()">Prev</button>
+    <button onclick="playAudio()">Play</button>
+    <button onclick="pauseAudio()">Pause</button>
+    <button onclick="nextSong()">Next</button>
+    <button onclick="downloadAudio()">Download</button>
+  </div>
+  <p id="song-name"></p>
+</div>
+
+<script>
+// List of songs
+const songs = [
+  { name: "Song 1", src: "song1.mp3" },
+  { name: "Song 2", src: "song2.mp3" },
+  { name: "Song 3", src: "song3.mp3" }
+];
+
+let currentSong = 0;
+const audio = document.getElementById('music');
+const songName = document.getElementById('song-name');
+
+function loadSong(index) {
+  audio.src = songs[index].src;
+  songName.textContent = songs[index].name;
+  audio.play();
+}
+
+// Initial load
+loadSong(currentSong);
+
+function playAudio() {
+  audio.play();
+}
+
+function pauseAudio() {
+  audio.pause();
+}
+
+function nextSong() {
+  currentSong = (currentSong + 1) % songs.length;
+  loadSong(currentSong);
+}
+
+function prevSong() {
+  currentSong = (currentSong - 1 + songs.length) % songs.length;
+  loadSong(currentSong);
+}
+
+function downloadAudio() {
+  const link = document.createElement('a');
+  link.href = audio.src;
+  link.download = audio.src.split('/').pop();
+  link.click();
+}
+
+// Optional: auto-play next when current ends
+audio.addEventListener('ended', nextSong);
+</script>
+
+</body>
+</html>
