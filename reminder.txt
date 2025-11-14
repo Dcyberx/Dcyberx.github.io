@@ -1,4 +1,4 @@
-ok so right now  create for me perfect code for    ok Write for me full code for it . so if asked about me, it sound say am its father, if asked about the socials, let it say or give theses respective of what site is asked  <a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a>
+  <a href="https://www.tiktok.com/@Dcyberx" target="_blank">TikTok</a>
             <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
             <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
             <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech_discord_chat</a>
@@ -381,3 +381,4 @@ ok so right now  create for me perfect code for    ok Write for me full code for
   </script>
 </body>
 </html>
+
