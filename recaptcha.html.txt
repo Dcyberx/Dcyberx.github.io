@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberTech Subscription Puzzle</title>
+  <style>
+    body { background:#0d0d0d; color:#00ff99; font-family:monospace; padding:20px; }
+    h1 { display:flex; align-items:center; gap:10px; }
+    .card { background:#111; border:1px solid #00ff99; border-radius:10px; padding:20px; max-width:500px; margin:auto; }
+    .puzzle { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:15px; }
+    .tile {
+      background:#0c1116; border:1px solid #00ff99; border-radius:8px;
+      height:80px; display:flex; align-items:center; justify-content:center;
+      font-size:28px; cursor:pointer; transition:0.2s;
+    }
+    .tile.selected { background:#00ff99; color:#000; }
+    button {
+      margin-top:15px; width:100%; padding:12px; border:1px solid #00ff99;
+      background:#0c1116; color:#00ff99; border-radius:8px; cursor:not-allowed;
+    }
+    button.enabled { cursor:pointer; box-shadow:0 0 10px #00ff99; }
+    .status { margin-top:10px; font-size:14px; }
+  </style>
+</head>
+<body>
+  <h1>🛡Prove your not a robot</h1>
+
+
+      <form id="subscribe-form">
+      <p>🧩🔐 Recaptcha: Pick 2 items which go in a <strong>book, door, or bicycle</strong></p>
+      <div class="puzzle" id="puzzle"></div>
+      <div id="status" class="status"></div>
+      <button id="submit" type="submit" disabled>Continue</button>
+    </form>
+  </div>
+
+<script>
+  // Puzzle sets: each has a target container and the correct pair
+  const puzzles = [
+    { container:"book", pair:["✒️","✏️"], label:"Pen + Pencil → Book" },
+    { container:"door", pair:["🔑","💳"], label:"Key + Card → Door" },
+    { container:"bicycle", pair:["🚴","🚲"], label:"Two Tyres → Bicycle" }
+  ];
+
+  // Pick random puzzle
+  const puzzle = puzzles[Math.floor(Math.random()*puzzles.length)];
+  document.querySelector("p").innerHTML = `🧩 recaptcha Pick 2 items which go in a <strong>${puzzle.container}</strong>`;
+
+  // Distractors
+  const distractors = ["🍎","🐱","🦅","💻","🎧","📦","🔋","🕹️"];
+  const items = [...puzzle.pair];
+  while(items.length<9){
+    items.push(distractors[Math.floor(Math.random()*distractors.length)]);
+  }
+  items.sort(()=>Math.random()-0.5);
+
+  const puzzleEl=document.getElementById("puzzle");
+  const tiles=[];
+  items.forEach(emoji=>{
+    const tile=document.createElement("div");
+    tile.className="tile";
+    tile.textContent=emoji;
+    tile.addEventListener("click",()=>{
+      tile.classList.toggle("selected");
+      validate();
+    });
+    puzzleEl.appendChild(tile);
+    tiles.push(tile);
+  });
+
+  const statusEl=document.getElementById("status");
+  const submitBtn=document.getElementById("submit");
+
+  function validate(){
+    const selected=tiles.filter(t=>t.classList.contains("selected")).map(t=>t.textContent);
+    if(selected.length===2){
+      if(selected.includes(puzzle.pair[0]) && selected.includes(puzzle.pair[1])){
+        statusEl.textContent="✅ Correct! You may continue.";
+        submitBtn.disabled=false;
+        submitBtn.classList.add("enabled");
+      } else {
+        statusEl.textContent="❌ Wrong pair. Try again.";
+        submitBtn.disabled=true;
+        submitBtn.classList.remove("enabled");
+      }
+    } else {
+      statusEl.textContent="Select exactly two items.";
+      submitBtn.disabled=true;
+      submitBtn.classList.remove("enabled");
+    }
+  }
+
+  document.getElementById("subscribe-form").addEventListener("submit",e=>{
+    e.preventDefault();
+    if(!submitBtn.disabled){
+      // Redirect to pay.html when puzzle solved
+      window.location.href="pay.html";
+    } else {
+      alert("Solve the puzzle first!");
+    }
+  });
+</script>
+</body>
+</html>
