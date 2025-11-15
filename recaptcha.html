@@ -4,10 +4,22 @@
   <meta charset="UTF-8">
   <title>CyberTech Subscription Puzzle</title>
   <style>
-    body { background:#0d0d0d; color:#00ff99; font-family:monospace; padding:20px; }
+    body {
+      background:#0d0d0d;
+      color:#00ff99;
+      font-family:monospace;
+      padding:20px;
+      padding-top:100px; /* space so header doesn't overlap */
+    }
     h1 { display:flex; align-items:center; gap:10px; }
-    .card { background:#111; border:1px solid #00ff99; border-radius:10px; padding:20px; max-width:500px; margin:auto; }
-    .puzzle { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:15px; }
+    .card {
+      background:#111; border:1px solid #00ff99; border-radius:10px;
+      padding:20px; max-width:500px; margin:auto;
+    }
+    .puzzle {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:12px; margin-top:15px;
+    }
     .tile {
       background:#0c1116; border:1px solid #00ff99; border-radius:8px;
       height:80px; display:flex; align-items:center; justify-content:center;
@@ -15,24 +27,52 @@
     }
     .tile.selected { background:#00ff99; color:#000; }
     button {
-      margin-top:15px; width:100%; padding:12px; border:1px solid #00ff99;
-      background:#0c1116; color:#00ff99; border-radius:8px; cursor:not-allowed;
+      margin-top:15px; width:100%; padding:12px;
+      border:1px solid #00ff99; background:#0c1116; color:#00ff99;
+      border-radius:8px; cursor:not-allowed;
     }
     button.enabled { cursor:pointer; box-shadow:0 0 10px #00ff99; }
     .status { margin-top:10px; font-size:14px; }
+
+    /* 🔹 Header styles */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 20px; border-bottom:1px solid rgba(57,255,20,0.2);
+      position:fixed; top:0; left:0; right:0;
+      background:#000; z-index:1000;
+    }
+    .logo { font-weight:700; font-size:20px; color:#39ff14; }
+    nav { display:flex; gap:15px; }
+    nav a { text-decoration:none; color:#0f0; font-weight:500; }
+    nav a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
-  <h1>🛡Prove your not a robot</h1>
 
+  <!-- 🔹 HEADER -->
+  <header>
+    <div class="logo">CyberTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="programs.html">Programs</a>
+      <a href="cyberx.html">Cyberx AI</a>
+      <a href="subscription.html">Subscription</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="pay.html" class="cta-btn">Donate</a>
+    </nav>
+  </header>
 
-      <form id="subscribe-form">
-      <p>🧩🔐 Recaptcha: Pick 2 items which go in a <strong>book, door, or bicycle</strong></p>
-      <div class="puzzle" id="puzzle"></div>
-      <div id="status" class="status"></div>
-      <button id="submit" type="submit" disabled>Continue</button>
-    </form>
-  </div>
+  <!-- 🔹 PUZZLE CONTENT -->
+  <h1>🛡 Prove you’re not a robot</h1>
+
+  <form id="subscribe-form">
+    <p>🧩🔐 Recaptcha: Pick 2 items which go in a <strong>book, door, or bicycle</strong></p>
+    <div class="puzzle" id="puzzle"></div>
+    <div id="status" class="status"></div>
+    <button id="submit" type="submit" disabled>Continue</button>
+  </form>
 
 <script>
   // Puzzle sets: each has a target container and the correct pair
@@ -44,7 +84,8 @@
 
   // Pick random puzzle
   const puzzle = puzzles[Math.floor(Math.random()*puzzles.length)];
-  document.querySelector("p").innerHTML = `🧩 recaptcha Pick 2 items which go in a <strong>${puzzle.container}</strong>`;
+  document.querySelector("p").innerHTML =
+    `🧩 Recaptcha: Pick 2 items which go in a <strong>${puzzle.container}</strong>`;
 
   // Distractors
   const distractors = ["🍎","🐱","🦅","💻","🎧","📦","🔋","🕹️"];
