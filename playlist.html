@@ -1,175 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dcyberx Player</title>
-<style>
-  body {
-    background: #000;
-    color: #0f0;
-    font-family: monospace;
-    text-align: center;
-    padding-top: 40px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dcyberx Player</title>
 
-  h2 {
-    color: #00ff00;
-  }
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+      padding-top: 100px; /* space so header doesn't overlap */
+    }
 
-  button {
-    background: #0f0;
-    color: #000;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: monospace;
-  }
+    h2 { color: #00ff00; }
 
-  button:hover {
-    background: #0a0;
-    color: #fff;
-  }
+    button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    button:hover { background: #0a0; color: #fff; }
 
-  #now-playing {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #0f0;
-  }
+    #now-playing { margin-top: 15px; font-size: 14px; color: #0f0; }
 
-  /* Sound wave animation bars */
-  .wave-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 40px;
-    margin-top: 20px;
-    gap: 5px;
-  }
+    /* Sound wave animation bars */
+    .wave-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 40px;
+      margin-top: 20px;
+      gap: 5px;
+    }
+    .bar {
+      width: 6px;
+      height: 10px;
+      background: #0f0;
+      border-radius: 3px;
+      animation: bounce 1s infinite;
+      animation-play-state: paused;
+    }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
 
-  .bar {
-    width: 6px;
-    height: 10px;
-    background: #0f0;
-    border-radius: 3px;
-    animation: bounce 1s infinite;
-    animation-play-state: paused;
-  }
+    @keyframes bounce {
+      0%, 100% { height: 10px; }
+      50% { height: 35px; }
+    }
 
-  .bar:nth-child(2) { animation-delay: 0.1s; }
-  .bar:nth-child(3) { animation-delay: 0.2s; }
-  .bar:nth-child(4) { animation-delay: 0.3s; }
-  .bar:nth-child(5) { animation-delay: 0.4s; }
-
-  @keyframes bounce {
-    0%, 100% { height: 10px; }
-    50% { height: 35px; }
-  }
-</style>
+    /* 🔹 Header styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+      position: fixed; /* stays at top */
+      top: 0; left: 0; right: 0;
+      background: #000;
+      z-index: 1000;
+    }
+    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
+    nav { display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #0f0; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-<h2>Dcyberx  Player</h2>
-<audio id="music-player" controls></audio><br>
+  <!-- 🔹 HEADER -->
+  <header>
+    <div class="logo">CyberTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="programs.html">Programs</a>
+      <a href="cyberx.html">Cyberx AI</a>
+      <a href="subscription.html">Subscription</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="pay.html" class="cta-btn">Donate</a>
+    </nav>
+  </header>
 
-<button onclick="prevSong()">⏮ Prev</button>
-<button onclick="playAudio()">▶ Play</button>
-<button onclick="pauseAudio()">⏸ Pause</button>
-<button onclick="nextSong()">⏭ Next</button>
-<button onclick="shuffleSong()">🔀 Shuffle</button>
-<button onclick="downloadSong()">📥 Download</button>
+  <!-- 🔹 PLAYER CONTENT -->
+  <h2>Dcyberx Player</h2>
+  <audio id="music-player" controls></audio><br>
 
- <script>
-        // Function to trigger file download
-        function downloadSong() {
-            const link = document.createElement('a');
-            link.href = 'music/Song.mp3';  // Replace with your file path
-            link.download = 'Song.mp3';  // The name the file will have
-            link.click();
-            console.log('Dcyberx downloading song...');
-        }
-    </script>
+  <button onclick="prevSong()">⏮ Prev</button>
+  <button onclick="playAudio()">▶ Play</button>
+  <button onclick="pauseAudio()">⏸ Pause</button>
+  <button onclick="nextSong()">⏭ Next</button>
+  <button onclick="shuffleSong()">🔀 Shuffle</button>
+  <button onclick="downloadSong()">📥 Download</button>
 
-</body>
+  <div id="now-playing">Now Playing: None</div>
 
-<div id="now-playing">Now Playing: None</div>
+  <!-- Sound wave animation -->
+  <div class="wave-container">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
 
-<!-- Sound wave animation -->
-<div class="wave-container">
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-</div>
+  <!-- 🔹 Scripts -->
+  <script>
+    const songs = [
+      { name: "Song 1", src: "music/little bit sam02.mp3" },
+      { name: "Song 2", src: "music/pretend sam 02.mp3" },
+      { name: "Song 3", src: "music/good things sam02.mp3" },
+      { name: "Song 4", src: "music/intoxicated sam02.mp3" },
+      { name: "Song 5", src: "music/Girl with quiet fire.mp3" },
+      { name: "Song 6", src: "music/europhia sam02.mp3" },
+      { name: "Song 7", src: "music/bittersweet sam02.mp3" },
+      { name: "Song 8", src: "music/Biber - Intensions.mp3" },
+      { name: "Song 9", src: "music/Helplessly_Tatiana.mp3" },
+      { name: "Song 10", src: "music/central_cee_band4band.mp3" },
+      { name: "Song 11", src: "music/all mine sam02.mp3" },
+      { name: "Song 12", src: "music/Tides sam02.mp3" },
+    ];
 
-<script>
-const songs = [
-  { name: "Song 1", src: "music/little bit sam02.mp3" },
-  { name: "Song 2", src: "music/pretend sam 02.mp3" },
-  { name: "Song 3", src: "music/good things sam02.mp3" },
-  { name: "Song 4", src: "music/intoxicated sam02.mp3" },
-  { name: "Song 5", src: "music/Girl with quiet fire.mp3" },
-  { name: "Song 6", src: "music/europhia sam02.mp3" },
-  { name: "Song 7", src: "music/bittersweet sam02.mp3" },
-  { name: "Song 8", src: "music/Biber - Intensions.mp3" },
-  { name: "Song 9", src: "music/Helplessly_Tatiana.mp3" },
-  { name: "Song 10", src: "music/central_cee_band4band.mp3" },
-  { name: "Song 11", src: "music/all mine sam02.mp3" },
-  { name: "Song 12", src: "music/Tides sam02.mp3" },
-];
+    let currentSong = 0;
+    const audio = document.getElementById("music-player");
+    const nowPlaying = document.getElementById("now-playing");
+    const bars = document.querySelectorAll(".bar");
 
-let currentSong = 0;
-const audio = document.getElementById("music-player");
-const nowPlaying = document.getElementById("now-playing");
-const bars = document.querySelectorAll(".bar");
+    function updateNowPlaying() {
+      nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
+    }
+    function playAudio() { audio.src = songs[currentSong].src; audio.play(); updateNowPlaying(); animateWaves(true); }
+    function pauseAudio() { audio.pause(); animateWaves(false); }
+    function nextSong() { currentSong = (currentSong + 1) % songs.length; playAudio(); }
+    function prevSong() { currentSong = (currentSong - 1 + songs.length) % songs.length; playAudio(); }
+    function shuffleSong() { currentSong = Math.floor(Math.random() * songs.length); playAudio(); }
+    function animateWaves(isPlaying) { bars.forEach(bar => bar.style.animationPlayState = isPlaying ? "running" : "paused"); }
+    audio.addEventListener("ended", () => animateWaves(false));
 
-function updateNowPlaying() {
-  nowPlaying.textContent = "Now Playing: " + songs[currentSong].src;
-}
-
-function playAudio() {
-  audio.src = songs[currentSong].src;
-  audio.play();
-  updateNowPlaying();
-  animateWaves(true);
-}
-
-function pauseAudio() {
-  audio.pause();
-  animateWaves(false);
-}
-
-function nextSong() {
-  currentSong = (currentSong + 1) % songs.length;
-  playAudio();
-}
-
-function prevSong() {
-  currentSong = (currentSong - 1 + songs.length) % songs.length;
-  playAudio();
-}
-
-function shuffleSong() {
-  currentSong = Math.floor(Math.random() * songs.length);
-  playAudio();
-}
-
-function animateWaves(isPlaying) {
-  bars.forEach(bar => {
-    bar.style.animationPlayState = isPlaying ? "running" : "paused";
-  });
-}
-
-// Automatically stop animation when song ends
-audio.addEventListener("ended", () => {
-  animateWaves(false);
-});
-</script>
+    function downloadSong() {
+      const link = document.createElement('a');
+      link.href = songs[currentSong].src;
+      link.download = songs[currentSong].name + ".mp3";
+      link.click();
+    }
+  </script>
 
 </body>
 </html>
-
-
