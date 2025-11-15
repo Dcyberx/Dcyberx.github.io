@@ -1,297 +1,266 @@
-<style>
-  :root {
-    --bg-dark: #0a0a0a;
-    --text-dark: #0fff72;
-    --bg-light: #f9f9f9;
-    --text-light: #222222;
-    --hover-dark: rgba(57,255,20,0.1);
-    --hover-light: rgba(0,0,0,0.1);
-    --border-dark: rgba(57,255,20,0.2);
-    --border-light: rgba(0,0,0,0.2);
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberTech Modern Layout</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --text-dark: #0fff72;
+      --bg-light: #f9f9f9;
+      --text-light: #222222;
+      --hover-dark: rgba(57,255,20,0.1);
+      --hover-light: rgba(0,0,0,0.1);
+    }
 
-  /* Base */
-  body {
-    margin: 0;
-    font-family: "Fira Code", monospace;
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  body.light-theme { background-color: var(--bg-light); color: var(--text-light); }
+    body {
+      margin: 0;
+      font-family: "Fira Code", monospace;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-  /* Header */
-  header.ct-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--border-dark);
-    position: relative;
-  }
-  body.light-theme header.ct-header { border-bottom-color: var(--border-light); }
+    body.light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
 
-  .ct-logo { font-weight: 700; font-size: 20px; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+      position: relative;
+    }
 
-  nav.ct-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    z-index: 100;
-  }
+    .logo .logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-  /* Links and buttons */
-  nav.ct-nav a, .ct-dropdown-btn {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-    padding: 4px 0;
-  }
-  .ct-dropdown-btn::after { content: " ▾"; font-size: 0.8em; margin-left: 2px; }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      z-index: 100;
+    }
 
-  /* Dropdown containers */
-  .ct-dropdown, .ct-submenu { position: relative; }
+    nav a, .dropdown-btn {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      padding: 4px 0;
+    }
 
-  /* Menus */
-  .ct-dropdown-menu, .ct-submenu-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 180px;
-    border-radius: 6px;
-    padding: 6px 0;
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    background-color: var(--bg-dark);
-  }
-  .ct-submenu-menu { top: 0; left: 100%; }
-  body.light-theme .ct-dropdown-menu, body.light-theme .ct-submenu-menu {
-    background-color: var(--bg-light);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
+    .dropdown-btn::after {
+      content: " ▾";
+      font-size: 0.8em;
+      margin-left: 2px;
+    }
 
-  /* Show when open */
-  .ct-dropdown.open > .ct-dropdown-menu { display: block; }
-  .ct-submenu.open > .ct-submenu-menu { display: block; }
+    .dropdown, .submenu {
+      position: relative;
+    }
 
-  /* Menu items */
-  .ct-dropdown-menu a, .ct-submenu-menu a {
-    display: block;
-    padding: 8px 12px;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-  .ct-dropdown-menu a:hover, .ct-submenu-menu a:hover { background-color: var(--hover-dark); }
-  body.light-theme .ct-dropdown-menu a:hover, body.light-theme .ct-submenu-menu a:hover { background-color: var(--hover-light); }
+    .dropdown-content, .submenu-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      border-radius: 6px;
+      padding: 6px 0;
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background-color: var(--bg-dark);
+    }
 
-  /* CTA */
-  .ct-cta {
-    background-color: #39ff14;
-    color: #000;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .ct-cta:hover { background-color: #2fcc0e; transform: translateY(-2px); }
+    .submenu-content {
+      top: 0;
+      left: 100%;
+    }
 
-  /* Theme toggle */
-  .ct-theme-toggle { cursor: pointer; font-weight: 500; }
+    body.light-theme .dropdown-content, body.light-theme .submenu-content {
+      background-color: var(--bg-light);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
 
-  /* Hamburger */
-  .ct-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
-  }
-  .ct-hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-dark);
-    transition: background 0.3s;
-  }
-  body.light-theme .ct-hamburger div { background-color: var(--text-light); }
+    .dropdown-content a, .submenu-content a {
+      display: block;
+      padding: 8px 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
 
-  /* Active link highlight */
-  nav.ct-nav a.ct-active { border-bottom: 2px solid currentColor; }
+    .dropdown-content a:hover, .submenu-content a:hover {
+      background-color: var(--hover-dark);
+    }
 
-  /* Desktop hover behavior */
-  @media (hover: hover) {
-    .ct-dropdown:hover > .ct-dropdown-menu { display: block; }
-  }
+    body.light-theme .dropdown-content a:hover, body.light-theme .submenu-content a:hover {
+      background-color: var(--hover-light);
+    }
 
-  /* Mobile */
-  @media (max-width: 768px) {
-    nav.ct-nav {
+    .cta-btn {
+      background-color: #39ff14;
+      color: #000;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .cta-btn:hover {
+      background-color: #2fcc0e;
+      transform: translateY(-2px);
+    }
+
+    .hamburger {
       display: none;
       flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 12px;
-      background-color: var(--bg-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 8px;
-      padding: 10px;
-      gap: 10px;
-    }
-    body.light-theme nav.ct-nav {
-      background-color: var(--bg-light);
-      border-color: var(--border-light);
+      gap: 4px;
+      cursor: pointer;
     }
 
-    nav.ct-nav.show { display: flex; }
-    .ct-hamburger { display: flex; }
-
-    /* Dropdowns become inline for stacked mobile menu */
-    .ct-dropdown-menu, .ct-submenu-menu {
-      position: relative;
-      top: 0;
-      left: 0;
-      min-width: unset;
-      box-shadow: none;
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-dark);
+      transition: background 0.3s;
     }
-  }
-</style>
 
-<header class="ct-header">
-  <div class="ct-logo">CyberTech</div>
+    body.light-theme .hamburger div {
+      background-color: var(--text-light);
+    }
 
-  <!-- Hamburger: inline toggle (works after innerHTML injection) -->
-  <div class="ct-hamburger"
-       aria-label="Toggle menu"
-       aria-expanded="false"
-       onclick="
-         var nav = document.getElementById('ct-navbar');
-         var expanded = this.getAttribute('aria-expanded') === 'true';
-         this.setAttribute('aria-expanded', String(!expanded));
-         if (nav) nav.classList.toggle('show');
-       ">
-    <div></div><div></div><div></div>
-  </div>
+    @media (max-width:768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 12px;
+        background-color: var(--bg-dark);
+        border: 1px solid rgba(57,255,20,0.2);
+        border-radius: 8px;
+        padding: 10px;
+        gap: 10px;
+      }
 
-  <nav class="ct-nav" id="ct-navbar" aria-label="Main navigation">
-    <!-- Programs -->
-    <div class="ct-dropdown">
-      <div class="ct-dropdown-btn"
-           tabindex="0"
-           aria-haspopup="true"
-           aria-expanded="false"
-           onclick="
-             var p = this.parentElement;
-             var isOpen = p.classList.contains('open');
-             p.classList.toggle('open');
-             this.setAttribute('aria-expanded', String(!isOpen));
-           ">
-        Programs
+      body.light-theme nav {
+        background-color: var(--bg-light);
+        border-color: rgba(0,0,0,0.2);
+      }
+
+      nav.show { display: flex; }
+      .hamburger { display: flex; }
+      .dropdown-content, .submenu-content {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <!-- PNG Logo that links to homepage -->
+      <a href="index.html" class="logo" aria-label="Homepage">
+        <img src="cyber.png" alt="Cyber Logo" class="logo-img">
+      </a>
+    </nav>
+
+    <nav id="navbar">
+      <!-- Programs -->
+      <div class="dropdown">
+        <div class="dropdown-btn">Programs</div>
+        <div class="dropdown-content">
+          <a href="#">Dcyberx Nexus Academy</a>
+          <a href="#">Gumroad products</a>
+        </div>
       </div>
-      <div class="ct-dropdown-menu">
-        <a href="#">Dcyberx Nexus Academy</a>
-        <a href="#">Gumroad products</a>
-      </div>
-    </div>
 
-    <!-- Subscriptions -->
-    <a href="recaptcha.html">Subscriptions</a>
+      <!-- Subscriptions -->
+      <a href="recaptcha.html">Subscriptions</a>
 
-    <!-- Socials -->
-    <div class="ct-dropdown">
-      <div class="ct-dropdown-btn"
-           tabindex="0"
-           aria-haspopup="true"
-           aria-expanded="false"
-           onclick="
-             var p = this.parentElement;
-             var isOpen = p.classList.contains('open');
-             p.classList.toggle('open');
-             this.setAttribute('aria-expanded', String(!isOpen));
-           ">
-        Socials
+      <!-- Socials -->
+      <div class="dropdown">
+        <div class="dropdown-btn">Socials</div>
+        <div class="dropdown-content">
+          <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
+          <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
+          <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech Discord</a>
+          <a href="mailto:Dcyberx@proton.me">email</a>
+          <a href="tel:+256763753544" target="_blank">Telephone</a>
+        </div>
       </div>
-      <div class="ct-dropdown-menu">
-        <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
-        <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
-        <a href="https://discord.gg/833GaF3R" target="_blank">CyberTech Discord</a>
-        <a href="mailto:Dcyberx@proton.me">Email</a>
-        <a href="tel:+256763753544" target="_blank">Telephone</a>
-      </div>
-    </div>
 
-    <!-- Policies -->
-    <div class="ct-dropdown">
-      <div class="ct-dropdown-btn"
-           tabindex="0"
-           aria-haspopup="true"
-           aria-expanded="false"
-           onclick="
-             var p = this.parentElement;
-             var isOpen = p.classList.contains('open');
-             p.classList.toggle('open');
-             this.setAttribute('aria-expanded', String(!isOpen));
-           ">
-        Policies
+      <!-- Policies -->
+      <div class="dropdown">
+        <div class="dropdown-btn">Policies</div>
+        <div class="dropdown-content">
+          <a href="privacy policy.html">Privacy Policy</a>
+          <a href="copyright.html">Copyright</a>
+          <a href="subscription.html">Subscription policy</a>
+        </div>
       </div>
-      <div class="ct-dropdown-menu">
-        <a href="privacy policy.html">Privacy Policy</a>
-        <a href="copyright.html">Copyright</a>
-        <a href="subscription.html">Subscription policy</a>
-      </div>
-    </div>
 
-    <!-- Cyberx AI -->
-    <a href="cyberx.html">Cyberx AI</a>
+      <!-- Cyberx AI -->
+      <a href="cyberx.html">Cyberx AI</a>
 
-    <!-- About -->
-    <div class="ct-dropdown">
-      <div class="ct-dropdown-btn"
-           tabindex="0"
-           aria-haspopup="true"
-           aria-expanded="false"
-           onclick="
-             var p = this.parentElement;
-             var isOpen = p.classList.contains('open');
-             p.classList.toggle('open');
-             this.setAttribute('aria-expanded', String(!isOpen));
-           ">
-        About
+      <!-- About -->
+      <div class="dropdown">
+        <div class="dropdown-btn">About</div>
+        <div class="dropdown-content">
+          <a href="aboutme.html">Dcyberx</a>
+          <a href="aboutsite.html">CyberTech</a>
+        </div>
       </div>
-      <div class="ct-dropdown-menu">
-        <a href="aboutme.html">Dcyberx</a>
-        <a href="aboutsite.html">CyberTech</a>
-      </div>
-    </div>
 
-    <!-- More -->
-    <div class="ct-dropdown">
-      <div class="ct-dropdown-btn"
-           tabindex="0"
-           aria-haspopup="true"
-           aria-expanded="false"
-           onclick="
-             var p = this.parentElement;
-             var isOpen = p.classList.contains('open');
-             p.classList.toggle('open');
-             this.setAttribute('aria-expanded', String(!isOpen));
-           ">
-        More
+      <!-- More -->
+      <div class="dropdown">
+        <div class="dropdown-btn">More</div>
+        <div class="dropdown-content">
+          <a href="playlist.html">Playlist</a>
+        </div>
       </div>
-      <div class="ct-dropdown-menu">
-        <a href="playlist.html">Playlist</a>
-      </div>
-    </div>
 
-    <a href="pay.html" class="ct-cta">Donate</a>
+      <a href="pay.html" class="cta-btn">Donate</a>
+    </nav>
+  </header>
 
-    <!-- Theme toggle: inline -->
-    <div class="ct-theme-toggle"
-         aria-label="Toggle theme"
-         onclick="document.body.classList.toggle('light-theme')">
-      🌙/☀️
-    </div>
-  </nav>
-</header>
+  <script>
+    // Apply the stored theme from localStorage if available
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      document.body.classList.add(storedTheme);
+    }
+
+    // Dropdown hover functionality
+    document.querySelectorAll('.dropdown').forEach(drop => {
+      const btn = drop.querySelector('.dropdown-btn');
+      const content = drop.querySelector('.dropdown-content');
+
+      btn.addEventListener('mouseenter', () => { content.style.display = 'block'; });
+      drop.addEventListener('mouseleave', () => { content.style.display = 'none'; });
+
+      const submenu = drop.querySelector('.submenu');
+      if(submenu){
+        const submenuContent = submenu.querySelector('.submenu-content');
+        submenu.addEventListener('mouseenter', () => { submenuContent.style.display = 'block'; });
+        submenu.addEventListener('mouseleave', () => { submenuContent.style.display = 'none'; });
+      }
+    });
+  </script>
+</body>
+</html>
