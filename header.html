@@ -159,8 +159,16 @@
   }
 </style>
 
-<header class="ct-header">
-  <div class="ct-logo">CyberTech</div>
+<header>
+  <nav>
+    <!-- PNG Logo that links to homepage -->
+    <a href="index.html" class="logo" aria-label="Homepage">
+      <img src="cyber.png" alt="Cyber Logo" class="logo-img">
+    </a>
+  </nav
+    </div>
+    </div>
+
 
   <!-- Hamburger: inline toggle (works after innerHTML injection) -->
   <div class="ct-hamburger"
@@ -287,27 +295,7 @@
 
     <a href="pay.html" class="ct-cta">Donate</a>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      document.body.classList.add(savedTheme);
-    }
-  });
-</script>
-
-  // Toggle theme and save preference
-  function toggleTheme() {
-    if (document.body.classList.contains("light-theme")) {
-      document.body.classList.remove("light-theme");
-      localStorage.setItem("theme", "");
-    } else {
-      document.body.classList.add("light-theme");
-      localStorage.setItem("theme", "light-theme");
-    }
-  }
-</script>
-
+     <script>   document.addEventListener("DOMContentLoaded", () => {     const savedTheme = localStorage.getItem("theme");     if (savedTheme) {       document.body.classList.add(savedTheme);     }   }); </script>
     </div>
   </nav>
 </header>
