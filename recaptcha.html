@@ -21,6 +21,16 @@
     button.enabled { cursor:pointer; box-shadow:0 0 10px #00ff99; }
     .status { margin-top:10px; font-size:14px; }
   </style>
+  <div id="site-header"></div>
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    });
+</script>
+
+
 </head>
 <body>
   <h1>🛡Prove your not a robot</h1>

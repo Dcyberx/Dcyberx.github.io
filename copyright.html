@@ -24,6 +24,16 @@
       margin-bottom: 20px;
     }
   </style>
+  <div id="site-header"></div>
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    });
+</script>
+
+
 </head>
 <body>
   <h1>

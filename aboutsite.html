@@ -45,44 +45,41 @@
       font-weight: bold;
     }
   </style>
+  <div id="site-header"></div>
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    });
+</script>
+
+
 </head>
 <body>
 
-  <!-- 🔹 HEADER -->
-  <header>
-    <div class="logo">CyberTech</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="programs.html">Programs</a>
-      <a href="cyberx.html">Cyberx AI</a>
-      <a href="subscription.html">Subscription</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="playlist.html">Playlist</a>
-      <a href="pay.html" class="cta-btn">Donate</a>
-    </nav>
-  </header>
+
 
   <!-- 🔹 ABOUT SITE CONTENT -->
   <div class="container">
     <h1>About This Site</h1>
     <p>
-      The <span class="highlight">Dcyberx Nexus</span> is a digital hub designed to merge  
-      <span class="highlight">music, AI, and cyber‑culture</span> into one immersive experience.  
-      It is more than just a website — it is a platform for exploration, creativity, and connection.
+      The <span class="highlight">CyberTech</span> is a digital hub designed to merge  
+      <span class="highlight">creativity, innovation, and cyber‑culture</span> into one immersive experience.  
+      It is more than just a website — it is a platform for exploration, creativity, and determination.
     </p>
     <p>
-      Here you’ll find the <span class="highlight">Dcyberx Player</span> for streaming curated tracks,  
+      Here you’ll find the <span class="highlight">desire</span> for further involvement,  
       interactive programs that showcase futuristic technology, and AI‑powered tools that push the boundaries  
       of what’s possible online.
     </p>
     <p>
-      The site is built to be <span class="highlight">community‑driven</span>, offering playlists,  
+      The site is built to be <span class="highlight">community‑driven</span>, offering infromative ideas,  
       subscription options, and opportunities to support innovation through donations.  
       Every page is crafted with a cyber‑tech aesthetic to reflect the vision of a connected future.
     </p>
     <p>
-      Whether you’re here to enjoy music, explore AI, or join the movement,  
+      Whether you’re here to enjoy, explore AI, or join the movement,  
       the <span class="highlight">Nexus</span> is your gateway to the next frontier of digital creativity.
     </p>
   </div>

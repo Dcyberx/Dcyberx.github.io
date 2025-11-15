@@ -48,6 +48,16 @@
       color: #7fffd4;
     }
   </style>
+  <div id="site-header"></div>
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    });
+</script>
+
+
 </head>
 <body>
   <h1>
@@ -95,7 +105,7 @@
 
   <div class="section">
     <h2>💳 Payments & Billing</h2>
-    <p>Payments are accepted via mobile money, cash, or approved digital wallets. All plans are prepaid and can be refundable. Renewal is kindly notified by Dcyberx.</p>
+    <p>Payments are accepted via mobile money, cash, or approved digital wallets eg credit cards. All plans are prepaid and can be refundable. Renewal is kindly notified by Dcyberx.</p>
   </div>
 
   <div class="section">
@@ -112,6 +122,12 @@
     <h2>🔐 Privacy & Data</h2>
     <p>Subscriber data is stored securely and never shared with third parties. We collect only essential information for service delivery. See my <a href="https://dcyberx.github.io/privacy%20policy.html">Privacy Policy</a> for full details.</p>
   </div>
+
+  <div class="section"></div>
+    <h2>🚫 Rules and regulations</h2>
+    <p>Impersonating is highly breach and leads to burn or termination.
+    <p>Avoidig plagiarism (cheatig) is the best for one's gain.
+    <p>Uploading sexually explicit images and illeagal activities is not accepted.
 
   <div class="section">
     <h2>❌ Cancellation & Termination</h2>

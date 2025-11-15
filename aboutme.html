@@ -45,40 +45,35 @@
       font-weight: bold;
     }
   </style>
+  <div id="site-header"></div>
+<script>
+  fetch("header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("site-header").innerHTML = html;
+    });
+</script>
+
 </head>
 <body>
 
-  <!-- 🔹 HEADER -->
-  <header>
-    <div class="logo">CyberTech</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="programs.html">Programs</a>
-      <a href="cyberx.html">Cyberx AI</a>
-      <a href="subscription.html">Subscription</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="playlist.html">Playlist</a>
-      <a href="pay.html" class="cta-btn">Donate</a>
-    </nav>
-  </header>
 
   <!-- 🔹 ABOUT ME CONTENT -->
   <div class="container">
     <h1>About Me</h1>
     <p>
-      Welcome to the <span class="highlight">Dcyberx Nexus</span> — a hub where technology, creativity, and innovation converge.  
+      Welcome to the <span class="highlight">CyberTech</span> — a hub where technology, creativity, and innovation converge.  
       I am <span class="highlight">Dcyber</span>, a digital creator passionate about building futuristic experiences that blend  
-      <span class="highlight">music, AI, and cyber‑culture</span>.  
+      <span class="highlight">creativity, AI, and cyber‑culture</span>.  
     </p>
     <p>
-      My mission is to design tools and platforms that empower people to explore new dimensions of sound,  
-      creativity, and digital freedom. Whether it’s through the <span class="highlight">Dcyberx Player</span>, immersive programs,  
-      or AI‑driven projects, I aim to push boundaries and inspire others to embrace the cyber‑tech future.
+      My mission is to design tools and platforms that empower people to explore new dimensions of innovation,  
+      creativity, and digital awareness. Whether it’s through the <span class="highlight">Dcyberx Programs</span>, or any other programs,  
+      like the DIY projects, I aim to push boundaries and inspire others to embrace the cyber‑tech future.
     </p>
     <p>
-      The <span class="highlight">Nexus</span> is more than just a space — it’s a movement.  
-      A place for dreamers, coders, and creators to connect, share, and evolve together.  
+      The <span class="highlight">CyberTech</span> is more than just a space — it’s a movement.  
+      A place for inspirasion, coding, and developing new ideas to connect, share, and evolve together.  
       Join me on this journey as we unlock the next frontier of digital innovation.
     </p>
   </div>
