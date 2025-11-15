@@ -382,3 +382,55 @@
 </body>
 </html>
 
+
+
+
+<!-- 🔹 GLOBAL HEADER -->
+<header>
+  <div class="logo">CyberTech</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="programs.html">Programs</a>
+    <a href="cyberx.html">Cyberx AI</a>
+    <a href="subscription.html">Subscription</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="playlist.html">Playlist</a>
+    <a href="pay.html" class="cta-btn">Donate</a>
+  </nav>
+</header>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(57,255,20,0.2);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #000;
+    z-index: 1000;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 20px;
+    color: #39ff14;
+  }
+  nav {
+    display: flex;
+    gap: 15px;
+  }
+  nav a {
+    text-decoration: none;
+    color: #0f0;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  nav a:hover {
+    text-decoration: underline;
+    color: #00ccff;
+  }
+</style>
+
+
