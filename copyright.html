@@ -9,6 +9,7 @@
       color: #00ff99;
       font-family: monospace;
       padding: 20px;
+      padding-top: 100px; /* space so header doesn't overlap */
     }
     h1, h2 {
       display: flex;
@@ -20,12 +21,44 @@
       height: 24px;
       fill: #00ff99;
     }
-    .section {
-      margin-bottom: 20px;
+    .section { margin-bottom: 20px; }
+
+    /* 🔹 Header styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #000;
+      z-index: 1000;
     }
+    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
+    nav { display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #0f0; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
+
+  <!-- 🔹 HEADER -->
+  <header>
+    <div class="logo">CyberTech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="programs.html">Programs</a>
+      <a href="cyberx.html">Cyberx AI</a>
+      <a href="subscription.html">Subscription</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="pay.html" class="cta-btn">Donate</a>
+    </nav>
+  </header>
+
+  <!-- 🔹 PAGE CONTENT -->
   <h1>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
@@ -35,17 +68,18 @@
 
   <div class="section">
     <h2>🔒 Ownership</h2>
-    <p>All content, code, graphics, and designs on this site are © CyberTech. by the root Dcyberx. Unauthorized use, reproduction, or distribution is strictly prohibited.</p>
+    <p>All content, code, graphics, and designs on this site are © CyberTech by the root Dcyberx. Unauthorized use, reproduction, or distribution is strictly prohibited.</p>
   </div>
 
   <div class="section">
     <h2>📂 Fair Use</h2>
-    <p>Limited use of excerpts for educational or non-commercial purposes is permitted, provided proper attribution is given by Dcyberx</p>
+    <p>Limited use of excerpts for educational or non-commercial purposes is permitted, provided proper attribution is given by Dcyberx.</p>
   </div>
 
   <div class="section">
     <h2>🚫 Violations</h2>
-    <p>Any scaming, unauthorised root access, phishing or any other illegal acitivity on this site is highly unacceptable and immediate action will be enforced.</p>
+    <p>Any scamming, unauthorized root access, phishing, or any other illegal activity on this site is highly unacceptable and immediate action will be enforced.</p>
   </div>
+
 </body>
 </html>
