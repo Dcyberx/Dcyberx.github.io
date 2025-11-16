@@ -266,7 +266,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Zoom-In Effect with Popup</title>
+  <title>Image Zoom-In with Popup on Hover/Tap</title>
   <style>
     /* Container to hold images */
     .image-container {
@@ -285,7 +285,6 @@
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
       max-width: 100%;
       height: auto;
-      transform: scale(1); /* Normal size by default */
       cursor: pointer;
     }
 
@@ -354,8 +353,8 @@
 
     // Function to open popup
     images.forEach(image => {
-      image.addEventListener('click', (e) => {
-        // Open popup and display the clicked image in zoomed form
+      image.addEventListener('mouseenter', (e) => {
+        // Open popup and display the hovered image in zoomed form
         popup.style.display = 'block';
         popupImg.src = e.target.src; // Set the image source for popup
       });
@@ -372,6 +371,11 @@
         popup.style.display = 'none'; // Hide the popup if clicked outside the image
       }
     });
+  </script>
+
+</body>
+</html>
+
   </script>
 
 </body>
