@@ -262,19 +262,30 @@
 </main>
 
 <div class="image-container">
-  <img src="nexus.png" alt="Dcyberx Nexus Program" width="300" height="300">
+  <img src="image1.png" alt="Image 1" style="width: 150px; height: 150px;">
+  <img src="image2.png" alt="Image 2" style="width: 150px; height: 150px;">
 </div>
 
 <style>
   .image-container {
-    padding-top: 9px;    /* Space inside the container at the top */
+    padding-top: 3px;    /* Space inside the container at the top */
     padding-right: 5px;  /* Space inside the container to the right */
     padding-bottom: 4px; /* Space inside the container at the bottom */
     padding-left: 5px;   /* Space inside the container to the left */
+    display: flex;       /* To align images horizontally */
   }
 
   .image-container img {
-    padding: 10px;  /* Space around the image itself */
+    margin: 0 5px; /* Space between images */
+    border: 5px solid transparent; /* Transparent border to allow fading effect */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow to mimic fading effect */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  }
+
+  .image-container img:hover {
+    border-color: rgba(0, 0, 0, 0.3); /* Faded border color on hover */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
   }
 </style>
 
