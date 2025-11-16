@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CyberX WhatsApp Style Chat</title>
   <style>
+   <!-- Dynamic Header  be injected here -->
+  <div id="site-header"></div>
+ 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #000000
@@ -15,7 +19,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      padding-top: 100px; /* space for fixed header */
+      padding-top: 350px; /* space for fixed header */
     }
     /* 🔹 Header styles */
     header {
@@ -97,6 +101,7 @@
     }
     .categories button:hover { background: #00ff99; color: #000; }
   </style>
+  
   <div id="site-header"></div>
 <script>
   fetch("header.html")
@@ -105,26 +110,12 @@
       document.getElementById("site-header").innerHTML = html;
     });
 </script>
-
+ 
 
 </head>
 <body>
 
-  <!-- 🔹 GLOBAL HEADER -->
-  <header>
-    <div class="logo">CyberTech</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="programs.html">Programs</a>
-      <a href="cyberx.html">Cyberx AI</a>
-      <a href="subscription.html">Subscription</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="playlist.html">Playlist</a>
-      <a href="pay.html" class="cta-btn">Donate</a>
-    </nav>
-  </header>
-
+   
   <!-- 🔹 CHAT CONTAINER -->
   <div id="chat-container">
     <div id="header">
