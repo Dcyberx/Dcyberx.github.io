@@ -261,10 +261,10 @@
 <br>
 </main>
 
-<div class="image-container">
-  <img src="image1.png" alt="Image 1 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
-  <img src="image2.png" alt="Image 2 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
-</div>
+ <div class="image-container">
+    <img src="image1.png" alt="Image 1 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
+    <img src="image2.png" alt="Image 2 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
+  </div>
 
 
 <style>
@@ -276,26 +276,41 @@
   display: flex;       /* Align images horizontally */
 }
 
+/* Container to hold images */
+.image-container {
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  display: flex; /* Align images horizontally */
+}
+
+/* Style for images in the container */
 .image-container img {
   margin: 0 5px;
   border: 5px solid transparent;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  max-width: 100%; /* Ensure the image scales to its container size */
+  height: auto; /* Maintain aspect ratio */
 }
 
+/* Hover effect for images */
 .image-container img:hover {
-  border-color: rgba(0, 0, 0, 0.3); /* Faded border color on hover */
+  border-color: rgba(0, 0, 0, 0.3); /* Border color on hover */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
+/* Zoom effect on hover */
 .zoom-image {
   transition: transform 0.3s ease; /* Smooth zoom transition */
 }
 
 .zoom-image:hover {
-  transform: scale(0.8);  /* Zoom out the image to 80% of its original size */
+  transform: scale(0.8);  /* Zoom out to 80% on hover */
 }
+
 
 
 </style>
