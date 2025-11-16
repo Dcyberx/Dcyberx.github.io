@@ -264,6 +264,9 @@
 <div class="image-container">
   <img src="image1.png" alt="Image 1" style="width: 165px; height: 155px;">
   <img src="image2.png" alt="Image 2" style="width: 165px; height: 155px;">
+  <img src="image1.png" alt="Zoomable Image" class="zoom-out">
+  <img src="image2.png" alt="Zoomable Image" class="zoom-out">
+
 </div>
 
 <style>
@@ -287,6 +290,15 @@
     border-color: rgba(0, 0, 0, 0.3); /* Faded border color on hover */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
   }
+
+  .zoom-out {
+  transition: transform 0.3s ease;  /* Smooth transition for zooming */
+}
+
+.zoom-out:hover {
+  transform: scale(0.8);  /* Scales the image to 80% of its size */
+}
+
 </style>
 
 
