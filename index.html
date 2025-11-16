@@ -268,12 +268,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Zoom-In with Popup on Hover/Tap</title>
   <style>
-    /* Container to hold images */
+    /* Container to hold images near the left margin */
     .image-container {
       padding: 3px 5px 4px 5px;
       display: flex; /* Align images horizontally */
-      justify-content: center;
+      justify-content: flex-start; /* Align to the left */
       gap: 10px;
+      margin-left: 10px; /* Adjust the left margin */
     }
 
     /* Style for images in the container */
@@ -371,6 +372,11 @@
         popup.style.display = 'none'; // Hide the popup if clicked outside the image
       }
     });
+  </script>
+
+</body>
+</html>
+
   </script>
 
 </body>
