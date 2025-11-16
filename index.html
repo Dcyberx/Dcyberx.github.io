@@ -266,12 +266,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Zoom-Out Effect</title>
+  <title>Image Zoom-In Effect with Popup</title>
   <style>
     /* Container to hold images */
     .image-container {
       padding: 3px 5px 4px 5px;
       display: flex; /* Align images horizontally */
+      justify-content: center;
+      gap: 10px;
     }
 
     /* Style for images in the container */
@@ -280,27 +282,100 @@
       border: 5px solid transparent;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
       max-width: 100%;
       height: auto;
       transform: scale(1); /* Normal size by default */
+      cursor: pointer;
     }
 
     /* Hover/tap effect for images */
-    .image-container img:hover,
-    .image-container img:active {
+    .image-container img:hover {
+      transform: scale(1.8); /* Zoom in to 80% bigger */
       border-color: rgba(0, 0, 0, 0.3);
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      transform: scale(1.65); /* Zoom in to 65% bigger */
+    }
+
+    /* Popup style (hidden by default) */
+    .popup {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* To make sure it's on top */
+    }
+
+    .popup img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+
+    /* Close button style */
+    .popup .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #fff;
+      border: none;
+      font-size: 18px;
+      color: #333;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Image Container -->
   <div class="image-container">
-    <img src="image1.png" alt="Image 1 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
-    <img src="image2.png" alt="Image 2 Zoomable Image" class="zoom-image" style="width: 165px; height: 155px;">
+    <img src="image1.png" alt="Image 1" class="zoom-image" id="img1" style="width: 165px; height: 155px;">
+    <img src="image2.png" alt="Image 2" class="zoom-image" id="img2" style="width: 165px; height: 155px;">
   </div>
+
+  <!-- Popup Container -->
+  <div class="popup" id="popup">
+    <button class="close-btn" id="close-btn">X</button>
+    <img id="popup-img" src="" alt="Zoomed-in Image">
+  </div>
+
+  <script>
+    // Get elements
+    const images = document.querySelectorAll('.zoom-image');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Function to open popup
+    images.forEach(image => {
+      image.addEventListener('click', (e) => {
+        // Open popup and display the clicked image in zoomed form
+        popup.style.display = 'block';
+        popupImg.src = e.target.src; // Set the image source for popup
+      });
+    });
+
+    // Close the popup when close button is clicked
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none'; // Hide the popup
+    });
+
+    // Close popup when clicking outside of the image in popup
+    window.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none'; // Hide the popup if clicked outside the image
+      }
+    });
+  </script>
+
+</body>
+</html>
 
 </body>
 </html>
