@@ -90,6 +90,20 @@
         height: 35px;
       }
     }
+
+    /* Make sure the header spans the full width of the screen */
+    #site-header {
+      width: 100%; /* Ensure it takes up the full width */
+      position: absolute; /* Make sure it's positioned at the top */
+      top: 0;
+      left: 0;
+      padding: 10px 20px; /* Add some padding to the header */
+      background-color: #111; /* Background color for the header */
+      color: #0f0; /* Text color */
+      text-align: left; /* Align text to the left */
+      box-sizing: border-box; /* Prevent overflow from padding */
+      z-index: 10; /* Ensure it stays on top */
+    }
   </style>
 </head>
 <body>
