@@ -4,24 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dcyberx Player</title>
-
+  
   <style>
     body {
       background: #000;
       color: #0f0;
       font-family: monospace;
       display: flex;
-      flex-direction: column; /* Stack elements vertically */
-      align-items: center;
-      justify-content: flex-start; /* Align items to the top */
-      height: 100vh;
+      flex-direction: column; /* Stack header and player vertically */
+      justify-content: center; /* Center content horizontally */
+      align-items: center; /* Center content vertically */
+      height: 100vh; /* Full viewport height */
       margin: 0;
       text-align: center;
     }
 
-    h2 {
-      color: #00ff00;
+    /* Ensure the header is positioned at the top */
+    #site-header {
+      width: 100%; /* Full width */
+      position: absolute; /* Position it at the top */
+      top: 0; /* At the very top */
+      left: 0; /* Full width */
+      padding: 10px 0;
+      text-align: center; /* Center the text inside the header */
     }
+
+    h2 { color: #00ff00; }
 
     button {
       background: #0f0;
@@ -33,17 +41,9 @@
       cursor: pointer;
       font-family: monospace;
     }
+    button:hover { background: #0a0; color: #fff; }
 
-    button:hover {
-      background: #0a0;
-      color: #fff;
-    }
-
-    #now-playing {
-      margin-top: 15px;
-      font-size: 14px;
-      color: #0f0;
-    }
+    #now-playing { margin-top: 15px; font-size: 14px; color: #0f0; }
 
     /* Sound wave animation bars */
     .wave-container {
@@ -63,53 +63,28 @@
       animation: bounce 1s infinite;
       animation-play-state: paused;
     }
-
-    .bar:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-
-    .bar:nth-child(3) {
-      animation-delay: 0.2s;
-    }
-
-    .bar:nth-child(4) {
-      animation-delay: 0.3s;
-    }
-
-    .bar:nth-child(5) {
-      animation-delay: 0.4s;
-    }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.2s; }
+    .bar:nth-child(4) { animation-delay: 0.3s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
 
     @keyframes bounce {
-      0%,
-      100% {
-        height: 10px;
-      }
-
-      50% {
-        height: 35px;
-      }
-    }
-
-    /* Make sure the header spans the full width of the screen */
-    #site-header {
-      width: 100%; /* Ensure it takes up the full width */
-      position: absolute; /* Make sure it's positioned at the top */
-      top: 0;
-      left: 0;
-      padding: 10px 20px; /* Add some padding to the header */
-      background-color: #111; /* Background color for the header */
-      color: #0f0; /* Text color */
-      text-align: left; /* Align text to the left */
-      box-sizing: border-box; /* Prevent overflow from padding */
-      z-index: 10; /* Ensure it stays on top */
+      0%, 100% { height: 10px; }
+      50% { height: 35px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 🔹 Header content -->
+  <!-- 🔹 Fetch and display header -->
   <div id="site-header"></div>
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      });
+  </script>
 
   <!-- 🔹 PLAYER CONTENT -->
   <div>
@@ -171,15 +146,6 @@
       link.download = songs[currentSong].name + ".mp3";
       link.click();
     }
-  </script>
-
-  <!-- 🔹 Fetch header content -->
-  <script>
-    fetch("header.html")
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById("site-header").innerHTML = html;
-      });
   </script>
 
 </body>
