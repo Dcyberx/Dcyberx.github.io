@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <div id="site-header"></div>
   <title>Dcyberx Player</title>
 
   <style>
@@ -13,15 +11,17 @@
       color: #0f0;
       font-family: monospace;
       display: flex;
-      justify-content: center; /* Horizontal centering */
-      align-items: center; /* Vertical centering */
-      height: 100vh; /* Full viewport height */
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center;
+      justify-content: flex-start; /* Align items to the top */
+      height: 100vh;
       margin: 0;
       text-align: center;
-
     }
 
-    h2 { color: #00ff00; }
+    h2 {
+      color: #00ff00;
+    }
 
     button {
       background: #0f0;
@@ -33,9 +33,17 @@
       cursor: pointer;
       font-family: monospace;
     }
-    button:hover { background: #0a0; color: #fff; }
 
-    #now-playing { margin-top: 15px; font-size: 14px; color: #0f0; }
+    button:hover {
+      background: #0a0;
+      color: #fff;
+    }
+
+    #now-playing {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #0f0;
+    }
 
     /* Sound wave animation bars */
     .wave-container {
@@ -46,6 +54,7 @@
       margin-top: 20px;
       gap: 5px;
     }
+
     .bar {
       width: 6px;
       height: 10px;
@@ -54,22 +63,39 @@
       animation: bounce 1s infinite;
       animation-play-state: paused;
     }
-    .bar:nth-child(2) { animation-delay: 0.1s; }
-    .bar:nth-child(3) { animation-delay: 0.2s; }
-    .bar:nth-child(4) { animation-delay: 0.3s; }
-    .bar:nth-child(5) { animation-delay: 0.4s; }
 
-    @keyframes bounce {
-      0%, 100% { height: 10px; }
-      50% { height: 35px; }
+    .bar:nth-child(2) {
+      animation-delay: 0.1s;
     }
 
-  </style>
+    .bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
 
+    .bar:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    .bar:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        height: 10px;
+      }
+
+      50% {
+        height: 35px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-
+  <!-- 🔹 Header content -->
+  <div id="site-header"></div>
 
   <!-- 🔹 PLAYER CONTENT -->
   <div>
@@ -132,16 +158,15 @@
       link.click();
     }
   </script>
- 
-<script>
-  fetch("header.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("site-header").innerHTML = html;
-    });
-</script>
 
-
+  <!-- 🔹 Fetch header content -->
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("site-header").innerHTML = html;
+      });
+  </script>
 
 </body>
 </html>
