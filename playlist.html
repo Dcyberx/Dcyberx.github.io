@@ -93,10 +93,11 @@
     <h2>Dcyberx Player</h2>
     <audio id="music-player" controls></audio><br>
 
-    <button onclick="prevSong()">⏮ Prev</button>
-    <button onclick="playAudio()">▶ Play</button>
-    <button onclick="pauseAudio()">⏸ Pause</button>
-    <button onclick="nextSong()">⏭ Next</button>
+    <button onclick="prevSong()">⏮️ Prev</button>
+    <button onclick="playAudio()">▶️ Play</button>
+    <button onclick="pauseAudio()">⏸️ Pause</button>
+    <button onclick="nextSong()">⏭️ Next</button>
+    <button onclick="replay()">🔁 replay</button>
     <button onclick="shuffleSong()">🔀 Shuffle</button>
     <button onclick="downloadSong()">📥 Download</button>
 
@@ -138,6 +139,15 @@
     function pauseAudio() { audio.pause(); animateWaves(false); }
     function nextSong() { currentSong = (currentSong + 1) % songs.length; playAudio(); }
     function prevSong() { currentSong = (currentSong - 1 + songs.length) % songs.length; playAudio(); }
+    function replaySong() {
+  // Keep the same song index
+  currentSong = currentSong; 
+  // Reset playback to the start
+  audio.currentTime = 0;
+  audio.loop=true;
+  playAudio();
+}
+
     function shuffleSong() { currentSong = Math.floor(Math.random() * songs.length); playAudio(); }
     function animateWaves(isPlaying) { bars.forEach(bar => bar.style.animationPlayState = isPlaying ? "running" : "paused"); }
     audio.addEventListener("ended", () => animateWaves(false));
@@ -356,3 +366,4 @@
   </script>
 </body>
 </html>
+
