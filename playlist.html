@@ -98,6 +98,7 @@
     <button onclick="pauseAudio()">⏸️ Pause</button>
     <button onclick="nextSong()">⏭️ Next</button>
     <button onclick="replay()">🔁 replay</button>
+    <button onlick="replay()">🔂 replay</button>
     <button onclick="shuffleSong()">🔀 Shuffle</button>
     <button onclick="downloadSong()">📥 Download</button>
 
@@ -139,14 +140,29 @@
     function pauseAudio() { audio.pause(); animateWaves(false); }
     function nextSong() { currentSong = (currentSong + 1) % songs.length; playAudio(); }
     function prevSong() { currentSong = (currentSong - 1 + songs.length) % songs.length; playAudio(); }
-    function replaySong() {
-  // Keep the same song index
-  currentSong = currentSong; 
+    // Track the replay mode: "all" or "one"
+let replayMode = "all"; 
+
+function toggleReplayIcon(buttonElement) {
+  if (replayMode === "all") {
+    // Switch to replay one
+    replayMode = "one";
+    buttonElement.textContent = "🔂"; 
+    audio.loop = true; // loop the current track
+  } else {
+    // Switch back to replay all
+    replayMode = "all";
+    buttonElement.textContent = "🔁"; 
+    audio.loop = false; // let playlist handle next track
+  }
+}
+
+function replaySong() {
   // Reset playback to the start
   audio.currentTime = 0;
-  audio.loop=true;
   playAudio();
 }
+
 
     function shuffleSong() { currentSong = Math.floor(Math.random() * songs.length); playAudio(); }
     function animateWaves(isPlaying) { bars.forEach(bar => bar.style.animationPlayState = isPlaying ? "running" : "paused"); }
@@ -366,4 +382,5 @@
   </script>
 </body>
 </html>
+
 
