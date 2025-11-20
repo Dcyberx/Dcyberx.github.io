@@ -20,6 +20,7 @@
       margin: 0;
       text-align: center;
     }
+  
 
     /* Ensure the header is positioned at the top */
     #site-header {
@@ -74,6 +75,35 @@
       0%, 100% { height: 10px; }
       50% { height: 35px; }
     }
+  /* Base button style */
+button {
+  background: #0f0;       /* bright green */
+  color: #000;            /* black text */
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+/* Hover effect */
+button:hover {
+  background: #0a0;       /* darker green */
+  color: #fff;            /* white text */
+}
+
+/* Active (Replay ON) state */
+button.active {
+  background: #060;       /* even darker green */
+  color: #fff;
+}
+
+button.active:hover {
+  background: #040;       /* darkest hover when active */
+  color: #fff;
+}
+
   </style>
 </head>
 <body>
@@ -139,12 +169,31 @@
     function pauseAudio() { audio.pause(); animateWaves(false); }
     function nextSong() { currentSong = (currentSong + 1) % songs.length; playAudio(); }
     function prevSong() { currentSong = (currentSong - 1 + songs.length) % songs.length; playAudio(); }
-    function replaySong() {
-    // Reset the audio playback to the start
-    audio.currentTime = 0;
-    audio.loop=true;
-    playAudio();
+    let replayMode = false; // track toggle state
+
+function toggleReplaySong() {
+    const btn = document.getElementById("replayBtn");
+
+    // Flip the mode
+    replayMode = !replayMode;
+
+    // Update button style
+    btn.classList.toggle("active", replayMode);
+
+    // Apply loop setting
+    audio.loop = replayMode;
+
+    if (replayMode) {
+        // Restart current song immediately if turning replay on
+        audio.currentTime = 0;
+        playAudio();
+    } else {
+        // If replay is off, just let songs progress normally
+        audio.loop = false;
+    }
 }
+    
+
     function shuffleSong() { currentSong = Math.floor(Math.random() * songs.length); playAudio(); }
     function animateWaves(isPlaying) { bars.forEach(bar => bar.style.animationPlayState = isPlaying ? "running" : "paused"); }
     audio.addEventListener("ended", () => animateWaves(false));
@@ -363,6 +412,7 @@
   </script>
 </body>
 </html>
+
 
 
 
