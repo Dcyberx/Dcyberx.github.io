@@ -157,10 +157,20 @@
   const nowPlaying = document.getElementById("now-playing");
   const replayBtn = document.getElementById("replayBtn");
   const bars = document.querySelectorAll(".bar");
-
+  
   function updateNowPlaying() {
-    nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
-  }
+  const totalSongs = songs.length;
+  const songNumber = currentSong + 1;
+
+  // Get filename from path
+  const filePath = songs[currentSong].src;
+  const fileName = filePath.split("/").pop().replace(".mp3", "");
+
+  // Display: Now Playing: pretend sam 02 (13/13)
+  nowPlaying.textContent = 
+    "Now Playing: " + fileName + "  (" + songNumber + "/" + totalSongs + ")";
+}
+
 
   function playAudio() {
     audio.src = songs[currentSong].src;
@@ -329,6 +339,7 @@
   </script>
 </body>
 </html>
+
 
 
 
