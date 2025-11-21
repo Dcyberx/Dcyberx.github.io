@@ -134,12 +134,12 @@
 
 <script>
   const songs = [
-    { name: "Song 1", src: "assets/audio/littlebit.mp3" },
-    { name: "Song 2", src: "assets/audio/sunroof.mp3" },
-    { name: "Song 3", src: "assets/audio/pretend.mp3" },
-    { name: "Song 4", src: "assets/audio/ordinary.mp3" },
-    { name: "Song 5", src: "assets/audio/europhia.mp3" },
-    { name: "Song 6", src: "assets/audio/girlwithquietfire-Dcyberx.mp3" }
+    { name: "Euphoria- Sam02", src: "assets/audio/europhia.mp3" },
+    { name: "Girl with Quiet Fire- Dcyberx", src: "assets/audio/girlwithquietfire-Dcyberx.mp3" },
+    { name: "Pretend- Sam02", src: "assets/audio/pretend.mp3" },
+    { name: "Ordinary- Alex Warren", src: "assets/audio/ordinary.mp3" },
+    { name: "Sunroof- Nicky Youre", src: "assets/audio/sunroof.mp3" },
+    { name: "little bit- Sam02", src: "assets/audio/littlebit.mp3" }
   ];
 
   let currentSong = 0;
@@ -153,7 +153,7 @@
   function updateNowPlaying() {
     const songPosition = currentSong + 1; // 1-indexed position
     const totalSongs = songs.length;
-    nowPlaying.textContent = `Now Playing: ${songs[currentSong].name}, (${songPosition}/${totalSongs})`;
+    nowPlaying.textContent = `Now Playing: ${songs[currentSong].name} (${songPosition}/${totalSongs})`;
   }
 
   // Example of changing songs (could be tied to buttons or other events)
