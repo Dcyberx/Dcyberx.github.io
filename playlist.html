@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-inline'; 
+    style-src 'self' 'unsafe-inline'; 
+    img-src 'self' data:;
+    object-src 'none';">
+
   <title>Dcyberx Player</title>
 
   <style>
@@ -13,22 +19,20 @@
       color: #0f0;
       font-family: monospace;
       display: flex;
-      flex-direction: column; /* Stack header and player vertically */
-      justify-content: center; /* Center content horizontally */
-      align-items: center; /* Center content vertically */
-      height: 100vh; /* Full viewport height */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
       text-align: center;
     }
 
-    /* Ensure the header is positioned at the top */
     #site-header {
-      width: 100%; /* Full width */
-      position: absolute; /* Position it at the top */
-      top: 0; /* At the very top */
-      left: 0; /* Full width */
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
       padding: 10px 0;
-      text-align: center; /* Center the text inside the header */
     }
 
     h2 { color: #00ff00; }
@@ -43,11 +47,27 @@
       cursor: pointer;
       font-family: monospace;
     }
-    button:hover { background: #0a0; color: #fff; }
 
-    #now-playing { margin-top: 15px; font-size: 14px; color: #0f0; }
+    button:hover {
+      background: #0a0;
+      color: #fff;
+    }
 
-    /* Sound wave animation bars */
+    button.active {
+      background: #060;
+      color: #fff;
+    }
+
+    button.active:hover {
+      background: #040;
+    }
+
+    #now-playing {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #0f0;
+    }
+
     .wave-container {
       display: flex;
       justify-content: center;
@@ -65,6 +85,7 @@
       animation: bounce 1s infinite;
       animation-play-state: paused;
     }
+
     .bar:nth-child(2) { animation-delay: 0.1s; }
     .bar:nth-child(3) { animation-delay: 0.2s; }
     .bar:nth-child(4) { animation-delay: 0.3s; }
@@ -78,180 +99,125 @@
 </head>
 <body>
 
-  <!-- 🔹 Fetch and display header -->
+  <!-- HEADER FROM EXTERNAL FILE -->
   <div id="site-header"></div>
+
   <script>
     fetch("header.html")
       .then(res => res.text())
-      .then(html => {
-        document.getElementById("site-header").innerHTML = html;
-      });
+      .then(html => document.getElementById("site-header").innerHTML = html);
   </script>
 
-  <!-- 🔹 PLAYER CONTENT -->
+  <!-- PLAYER -->
   <div>
     <h2>Dcyberx Player</h2>
+
     <audio id="music-player" controls></audio><br>
 
     <button onclick="prevSong()">⏮️ Prev</button>
     <button onclick="playAudio()">▶️ Play</button>
     <button onclick="pauseAudio()">⏸️ Pause</button>
     <button onclick="nextSong()">⏭️ Next</button>
-    <button onclick="replay()">🔁 replay</button>
+    <button id="replayBtn" onclick="toggleReplaySong()">🔁 Replay</button>
     <button onclick="shuffleSong()">🔀 Shuffle</button>
     <button onclick="downloadSong()">📥 Download</button>
 
     <div id="now-playing">Now Playing: None</div>
 
-    <!-- Sound wave animation -->
     <div class="wave-container">
-      <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
     </div>
   </div>
 
-  <!-- 🔹 Scripts -->
-  <script>
-    const songs = [
-      { name: "Song 1", src: "music/little bit sam02.mp3" },
-      { name: "Song 2", src: "music/sunroof Nicky.mp3" },
-      { name: "Song 3", src: "music/good things sam02.mp3" },
-      { name: "Song 4", src: "music/intoxicated sam02.mp3" },
-      { name: "Song 5", src: "music/Girl with quiet fire.mp3" },
-      { name: "Song 6", src: "music/europhia sam02.mp3" },
-      { name: "Song 7", src: "music/bittersweet sam02.mp3" },
-      { name: "Song 8", src: "music/Biber - Intensions.mp3" },
-      { name: "Song 9", src: "music/Helplessly_Tatiana.mp3" },
-      { name: "Song 10", src: "music/central_cee_band4band.mp3" },
-      { name: "Song 11", src: "music/all mine sam02.mp3" },
-      { name: "Song 12", src: "music/Tides sam02.mp3" },
-      { name: "Song 13", src: "music/pretend sam 02.mp3" },
-    ];
+<script>
+  const songs = [
+    { name: "Song 1", src: "music/little bit sam02.mp3" },
+    { name: "Song 2", src: "music/sunroof Nicky.mp3" },
+    { name: "Song 3", src: "music/good things sam02.mp3" },
+    { name: "Song 4", src: "music/intoxicated sam02.mp3" },
+    { name: "Song 5", src: "music/Girl with quiet fire.mp3" },
+    { name: "Song 6", src: "music/europhia sam02.mp3" },
+    { name: "Song 7", src: "music/bittersweet sam02.mp3" },
+    { name: "Song 8", src: "music/Biber - Intensions.mp3" },
+    { name: "Song 9", src: "music/Helplessly_Tatiana.mp3" },
+    { name: "Song 10", src: "music/central_cee_band4band.mp3" },
+    { name: "Song 11", src: "music/all mine sam02.mp3" },
+    { name: "Song 12", src: "music/Tides sam02.mp3" },
+    { name: "Song 13", src: "music/pretend sam 02.mp3" }
+  ];
 
-    let currentSong = 0;
-    const audio = document.getElementById("music-player");
-    const nowPlaying = document.getElementById("now-playing");
-    const bars = document.querySelectorAll(".bar");
+  let currentSong = 0;
+  let replayMode = false;
 
-    function updateNowPlaying() {
-      nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
-    }
-    function playAudio() { audio.src = songs[currentSong].src; audio.play(); updateNowPlaying(); animateWaves(true); }
-    function pauseAudio() { audio.pause(); animateWaves(false); }
-    function nextSong() { currentSong = (currentSong + 1) % songs.length; playAudio(); }
-    function prevSong() { currentSong = (currentSong - 1 + songs.length) % songs.length; playAudio(); }
-    function replaySong() {
-    // Reset the audio playback to the start
-    audio.currentTime = 0;
-    audio.loop=true;
+  const audio = document.getElementById("music-player");
+  const nowPlaying = document.getElementById("now-playing");
+  const replayBtn = document.getElementById("replayBtn");
+  const bars = document.querySelectorAll(".bar");
+
+  function updateNowPlaying() {
+    nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
+  }
+
+  function playAudio() {
+    audio.src = songs[currentSong].src;
+    audio.play();
+    updateNowPlaying();
+    animateWaves(true);
+  }
+
+  function pauseAudio() {
+    audio.pause();
+    animateWaves(false);
+  }
+
+  function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
     playAudio();
-}
-    function shuffleSong() { currentSong = Math.floor(Math.random() * songs.length); playAudio(); }
-    function animateWaves(isPlaying) { bars.forEach(bar => bar.style.animationPlayState = isPlaying ? "running" : "paused"); }
-    audio.addEventListener("ended", () => animateWaves(false));
+  }
 
-    function downloadSong() {
-      const link = document.createElement('a');
-      link.href = songs[currentSong].src;
-      link.download = songs[currentSong].name + ".mp3";
-      link.click();
-    }
-  </script>
+  function prevSong() {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    playAudio();
+  }
 
-</body>
-</html>
+  function shuffleSong() {
+    currentSong = Math.floor(Math.random() * songs.length);
+    playAudio();
+  }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
-  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none';">
-  <title>Secure Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #79e0ab;
-      margin: 0;
-      padding: 20px;
-    }
+  function toggleReplaySong() {
+    replayMode = !replayMode;
+    replayBtn.classList.toggle("active", replayMode);
+    audio.loop = replayMode;
+  }
 
-    h1 {
-      color: #2e3a59;
-    }
+  audio.addEventListener("ended", () => {
+    animateWaves(false);
+    if (!replayMode) nextSong();
+  });
 
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 10px 15px;
-      background-color: #5cb85c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #4cae4c;
-    }
-
-    #comments {
-      margin-top: 20px;
-    }
-
-    .comment {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-  </style>
-</head>
-<body>
-
-
-
-  <script>
-    // Function to sanitize and escape user input
-    function sanitizeInput(input) {
-      const element = document.createElement('div');
-      element.textContent = input; // Escape input by converting it into text content
-      return element.innerHTML; // Returns the HTML-escaped string
-    }
-
-    // Function to add the comment to the page
-    document.getElementById("commentForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const commentText = document.getElementById("comment").value;
-      
-      // Sanitize the user input to prevent XSS
-      const sanitizedComment = sanitizeInput(commentText);
-
-      // Create a new div to hold the sanitized comment
-      const commentDiv = document.createElement("div");
-      commentDiv.classList.add("comment");
-      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
-      
-      // Append the sanitized comment to the comments section
-      document.getElementById("comments").appendChild(commentDiv);
-
-      // Clear the textarea after submission
-      document.getElementById("comment").value = '';
+  function animateWaves(isPlaying) {
+    bars.forEach(bar => {
+      bar.style.animationPlayState = isPlaying ? "running" : "paused";
     });
-  </script>
+  }
+
+  function downloadSong() {
+    const link = document.createElement("a");
+    link.href = songs[currentSong].src;
+    link.download = songs[currentSong].name + ".mp3";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>
+
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -363,5 +329,4 @@
   </script>
 </body>
 </html>
-
 
