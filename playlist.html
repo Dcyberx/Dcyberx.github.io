@@ -124,14 +124,13 @@
 
     <div id="now-playing">Now Playing: None</div>
 
-    <div class="wave-container">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-  </div>
+<div class="wave-container">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+</div>
 
 <script>
   const songs = [
@@ -140,7 +139,7 @@
     { name: "Song 3", src: "assets/audio/pretend.mp3" },
     { name: "Song 4", src: "assets/audio/ordinary.mp3" },
     { name: "Song 5", src: "assets/audio/europhia.mp3" },
-    { name: "Song 6", src: "assets/audio/girlwiththequietfire-Dcyberx.mp3" }
+    { name: "Song 6", src: "assets/audio/girlwithquietfire-Dcyberx.mp3" }
   ];
 
   let currentSong = 0;
@@ -152,8 +151,29 @@
   const bars = document.querySelectorAll(".bar");
 
   function updateNowPlaying() {
-    nowPlaying.textContent = "Now Playing: " + songs[currentSong].name;
+    const songPosition = currentSong + 1; // 1-indexed position
+    const totalSongs = songs.length;
+    nowPlaying.textContent = `Now Playing: ${songs[currentSong].name}, (${songPosition}/${totalSongs})`;
   }
+
+  // Example of changing songs (could be tied to buttons or other events)
+  function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
+    updateNowPlaying();
+    audio.src = songs[currentSong].src;
+    audio.play();
+  }
+
+  function prevSong() {
+    currentSong = (currentSong - 1 + songs.length) % songs.length;
+    updateNowPlaying();
+    audio.src = songs[currentSong].src;
+    audio.play();
+  }
+
+  // Update when the page first loads
+  updateNowPlaying();
+
 
   function playAudio() {
     audio.src = songs[currentSong].src;
