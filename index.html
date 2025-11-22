@@ -1,250 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>CyberTech Modern Layout</title>
-  <style>
-    :root {
-      --bg-dark: #0a0a0a;
-      --text-dark: #0fff72;
-      --bg-light: #f9f9f9;
-      --text-light: #222222;
-      --hover-dark: rgba(57,255,20,0.1);
-      --hover-light: rgba(0,0,0,0.1);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+<title>CyberTech Modern Layout</title>
+<style>
+  :root {
+    --bg-dark: #0a0a0a;
+    --text-dark: #0fff72;
+    --bg-light: #f9f9f9;
+    --text-light: #222222;
+    --hover-dark: rgba(57,255,20,0.1);
+    --hover-light: rgba(0,0,0,0.1);
+  }
 
-    body {
-      margin: 0;
-      font-family: "Fira Code", monospace;
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-      transition: background-color 0.3s, color 0.3s;
-      overflow-x: hidden; /* Prevent horizontal overflow */
-    }
+  body {
+    margin: 0;
+    font-family: "Fira Code", monospace;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    transition: background-color 0.3s, color 0.3s;
+  }
 
-    body.light-theme {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
+  body.light-theme {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+  }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      position: relative;
-    }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(57,255,20,0.2);
+    position: relative;
+  }
 
-    .logo-img {
-      width: 10vw; /* Makes logo width responsive */
-      max-width: 55px;
-      height: auto;
-      object-fit: contain;
-    }
+  .logo {
+.logo-img {
+  width: 55px;      /* same as SVG width */
+  height: 55px;     /* same as SVG height */
+  object-fit: contain; /* keeps proportions */
+  display: inline-block;
+  vertical-align: middle; /* aligns with text/buttons */
+}
 
+
+
+
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 100;
+  }
+
+  nav a, .dropdown-btn {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    padding: 4px 0;
+  }
+
+  .dropdown-btn::after {
+    content: " ▾";
+    font-size: 0.8em;
+    margin-left: 2px;
+  }
+
+  .dropdown, .submenu {
+    position: relative;
+  }
+
+  .dropdown-content, .submenu-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    border-radius: 6px;
+    padding: 6px 0;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: var(--bg-dark);
+  }
+
+  .submenu-content {
+    top: 0;
+    left: 100%;
+  }
+
+  body.light-theme .dropdown-content, body.light-theme .submenu-content {
+    background-color: var(--bg-light);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+
+  .dropdown-content a, .submenu-content a {
+    display: block;
+    padding: 8px 12px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .dropdown-content a:hover, .submenu-content a:hover {
+    background-color: var(--hover-dark);
+  }
+
+  body.light-theme .dropdown-content a:hover, body.light-theme .submenu-content a:hover {
+    background-color: var(--hover-light);
+  }
+
+  .cta-btn {
+    background-color: #39ff14;
+    color: #000;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  .cta-btn:hover {
+    background-color: #2fcc0e;
+    transform: translateY(-2px);
+  }
+
+  .theme-toggle {
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-dark);
+    transition: background 0.3s;
+  }
+
+  body.light-theme .hamburger div {
+    background-color: var(--text-light);
+  }
+
+  @media (max-width:768px) {
     nav {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    nav a, .dropdown-btn {
-      text-decoration: none;
-      color: inherit;
-      font-weight: 500;
-      cursor: pointer;
-      position: relative;
-      padding: 4px 0;
-    }
-
-    .dropdown-btn::after {
-      content: " ▾";
-      font-size: 0.8em;
-      margin-left: 2px;
-    }
-
-    .dropdown-content, .submenu-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 180px;
-      border-radius: 6px;
-      padding: 6px 0;
-      z-index: 10;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background-color: var(--bg-dark);
-    }
-
-    .submenu-content {
-      top: 0;
-      left: 100%;
-    }
-
-    body.light-theme .dropdown-content, body.light-theme .submenu-content {
-      background-color: var(--bg-light);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-
-    .dropdown-content a, .submenu-content a {
-      display: block;
-      padding: 8px 12px;
-      font-weight: 400;
-      white-space: nowrap;
-    }
-
-    .dropdown-content a:hover, .submenu-content a:hover {
-      background-color: var(--hover-dark);
-    }
-
-    body.light-theme .dropdown-content a:hover, body.light-theme .submenu-content a:hover {
-      background-color: var(--hover-light);
-    }
-
-    .cta-btn {
-      background-color: #39ff14;
-      color: #000;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.1s;
-    }
-
-    .cta-btn:hover {
-      background-color: #2fcc0e;
-      transform: translateY(-2px);
-    }
-
-    .theme-toggle {
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .hamburger {
       display: none;
       flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: var(--text-dark);
-      transition: background 0.3s;
-    }
-
-    body.light-theme .hamburger div {
-      background-color: var(--text-light);
-    }
-
-    @media (max-width: 1024px) {
-      header {
-        padding: 8px 16px;
-      }
-
-      .logo-img {
-        width: 12vw; /* Makes logo slightly bigger on tablets */
-        max-width: 60px;
-      }
-
-      nav {
-        font-size: 0.9rem;
-        gap: 12px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 12px;
-        background-color: var(--bg-dark);
-        border: 1px solid rgba(57,255,20,0.2);
-        border-radius: 8px;
-        padding: 10px;
-        gap: 10px;
-      }
-
-      body.light-theme nav {
-        background-color: var(--bg-light);
-        border-color: rgba(0,0,0,0.2);
-      }
-
-      nav.show { 
-        display: flex;
-      }
-
-      .hamburger { 
-        display: flex; 
-      }
-
-      .dropdown-content, .submenu-content {
-        position: relative;
-        top: 0;
-        left: 0;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo-img {
-        width: 20vw; /* Makes logo even bigger on mobile */
-        max-width: 70px;
-      }
-
-      nav {
-        font-size: 0.8rem;
-        gap: 10px;
-      }
-
-      .cta-btn {
-        font-size: 0.9rem;
-        padding: 5px 10px;
-      }
-    }
-
-    .image-container {
-      padding: 3px 5px 4px 5px;
-      display: flex;
-      justify-content: flex-start;
-      gap: 10px;
-      margin-left: 10px;
-      flex-wrap: wrap;
-    }
-
-    .image-container img {
-      max-width: 100%;
-      height: auto;
-      margin: 0 5px;
-      border: 5px solid transparent;
+      position: absolute;
+      top: 60px;
+      right: 12px;
+      background-color: var(--bg-dark);
+      border: 1px solid rgba(57,255,20,0.2);
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 10px;
+      gap: 10px;
+    }
+    body.light-theme nav {
+      background-color: var(--bg-light);
+      border-color: rgba(0,0,0,0.2);
     }
 
-    .image-container img:hover {
-      transform: scale(1.8);
-      border-color: rgba(0, 0, 0, 0.3);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    nav.show { display: flex; }
+    .hamburger { display: flex; }
+    .dropdown-content, .submenu-content {
+      position: relative;
+      top: 0;
+      left: 0;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 
 <header>
   <nav>
+    <!-- PNG Logo that links to homepage -->
     <a href="index.html" class="logo" aria-label="Homepage">
       <img src="cyber.png" alt="Cyber Logo" class="logo-img">
     </a>
-  </nav>
+  </nav
+    </div>
+    </div>
 
   <nav id="navbar">
+    <!-- Programs -->
     <div class="dropdown">
       <div class="dropdown-btn">Programs</div>
       <div class="dropdown-content">
@@ -253,8 +204,10 @@
       </div>
     </div>
 
+    <!-- Subscriptions -->
     <a href="recaptcha.html">Subscriptions</a>
 
+    <!-- Socials -->
     <div class="dropdown">
       <div class="dropdown-btn">Socials</div>
       <div class="dropdown-content">
@@ -265,6 +218,7 @@
       </div>
     </div>
 
+    <!-- Policies -->
     <div class="dropdown">
       <div class="dropdown-btn">Policies</div>
       <div class="dropdown-content">
@@ -274,14 +228,17 @@
       </div>
     </div>
 
+    
+    <!-- About -->
     <div class="dropdown">
       <div class="dropdown-btn">About</div>
       <div class="dropdown-content">
         <a href="aboutme.html">Dcyberx</a>
         <a href="aboutsite.html">CyberTech</a>
-      </div>
-    </div>
-
+          </div>
+        </div>
+        
+    <!--More -->
     <div class="dropdown">
       <div class="dropdown-btn">More</div>
       <div class="dropdown-content">
@@ -298,9 +255,388 @@
   <h1>Welcome to CyberTech</h1>
   <p>Where code meets innovation.</p>
   <br>
-  <p> 🚧 This website is still under development by Dcyberx. Interaction is okay. </p>
-  <p>⚠️ payments and subscriptions are still under arrangement, do not be scammed by anyone.</p>
+        
+              <P> 🚧 This website is still under development by Dcyberx. Interaction is okay. </P>
+              <p>⚠️ payments and subsription are still under arrangement, donot be scammed by anyone.<p>
+<br>
 </main>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Zoom-In with Popup on Hover/Tap</title>
+  <style>
+    /* Container to hold images near the left margin */
+    .image-container {
+      padding: 3px 5px 4px 5px;
+      display: flex; /* Align images horizontally */
+      justify-content: flex-start; /* Align to the left */
+      gap: 10px;
+      margin-left: 10px; /* Adjust the left margin */
+    }
+
+    /* Style for images in the container */
+    .image-container img {
+      margin: 0 5px;
+      border: 5px solid transparent;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    /* Hover/tap effect for images */
+    .image-container img:hover {
+      transform: scale(1.8); /* Zoom in to 80% bigger */
+      border-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Popup style (hidden by default) */
+    .popup {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* To make sure it's on top */
+    }
+
+    .popup img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+
+    /* Close button style */
+    .popup .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #fff;
+      border: none;
+      font-size: 18px;
+      color: #79e0ab;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Image Container -->
+  <div class="image-container">
+    <img src="image1.png" alt="Image 1" class="zoom-image" id="img1" style="width: 165px; height: 155px;">
+    <img src="image2.png" alt="Image 2" class="zoom-image" id="img2" style="width: 165px; height: 155px;">
+  </div>
+
+  <!-- Popup Container -->
+  <div class="popup" id="popup">
+    <button class="close-btn" id="close-btn">X</button>
+    <img id="popup-img" src="" alt="Zoomed-in Image">
+  </div>
+
+  <script>
+    // Get elements
+    const images = document.querySelectorAll('.zoom-image');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Function to open popup
+    images.forEach(image => {
+      image.addEventListener('mouseenter', (e) => {
+        // Open popup and display the hovered image in zoomed form
+        popup.style.display = 'block';
+        popupImg.src = e.target.src; // Set the image source for popup
+      });
+    });
+
+    // Close the popup when close button is clicked
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none'; // Hide the popup
+    });
+
+    // Close popup when clicking outside of the image in popup
+    window.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none'; // Hide the popup if clicked outside the image
+      }
+    });
+  </script>
 
 </body>
 </html>
+
+  </script>
+
+</body>
+</html>
+
+  </script>
+
+</body>
+</html>
+
+  </script>
+
+</body>
+</html>
+
+</body>
+</html>
+
+
+
+</style>
+
+
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('light-theme');
+  }
+
+  function toggleMenu(el) {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('show');
+    el.classList.toggle('active');
+  }
+
+  // Dropdown hover for desktop
+  document.querySelectorAll('.dropdown').forEach(drop => {
+    const btn = drop.querySelector('.dropdown-btn');
+    const content = drop.querySelector('.dropdown-content');
+
+    btn.addEventListener('mouseenter', () => { content.style.display = 'block'; });
+    drop.addEventListener('mouseleave', () => { content.style.display = 'none'; });
+
+    // Handle submenu hover
+    const submenu = drop.querySelector('.submenu');
+    if(submenu){
+      const submenuContent = submenu.querySelector('.submenu-content');
+      submenu.addEventListener('mouseenter', () => { submenuContent.style.display = 'block'; });
+      submenu.addEventListener('mouseleave', () => { submenuContent.style.display = 'none'; });
+    }
+  });
+</script>
+
+</body>
+
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
+  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none';">
+  <title>Secure Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #79e0ab;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2e3a59;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4cae4c;
+    }
+
+    #comments {
+      margin-top: 20px;
+    }
+
+    .comment {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <script>
+    // Function to sanitize and escape user input
+    function sanitizeInput(input) {
+      const element = document.createElement('div');
+      element.textContent = input; // Escape input by converting it into text content
+      return element.innerHTML; // Returns the HTML-escaped string
+    }
+
+    // Function to add the comment to the page
+    document.getElementById("commentForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const commentText = document.getElementById("comment").value;
+      
+      // Sanitize the user input to prevent XSS
+      const sanitizedComment = sanitizeInput(commentText);
+
+      // Create a new div to hold the sanitized comment
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
+      
+      // Append the sanitized comment to the comments section
+      document.getElementById("comments").appendChild(commentDiv);
+
+      // Clear the textarea after submission
+      document.getElementById("comment").value = '';
+    });
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
+  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self'; 
+    style-src 'self' 'unsafe-inline'; 
+    img-src 'self' data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload"> <!-- HSTS -->
+  <meta http-equiv="Referrer-Policy" content="no-referrer"> <!-- Referrer Policy -->
+  <title>Secure Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212; /* Dark background */
+      color: #8ad4ba; /* Light text color */
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #8ad4ba;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #333;
+      color: #8ad4ba;
+      border: 1px solid #555;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4cae4c;
+    }
+
+    #comments {
+      margin-top: 20px;
+    }
+
+    .comment {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+ 
+
+  
+
+  <script>
+    // Function to sanitize and escape user input
+    function sanitizeInput(input) {
+      const element = document.createElement('div');
+      element.textContent = input; // Escape input by converting it into text content
+      return element.innerHTML; // Returns the HTML-escaped string
+    }
+
+    // Function to generate a CSRF token (Server-side should generate and send this)
+    // This is just an example of what would happen on the server
+    function generateCSRFToken() {
+      return 'secure_random_token'; // Replace with your server-side token generation
+    }
+
+    // Populate the CSRF token in the hidden input
+    document.getElementById("csrfToken").value = generateCSRFToken();
+
+
+      
+      // Sanitize the user input to prevent XSS
+      const sanitizedComment = sanitizeInput(commentText);
+
+      // Create a new div to hold the sanitized comment
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
+      
+      // Append the sanitized comment to the comments section
+      document.getElementById("comments").appendChild(commentDiv);
+
+      // Clear the textarea after submission
+      document.getElementById("comment").value = '';
+    ;
+  </script>
+</body>
+</html>
+
+
+
