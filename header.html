@@ -290,3 +290,106 @@ document.addEventListener('click', (e) => {
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Website</title>
+  <style>
+    /* Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: padding 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: padding 0.3s ease;
+    }
+
+    h1 {
+      font-size: 5vw;
+      text-align: center;
+      color: #333;
+    }
+
+    /* Mobile (up to 767px) */
+    @media (max-width: 767px) {
+      .container {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 8vw; /* Larger font size for mobile */
+      }
+    }
+
+    /* Tablet (768px to 1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 6vw; /* Smaller font size for tablet */
+      }
+    }
+
+    /* Desktop (1024px and above) */
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 4vw; /* Even smaller font size for desktop */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1> </h1> <!-- Empty heading -->
+  </div>
+
+  <script>
+    // Automatically monitor screen resolution in the background
+    window.onload = function() {
+      adjustLayoutBasedOnResolution();
+      startResolutionMonitoring(); // Begin monitoring resolution changes
+    };
+
+    function startResolutionMonitoring() {
+      setInterval(function() {
+        adjustLayoutBasedOnResolution();
+      }, 1000); // Check every second (1000ms)
+    }
+
+    function adjustLayoutBasedOnResolution() {
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      console.log("Current Width: " + width + "px, Height: " + height + "px");
+
+      // Dynamically adjust the heading font size based on screen width
+      var heading = document.querySelector("h1");
+      if (width < 768) {
+        heading.style.fontSize = "8vw"; // Larger font size for mobile
+      } else if (width >= 768 && width < 1024) {
+        heading.style.fontSize = "6vw"; // Smaller font size for tablet
+      } else {
+        heading.style.fontSize = "4vw"; // Even smaller font size for desktop
+      }
+    }
+  </script>
+  
+</body>
+</html>
