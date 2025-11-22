@@ -1,182 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-<title>CyberTech Modern Layout</title>
-<style>
-  :root {
-    --bg-dark: #0a0a0a;
-    --text-dark: #0fff72;
-    --bg-light: #f9f9f9;
-    --text-light: #222222;
-    --hover-dark: rgba(57,255,20,0.1);
-    --hover-light: rgba(0,0,0,0.1);
-  }
-
-  body {
-    margin: 0;
-    font-family: "Fira Code", monospace;
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-    transition: background-color 0.3s, color 0.3s;
-  }
-  body.light-theme {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-  }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(57,255,20,0.2);
-    position: relative;
-  }
-
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-  }
-  .logo-img {
-    width: 55px;
-    height: 55px;
-    object-fit: contain;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    z-index: 10;
-  }
-
-  nav a, .dropdown-btn {
-    text-decoration: none;
-    color: inherit;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-    padding: 4px 0;
-  }
-  .dropdown-btn::after {
-    content: " ▾";
-    font-size: 0.8em;
-    margin-left: 2px;
-  }
-
-  .dropdown { position: relative; }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 180px;
-    border-radius: 6px;
-    padding: 6px 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    background-color: var(--bg-dark);
-  }
-  body.light-theme .dropdown-content {
-    background-color: var(--bg-light);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
-  .dropdown-content a {
-    display: block;
-    padding: 8px 12px;
-    font-weight: 400;
-    white-space: nowrap;
-  }
-  .dropdown-content a:hover {
-    background-color: var(--hover-dark);
-  }
-  body.light-theme .dropdown-content a:hover {
-    background-color: var(--hover-light);
-  }
-
-  /* Desktop hover */
-  @media (hover: hover) and (pointer: fine) {
-    .dropdown:hover .dropdown-content {
-      display: block;
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>CyberTech Modern Layout</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --text-dark: #0fff72;
+      --bg-light: #f9f9f9;
+      --text-light: #222222;
+      --hover-dark: rgba(57,255,20,0.1);
+      --hover-light: rgba(0,0,0,0.1);
     }
-  }
 
-  .cta-btn {
-    background-color: #39ff14;
-    color: #000;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .cta-btn:hover {
-    background-color: #2fcc0e;
-    transform: translateY(-2px);
-  }
+    body {
+      margin: 0;
+      font-family: "Fira Code", monospace;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-  .theme-toggle {
-    cursor: pointer;
-    font-weight: 500;
-  }
+    body.light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
 
-  /* Mobile */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    margin-left: 12px;
-  }
-  .hamburger span {
-    width: 26px;
-    height: 3px;
-    background-color: var(--text-dark);
-    transition: background 0.3s;
-  }
-  body.light-theme .hamburger span {
-    background-color: var(--text-light);
-  }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+      position: relative;
+    }
 
-  @media (max-width:768px) {
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
     nav {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      z-index: 10;
+    }
+
+    nav a, .dropdown-btn {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      cursor: pointer;
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .dropdown-btn::after {
+      content: " ▾";
+      font-size: 0.8em;
+      margin-left: 2px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      border-radius: 6px;
+      padding: 6px 0;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background-color: var(--bg-dark);
+    }
+
+    body.light-theme .dropdown-content {
+      background-color: var(--bg-light);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 8px 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--hover-dark);
+    }
+
+    body.light-theme .dropdown-content a:hover {
+      background-color: var(--hover-light);
+    }
+
+    .cta-btn {
+      background-color: #39ff14;
+      color: #000;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .cta-btn:hover {
+      background-color: #2fcc0e;
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .hamburger {
       display: none;
       flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 12px;
-      background-color: var(--bg-dark);
-      border: 1px solid rgba(57,255,20,0.2);
-      border-radius: 8px;
-      padding: 10px;
-      gap: 10px;
+      gap: 5px;
+      cursor: pointer;
+      margin-left: 12px;
     }
-    body.light-theme nav {
-      background-color: var(--bg-light);
-      border-color: rgba(0,0,0,0.2);
+
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background-color: var(--text-dark);
+      transition: background 0.3s;
     }
-    nav.show { display: flex; }
-    .hamburger { display: flex; }
-    .dropdown-content {
-      position: relative;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      box-shadow: none;
-      border: 1px solid rgba(57,255,20,0.2);
-      border-radius: 6px;
+
+    body.light-theme .hamburger span {
+      background-color: var(--text-light);
     }
-  }
-</style>
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 12px;
+        background-color: var(--bg-dark);
+        border: 1px solid rgba(57,255,20,0.2);
+        border-radius: 8px;
+        padding: 10px;
+        gap: 10px;
+      }
+
+      body.light-theme nav {
+        background-color: var(--bg-light);
+        border-color: rgba(0,0,0,0.2);
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: relative;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        box-shadow: none;
+        border: 1px solid rgba(57,255,20,0.2);
+        border-radius: 6px;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .cta-btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* For very small devices like phones */
+    @media (max-width: 480px) {
+      .logo-img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .cta-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -225,30 +266,14 @@
       </div>
     </div>
 
-    <div class="dropdown">
-      <div class="dropdown-btn">More</div>
-      <div class="dropdown-content">
-        <a href="playlist.html">Playlist</a>
-      </div>
-    </div>
-    
-    <div class="link">
-      <div class="link-content">
-        <a href="index.html">Home</a>
-        
-
     <a href="pay.html" class="cta-btn">Donate</a>
   </nav>
-  
-  
 
   <!-- Hamburger for mobile -->
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
 </header>
-
-
 
 <script>
   function toggleTheme() {
@@ -276,222 +301,14 @@
     });
   });
 
-// Close dropdowns when clicking outside
-document.addEventListener('click', (e) => {
-  // If the click is not inside a dropdown, close all
-  if (!e.target.closest('.dropdown')) {
-    document.querySelectorAll('.dropdown-content').forEach(dc => {
-      dc.style.display = 'none';
-    });
-  }
-});
-
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-content').forEach(dc => {
+        dc.style.display = 'none';
+      });
+    }
+  });
 </script>
 </body>
 </html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
-  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none';">
-  <title>Secure Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #79e0ab;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #2e3a59;
-    }
-
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 10px 15px;
-      background-color: #5cb85c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #4cae4c;
-    }
-
-    #comments {
-      margin-top: 20px;
-    }
-
-    .comment {
-      background-color: #fff;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-  </style>
-</head>
-<body>
-
-
-
-  <script>
-    // Function to sanitize and escape user input
-    function sanitizeInput(input) {
-      const element = document.createElement('div');
-      element.textContent = input; // Escape input by converting it into text content
-      return element.innerHTML; // Returns the HTML-escaped string
-    }
-
-    // Function to add the comment to the page
-    document.getElementById("commentForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      const commentText = document.getElementById("comment").value;
-      
-      // Sanitize the user input to prevent XSS
-      const sanitizedComment = sanitizeInput(commentText);
-
-      // Create a new div to hold the sanitized comment
-      const commentDiv = document.createElement("div");
-      commentDiv.classList.add("comment");
-      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
-      
-      // Append the sanitized comment to the comments section
-      document.getElementById("comments").appendChild(commentDiv);
-
-      // Clear the textarea after submission
-      document.getElementById("comment").value = '';
-    });
-  </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
-  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self'; 
-    script-src 'self'; 
-    style-src 'self' 'unsafe-inline'; 
-    img-src 'self' data:;
-    font-src 'self';
-    object-src 'none';
-    base-uri 'self';">
-  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload"> <!-- HSTS -->
-  <meta http-equiv="Referrer-Policy" content="no-referrer"> <!-- Referrer Policy -->
-  <title>Secure Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #121212; /* Dark background */
-      color: #8ad4ba; /* Light text color */
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      color: #8ad4ba;
-    }
-
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      background-color: #333;
-      color: #8ad4ba;
-      border: 1px solid #555;
-    }
-
-    button {
-      padding: 10px 15px;
-      background-color: #5cb85c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #4cae4c;
-    }
-
-    #comments {
-      margin-top: 20px;
-    }
-
-    .comment {
-      background-color: #1e1e1e;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-  </style>
-</head>
-<body>
- 
-
-  
-
-  <script>
-    // Function to sanitize and escape user input
-    function sanitizeInput(input) {
-      const element = document.createElement('div');
-      element.textContent = input; // Escape input by converting it into text content
-      return element.innerHTML; // Returns the HTML-escaped string
-    }
-
-    // Function to generate a CSRF token (Server-side should generate and send this)
-    // This is just an example of what would happen on the server
-    function generateCSRFToken() {
-      return 'secure_random_token'; // Replace with your server-side token generation
-    }
-
-    // Populate the CSRF token in the hidden input
-    document.getElementById("csrfToken").value = generateCSRFToken();
-
-
-      
-      // Sanitize the user input to prevent XSS
-      const sanitizedComment = sanitizeInput(commentText);
-
-      // Create a new div to hold the sanitized comment
-      const commentDiv = document.createElement("div");
-      commentDiv.classList.add("comment");
-      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
-      
-      // Append the sanitized comment to the comments section
-      document.getElementById("comments").appendChild(commentDiv);
-
-      // Clear the textarea after submission
-      document.getElementById("comment").value = '';
-    ;
-  </script>
-</body>
-</html>
-
-
