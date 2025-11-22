@@ -639,4 +639,115 @@
 </html>
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Website</title>
+  <style>
+    /* Base Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease;
+    }
 
+    .container {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: padding 0.3s ease;
+    }
+
+    h1 {
+      font-size: 5vw;
+      text-align: center;
+      color: #333;
+    }
+
+    /* Mobile (up to 767px) */
+    @media (max-width: 767px) {
+      body {
+        background-color: lightyellow;
+      }
+
+      .container {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 8vw;
+      }
+    }
+
+    /* Tablet (768px to 1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      body {
+        background-color: lightgreen;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 6vw;
+      }
+    }
+
+    /* Desktop (1024px and above) */
+    @media (min-width: 1024px) {
+      body {
+        background-color: lightblue;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 4vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Responsive Website</h1>
+    <p>This page adjusts based on your screen size and resolution. Resize the window to see the changes!</p>
+  </div>
+
+  <script>
+    // Detect screen resolution on page load
+    window.onload = function() {
+      adjustLayoutBasedOnResolution();
+    };
+
+    // Adjust layout dynamically when the window is resized
+    window.onresize = function() {
+      adjustLayoutBasedOnResolution();
+    };
+
+    function adjustLayoutBasedOnResolution() {
+      var width = window.innerWidth;
+
+      console.log("Screen Width: " + width + "px");
+
+      // Adjusting body background color dynamically (example)
+      if (width < 768) {
+        document.body.style.backgroundColor = 'lightyellow';
+      } else if (width >= 768 && width < 1024) {
+        document.body.style.backgroundColor = 'lightgreen';
+      } else {
+        document.body.style.backgroundColor = 'lightblue';
+      }
+    }
+  </script>
+  
+</body>
+</html>
