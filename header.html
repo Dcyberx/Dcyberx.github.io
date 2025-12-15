@@ -188,7 +188,7 @@
 
   <!-- Nav right -->
   <nav id="navbar">
-    <button onclick="openPopup()">cyber ai</button>
+    <a href="'cyber ai.html">Cyber ai</a>
     <div class="dropdown">
       <div class="dropdown-btn">Programs</div>
       <div class="dropdown-content">
@@ -381,80 +381,7 @@ document.addEventListener('click', (e) => {
     });
   </script>
 </body>
-</html>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
-    <style>
-        /* Modal overlay */
-        #popupModal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        /* Modal content */
-        #popupContent {
-            position: relative;
-            width: 80%;
-            height: 80%;
-            background: #000; /* Black background to match terminal */
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        /* Iframe styling */
-        #popupContent iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Close button */
-        #closeBtn {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            font-size: 20px;
-            color: #fff;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    
-
-    <!-- Modal -->
-    <div id="popupModal">
-        <div id="popupContent">
-            <button id="closeBtn" onclick="closePopup()">✖</button>
-            <iframe src="cyber ai.html"></iframe>
-        </div>
-    </div>
-
-    <script>
-        function openPopup() {
-            document.getElementById('popupModal').style.display = 'flex';
-        }
-
-        function closePopup() {
-            document.getElementById('popupModal').style.display = 'none';
-        }
-    </script>
-</body>
 </html>
 
 
