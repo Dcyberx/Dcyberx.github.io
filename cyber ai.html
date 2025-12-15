@@ -7,3 +7,885 @@
     });
 </script>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Bot - The CyberTech AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* ==================== HEADER ==================== */
+        .main-header {
+            background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #0a0a0a;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+        .header-info {
+            flex: 1;
+        }
+        .header-name {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .header-status {
+            color: #b0ffb0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        .header-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .header-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: rgba(0, 255, 136, 0.5);
+            transform: translateY(-2px);
+        }
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: all 0.3s;
+        }
+        .header-icons i:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            color: #00ff88;
+        }
+        /* ==================== CHAT MESSAGES ==================== */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px;
+            background:
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff88' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(180deg, #0d1117 0%, #0a0a0a 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border-radius: 4px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 136, 0.5);
+        }
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 600px;
+            align-self: center;
+        }
+        .welcome-banner h2 {
+            color: #00ff88;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .welcome-banner p {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .welcome-banner .motto {
+            color: #00d4ff;
+            font-style: italic;
+            font-size: 14px;
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 25px;
+            display: inline-block;
+        }
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 700px;
+            align-self: center;
+            margin-bottom: 20px;
+        }
+        .quick-btn {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            color: #e0e0e0;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .quick-btn:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
+        }
+        .quick-btn i {
+            color: #00ff88;
+        }
+        /* Date Separator */
+        .date-separator {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .date-separator span {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            padding: 8px 20px;
+            border-radius: 15px;
+            font-size: 13px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        /* Messages */
+        .message {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message.bot {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            color: #e0e0e0;
+            border-bottom-left-radius: 5px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+            color: #fff;
+            border-bottom-right-radius: 5px;
+        }
+        .message-content {
+            font-size: 15px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        .message-time {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 8px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 5px;
+        }
+        .message.user .message-time {
+            color: rgba(255,255,255,0.8);
+        }
+        .double-check {
+            color: #34B7F1;
+        }
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            padding: 20px 25px;
+            border-radius: 20px;
+            border-bottom-left-radius: 5px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .typing-indicator.active {
+            display: flex;
+            gap: 6px;
+        }
+        .typing-indicator span {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+        /* ==================== INPUT AREA ==================== */
+        .chat-input-container {
+            background: #1a1a1a;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .emoji-btn, .attach-btn {
+            background: none;
+            border: none;
+            color: #00ff88;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        .emoji-btn:hover, .attach-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .chat-input-wrapper {
+            flex: 1;
+            background: #2a2a2a;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 8px 20px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            transition: all 0.3s;
+        }
+        .chat-input-wrapper:focus-within {
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 16px;
+            padding: 12px 0;
+        }
+        .chat-input::placeholder {
+            color: #666;
+        }
+        .send-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            border: none;
+            color: #0a0a0a;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.3);
+        }
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 255, 136, 0.5);
+        }
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        /* ==================== SUBSCRIPTION MODAL ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 25px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.2);
+        }
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: #ff4757;
+            transform: rotate(90deg);
+        }
+        .modal-body {
+            padding: 25px 30px;
+        }
+        .plan-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .plan-card:hover {
+            border-color: rgba(0, 255, 136, 0.5);
+            transform: translateX(5px);
+            box-shadow: 0 5px 30px rgba(0, 255, 136, 0.1);
+        }
+        .plan-card.featured {
+            border-color: #00ff88;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+        }
+        .plan-card.featured::before {
+            content: '⭐ BEST VALUE';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+            color: #0a0a0a;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+        .plan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .plan-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .plan-icon {
+            font-size: 24px;
+        }
+        .plan-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+        .plan-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #888;
+        }
+        .plan-features {
+            list-style: none;
+        }
+        .plan-features li {
+            font-size: 14px;
+            color: #b0b0b0;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        .plan-features li i {
+            color: #00ff88;
+            font-size: 12px;
+        }
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+        .modal-footer p {
+            font-size: 13px;
+            color: #666;
+        }
+        .modal-footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+            padding: 15px 30px;
+            text-align: center;
+        }
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-content span {
+            color: #666;
+            font-size: 13px;
+        }
+        .footer-content a {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        .footer-social a {
+            color: #666;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        .footer-social a:hover {
+            color: #00ff88;
+            transform: translateY(-3px);
+        }
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 12px 15px;
+            }
+            .header-name {
+                font-size: 18px;
+            }
+            .header-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .header-btn span {
+                display: none;
+            }
+            .header-actions {
+                gap: 10px;
+            }
+            .chat-messages {
+                padding: 15px;
+            }
+            .message {
+                max-width: 85%;
+            }
+            .welcome-banner {
+                padding: 20px;
+            }
+            .welcome-banner h2 {
+                font-size: 22px;
+            }
+            .quick-actions {
+                gap: 8px;
+            }
+            .quick-btn {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+            .chat-input-container {
+                padding: 15px;
+            }
+            .send-btn {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-icons {
+                display: none;
+            }
+            .quick-btn span {
+                display: none;
+            }
+            .quick-btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-avatar">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="header-info">
+            <div class="header-name">Cyber Bot</div>
+            <div class="header-status">
+                <span class="status-dot"></span>
+                CyberTech AI Assistant
+            </div>
+        </div>
+        <div class="header-actions">
+           <!----- <button class="header-btn" onclick="askQuestion('Tell me a tech joke')">
+                <i class="fas fa-laugh"></i>
+                <span>Joke</span>
+            </button>
+            <button class="header-btn" onclick="openSubscriptionModal()">
+                <i class="fas fa-crown"></i>---->
+        </div>
+        <div class="header-icons">
+           <!----- <i class="fas fa-video" title="Video Call"></i>
+            <i class="fas fa-phone" title="Voice Call"></i>
+            <i class="fas fa-ellipsis-v" title="Menu"></i> ---->
+        </div>
+    </header>
+    <!-- Chat Messages -->
+    <div class="chat-messages" id="chatMessages">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2>🚀 Welcome to The CyberTech!</h2>
+            <div class="motto">💡 "Mindset is success"</div>
+        </div>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <!---<button class="quick-btn" onclick="askQuestion('Who is Dcyberx?')">
+                <i class="fas fa-user-astronaut"></i>
+                <span>About Dcyberx</span>
+            </button>
+            <button class="quick-btn" onclick="askQuestion('What subscription plans do you offer?')">
+                <i class="fas fa-crown"></i>
+                <span>Plans & Pricing</span>
+            </button>
+            <button class="quick-btn" onclick="askQuestion('Tell me a programming joke')">
+                <i class="fas fa-laugh-beam"></i>
+                <span>Tech Jokes</span>
+            </button>
+            <button class="quick-btn" onclick="askQuestion('Give me a motivational quote')">
+                <i class="fas fa-bolt"></i>
+                <span>Motivation</span>
+            </button>
+            <button class="quick-btn" onclick="askQuestion('What services do you offer?')">
+                <i class="fas fa-cogs"></i>
+                <span>Services</span>
+            </button>
+            <button class="quick-btn" onclick="askQuestion('How can I contact Dcyberx?')">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </button> ---->
+        </div>
+        <!-- Date Separator -->
+        <div class="date-separator">
+            <span>Today</span>
+        </div>
+        <!-- Initial Bot Message -->
+        <div class="message bot">
+            <div class="message-content">As-salamu alaykum! 👋 Welcome to The CyberTech.
+I'm Cyber Bot,
+Feel free to have a chat...! 💻✨</div>
+            <div class="message-time">Just now</div>
+        </div>
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- Input Area -->
+    <div class="chat-input-container">
+    <!--<button class="emoji-btn" title="Emoji"><i class="far fa-smile"></i></button>
+        <button class="attach-btn" title="Attach File"><i class="fas fa-paperclip"></i></button>---->
+        <div class="chat-input-wrapper">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." autocomplete="off">
+        </div>
+        <button class="send-btn" id="sendBtn" title="Send Message">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://discord.gg/FyJYcpaS" title="Discord"><i class="fab fa-discord"></i></a>
+                <a href="mailto:Dcyberx@proton.me" title="Email"><i class="fab fa-envelope"></i></a>
+                <a href="https://www.instagram.com/dcyberx.1" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/Dcyberx" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Subscription Modal -->
+    <div class="modal-overlay" id="subscriptionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-crown"></i>
+                    Subscription Plans
+                </div>
+                <button class="modal-close" onclick="closeSubscriptionModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="plan-card" onclick="selectPlan('daily')">
+                    <div class="plan-header">
+                        <div class="plan-name">Daily Pass</div>
+                        <div class="plan-icon">⚡</div>
+                    </div>
+                    <div class="plan-price">10,000 <span>UGX/day</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 24-hour full access</li>
+                        <li><i class="fas fa-check"></i> All learning materials</li>
+                        <li><i class="fas fa-check"></i> Community access</li>
+                    </ul>
+                </div>
+                <div class="plan-card" onclick="selectPlan('weekly')">
+                    <div class="plan-header">
+                        <div class="plan-name">Weekly Plan</div>
+                        <div class="plan-icon">🔥</div>
+                    </div>
+                    <div class="plan-price">50,000 <span>UGX/week</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 7 days full access</li>
+                        <li><i class="fas fa-check"></i> All learning materials</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Weekly live sessions</li>
+                    </ul>
+                </div>
+                <div class="plan-card featured" onclick="selectPlan('monthly')">
+                    <div class="plan-header">
+                        <div class="plan-name">Monthly Plan</div>
+                        <div class="plan-icon">👑</div>
+                    </div>
+                    <div class="plan-price">200,000 <span>UGX/month</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 30 days unlimited access</li>
+                        <li><i class="fas fa-check"></i> All premium content</li>
+                        <li><i class="fas fa-check"></i> 1-on-1 mentorship</li>
+                        <li><i class="fas fa-check"></i> Certificate of completion</li>
+                        <li><i class="fas fa-check"></i> Lifetime community access</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p>Questions? Contact <a href="
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!-- Enable XSS Protection -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff"> <!-- Prevent MIME type sniffing -->
+  <meta http-equiv="X-Frame-Options" content="DENY"> <!-- Prevent clickjacking -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self'; 
+    style-src 'self' 'unsafe-inline'; 
+    img-src 'self' data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload"> <!-- HSTS -->
+  <meta http-equiv="Referrer-Policy" content="no-referrer"> <!-- Referrer Policy -->
+  <title>Secure Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #080808; /* Dark background */
+      color: #8ad4ba; /* Light text color */
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #8ad4ba;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #333;
+      color: #8ad4ba;
+      border: 1px solid #555;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #4cae4c;
+    }
+
+    #comments {
+      margin-top: 20px;
+    }
+
+    .comment {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+ 
+
+  
+
+  <script>
+    // Function to sanitize and escape user input
+    function sanitizeInput(input) {
+      const element = document.createElement('div');
+      element.textContent = input; // Escape input by converting it into text content
+      return element.innerHTML; // Returns the HTML-escaped string
+    }
+
+    // Function to generate a CSRF token (Server-side should generate and send this)
+    // This is just an example of what would happen on the server
+    function generateCSRFToken() {
+      return 'secure_random_token'; // Replace with your server-side token generation
+    }
+
+    // Populate the CSRF token in the hidden input
+    document.getElementById("csrfToken").value = generateCSRFToken();
+
+
+      
+      // Sanitize the user input to prevent XSS
+      const sanitizedComment = sanitizeInput(commentText);
+
+      // Create a new div to hold the sanitized comment
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+      commentDiv.innerHTML = sanitizedComment; // Safely insert sanitized content
+      
+      // Append the sanitized comment to the comments section
+      document.getElementById("comments").appendChild(commentDiv);
+
+      // Clear the textarea after submission
+      document.getElementById("comment").value = '';
+    ;
+  </script>
+</body>
+</html>
+
+
+
