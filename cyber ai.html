@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <div id="site-header"></div>
-<script>
-  fetch("header.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("site-header").innerHTML = html;
-    });
-</script>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dcyberx Bot - CyberTech Chat</title>
@@ -304,6 +294,41 @@
     </style>
 </head>
 <body>
+    <body>
+    <!-- Header loaded from external file -->
+    <div id="site-header"></div>
+    <script>
+      fetch("header.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("site-header").innerHTML = html;
+        })
+        .catch(err => console.error('Failed to load header:', err));
+    </script>
+
+    <!-- Chat container -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="header-info">
+                <div class="header-name">Dcyberx Bot</div>
+                <div class="header-status">
+                    <span class="status-dot"></span>
+                    Online • The CyberTech
+                </div>
+            </div>
+            <div class="header-icons">
+                <i class="fas fa-video"></i>
+                <i class="fas fa-phone"></i>
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </div>
+        <!-- ... rest of chat content ... -->
+    </div>
+</body>
+
     <div class="chat-container">
 
         <div class="chat-header">
