@@ -20,7 +20,7 @@
             align-items: center;
             padding: 20px;
         }
-        
+
         .chat-container {
             width: 100%;
             max-width: 450px;
@@ -346,11 +346,13 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
         </div>
     </div>
     <script>
-        // ============================================================
-        // ⚡ CONFIGURATION - NO API KEY HERE (Secured in Vercel)
-        // ============================================================
-        const API_ENDPOINT = '/api/chat';
-        const CONVERSATION_ID = 'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+       // ============================================================
+// ⚡ CONFIGURATION - API KEY SECURED IN VERCEL
+// ============================================================
+const API_ENDPOINT = 'https://YOUR-VERCEL-PROJECT.vercel.app/api/chat';
+const CONVERSATION_ID =
+  'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+
         // ============================================================
         // DOM ELEMENTS
         // ============================================================
