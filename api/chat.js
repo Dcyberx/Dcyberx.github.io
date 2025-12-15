@@ -4,7 +4,7 @@ const ipStore = new Map();
 
 export default async function handler(req, res) {
   // ------------------------------------------------------------
-  // 🔒 CORS (LOCKED)
+  // 🔒 CORS
   // ------------------------------------------------------------
   const ALLOWED_ORIGIN = 'https://dcyberx.github.io';
   res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
@@ -16,75 +16,44 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   // ------------------------------------------------------------
-  // 🚦 Rate limiting (per IP)
+  // 🚦 Rate limiting
   // ------------------------------------------------------------
-  const ip =
-    req.headers['x-forwarded-for']?.split(',')[0] ||
-    req.socket.remoteAddress ||
-    'unknown';
-
+  const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress || 'unknown';
   const now = Date.now();
   const entry = ipStore.get(ip) || { count: 0, start: now };
-
-  if (now - entry.start > WINDOW_MS) {
-    entry.count = 0;
-    entry.start = now;
-  }
-
+  if (now - entry.start > WINDOW_MS) { entry.count = 0; entry.start = now; }
   entry.count++;
   ipStore.set(ip, entry);
-
-  if (entry.count > RATE_LIMIT) {
-    return res.status(429).json({ error: 'Too many requests' });
-  }
+  if (entry.count > RATE_LIMIT) return res.status(429).json({ error: 'Too many requests' });
 
   // ------------------------------------------------------------
-  // 🧠 SIM.AI request
+  // 🧠 Serve GitHub HTML and include API key
   // ------------------------------------------------------------
   try {
     const { prompt, conversationId } = req.body;
-
     if (!prompt || typeof prompt !== 'string') {
       return res.status(400).json({ error: 'Invalid prompt' });
     }
 
-    if (!process.env.SIM_API_KEY) {
-      return res.status(500).json({ error: 'SIM API key missing' });
-    }
+    // Use your Vercel-stored API key
+    const apiKey = process.env.SIM_API_KEY; // example
+    if (!apiKey) return res.status(500).json({ error: 'API key missing' });
 
-    const response = await fetch(
-      "https://www.sim.ai/api/workflows/487107e5-4ced-48e8-8737-83cc46bb68fa/execute",
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-Key': process.env.SIM_API_KEY
-        },
-        body: JSON.stringify({
-          prompt,
-          conversationId: conversationId || 'default'
-        })
-      }
-    );
+    // Fetch your GitHub HTML
+    const githubUrl = 'https://raw.githubusercontent.com/Dcyberx/YOUR-REPO/main/cyber_ai.html';
+    const response = await fetch(githubUrl);
+    if (!response.ok) return res.status(500).json({ error: 'Failed to fetch GitHub file' });
 
-    if (!response.ok) {
-      const err = await response.text();
-      return res.status(response.status).json({ error: err });
-    }
+    let htmlContent = await response.text();
 
-    const data = await response.json();
+    // Inject API key (securely, only server-side)
+    // Example: replace a placeholder in HTML with the key
+    htmlContent = htmlContent.replace('{{API_KEY}}', apiKey);
 
-    return res.status(200).json({
-      content:
-        data?.result?.content ??
-        data?.content ??
-        'No response'
-    });
+    return res.status(200).json({ content: htmlContent });
 
   } catch (e) {
-    console.error('SIM.AI failure:', e);
-    return res.status(500).json({
-      content: 'Backend error. Contact Dcyberx@proton.me'
-    });
+    console.error('Error serving GitHub HTML:', e);
+    return res.status(500).json({ content: 'Backend error. Contact Dcyberx@proton.me' });
   }
 }

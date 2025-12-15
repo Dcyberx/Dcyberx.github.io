@@ -346,6 +346,10 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
         </div>
     </div>
     <script>
+  const API_KEY = '{{API_KEY}}'; // This will be replaced server-side
+</script>
+
+    <script>
        // ============================================================
 // ⚡ CONFIGURATION - API KEY SECURED IN VERCEL
 // ============================================================
@@ -406,6 +410,7 @@ const CONVERSATION_ID =
         // ============================================================
         // 🚀 API CALL - CONNECTS TO VERCEL SERVERLESS FUNCTION
         // ============================================================
+        
         async function sendMessage(message) {
             try {
                 setLoading(true);
