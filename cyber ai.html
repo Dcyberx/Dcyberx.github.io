@@ -20,7 +20,7 @@
             align-items: center;
             padding: 20px;
         }
-        /* Main Chat Container */
+        
         .chat-container {
             width: 100%;
             max-width: 450px;
@@ -35,7 +35,7 @@
             flex-direction: column;
             border: 1px solid rgba(0, 255, 136, 0.2);
         }
-        /* Header - WhatsApp Style */
+
         .chat-header {
             background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
             padding: 15px 20px;
@@ -57,9 +57,7 @@
             font-weight: bold;
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
         }
-        .header-info {
-            flex: 1;
-        }
+        .header-info { flex: 1; }
         .header-name {
             color: #fff;
             font-size: 17px;
@@ -98,7 +96,7 @@
             opacity: 1;
             transform: scale(1.1);
         }
-        /* Chat Messages Area */
+
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -110,18 +108,13 @@
             flex-direction: column;
             gap: 10px;
         }
-        /* Scrollbar Styling */
-        .chat-messages::-webkit-scrollbar {
-            width: 6px;
-        }
-        .chat-messages::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        .chat-messages::-webkit-scrollbar { width: 6px; }
+        .chat-messages::-webkit-scrollbar-track { background: transparent; }
         .chat-messages::-webkit-scrollbar-thumb {
             background: rgba(0, 255, 136, 0.3);
             border-radius: 3px;
         }
-        /* Message Bubbles */
+
         .message {
             max-width: 80%;
             padding: 10px 14px;
@@ -161,13 +154,8 @@
             align-items: center;
             gap: 4px;
         }
-        .message.user .message-time {
-            color: rgba(255,255,255,0.8);
-        }
-        .double-check {
-            color: #34B7F1;
-        }
-        /* Typing Indicator */
+        .message.user .message-time { color: rgba(255,255,255,0.8); }
+        .double-check { color: #34B7F1; }
         .typing-indicator {
             display: none;
             align-self: flex-start;
@@ -194,7 +182,7 @@
             0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
             30% { transform: translateY(-8px); opacity: 1; }
         }
-        /* Input Area */
+
         .chat-input-container {
             background: #1a1a1a;
             padding: 15px 20px;
@@ -239,9 +227,7 @@
             font-size: 15px;
             padding: 10px 0;
         }
-        .chat-input::placeholder {
-            color: #666;
-        }
+        .chat-input::placeholder { color: #666; }
         .send-btn {
             width: 48px;
             height: 48px;
@@ -261,14 +247,12 @@
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
         }
-        .send-btn:active {
-            transform: scale(0.95);
-        }
+        .send-btn:active { transform: scale(0.95); }
         .send-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-        /* Date Separator */
+
         .date-separator {
             text-align: center;
             margin: 15px 0;
@@ -281,7 +265,7 @@
             font-size: 12px;
             border: 1px solid rgba(0, 255, 136, 0.2);
         }
-        /* Welcome Message */
+
         .welcome-banner {
             background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
             border: 1px solid rgba(0, 255, 136, 0.2);
@@ -299,11 +283,8 @@
             color: #888;
             font-size: 13px;
         }
-        /* Mobile Responsive */
         @media (max-width: 480px) {
-            body {
-                padding: 0;
-            }
+            body { padding: 0; }
             .chat-container {
                 height: 100vh;
                 max-height: none;
@@ -314,7 +295,7 @@
 </head>
 <body>
     <div class="chat-container">
-        <!-- Header -->
+
         <div class="chat-header">
             <div class="header-avatar">
                 <i class="fas fa-robot"></i>
@@ -332,7 +313,7 @@
                 <i class="fas fa-ellipsis-v"></i>
             </div>
         </div>
-        <!-- Messages Area -->
+
         <div class="chat-messages" id="chatMessages">
             <div class="date-separator">
                 <span>Today</span>
@@ -352,7 +333,7 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
                 <span></span>
             </div>
         </div>
-        <!-- Input Area -->
+
         <div class="chat-input-container">
             <button class="emoji-btn"><i class="far fa-smile"></i></button>
             <button class="attach-btn"><i class="fas fa-paperclip"></i></button>
@@ -366,10 +347,9 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
     </div>
     <script>
         // ============================================================
-        // ⚡ CONFIGURATION - REPLACE YOUR_API_KEY_HERE WITH YOUR KEY
+        // ⚡ CONFIGURATION - NO API KEY HERE (Secured in Vercel)
         // ============================================================
-        const API_ENDPOINT = 'https://www.sim.ai/api/workflows/487107e5-4ced-48e8-8737-83cc46bb68fa/execute';
-        const data = await response.json(); // <-- PASTE YOUR API KEY HERE!
+        const API_ENDPOINT = '/api/chat';
         const CONVERSATION_ID = 'user-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
         // ============================================================
         // DOM ELEMENTS
@@ -388,6 +368,11 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
                 hour12: true
             });
         }
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML.replace(/\n/g, '<br>');
+        }
         function addMessage(content, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
@@ -401,11 +386,7 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
             chatMessages.insertBefore(messageDiv, typingIndicator);
             scrollToBottom();
         }
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML.replace(/\n/g, '<br>');
-        }
+
         function showTyping() {
             typingIndicator.classList.add('active');
             scrollToBottom();
@@ -421,7 +402,7 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
             chatInput.disabled = loading;
         }
         // ============================================================
-        // 🚀 API CALL - CONNECTS TO YOUR DCYBERX BOT
+        // 🚀 API CALL - CONNECTS TO VERCEL SERVERLESS FUNCTION
         // ============================================================
         async function sendMessage(message) {
             try {
@@ -430,8 +411,7 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
                 const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-Key': API_KEY
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         input: message,
@@ -444,23 +424,12 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
                 const data = await response.json();
                 hideTyping();
                 setLoading(false);
-                // Extract bot response from API response
-                let botResponse = 'Sorry, I could not process that. Please try again.';
-                if (data.result && data.result.content) {
-                    botResponse = data.result.content;
-                } else if (data.content) {
-                    botResponse = data.content;
-                } else if (data.message_content) {
-                    botResponse = data.message_content;
-                } else if (typeof data.result === 'string') {
-                    botResponse = data.result;
-                }
-                addMessage(botResponse, false);
+                addMessage(data.content || 'Sorry, something went wrong.', false);
             } catch (error) {
                 console.error('Error:', error);
                 hideTyping();
                 setLoading(false);
-                addMessage('Oops! Connection error. Please check your internet and try again. If the problem persists, contact Dcyberx@proton.me 🔧', false);
+                addMessage('Oops! Connection error. Please try again or contact Dcyberx@proton.me 🔧', false);
             }
         }
         // ============================================================
@@ -480,14 +449,11 @@ How can I help you today? Ask me about Dcyberx, the academy, subscriptions, or j
                 sendBtn.click();
             }
         });
-        // Focus input on load
+
         chatInput.focus();
-        // ============================================================
-        // 🎉 YOUR DCYBERX BOT IS READY!
-        // ============================================================
+
         console.log('🚀 Dcyberx Bot Chat loaded!');
-        console.log('📡 API Endpoint:', API_ENDPOINT);
-        console.log('💬 Conversation ID:', CONVERSATION_ID);
+
     </script>
 </body>
 </html>
