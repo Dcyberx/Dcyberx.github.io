@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   // ------------------------------------------------------------
   // 🔒 CORS
   // ------------------------------------------------------------
-  const ALLOWED_ORIGIN = 'https://dcyberx.github.io';
+  const ALLOWED_ORIGIN = 'https://dcyberx.github.io/cyber';
   res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
