@@ -294,41 +294,75 @@
     </style>
 </head>
 <body>
-    <body>
-    <!-- Header loaded from external file -->
-    <div id="site-header"></div>
-    <script>
-      fetch("header.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("site-header").innerHTML = html;
-        })
-        .catch(err => console.error('Failed to load header:', err));
-    </script>
-
-    <!-- Chat container -->
-    <div class="chat-container">
-        <div class="chat-header">
-            <div class="header-avatar">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div class="header-info">
-                <div class="header-name">Dcyberx Bot</div>
-                <div class="header-status">
-                    <span class="status-dot"></span>
-                    Online • The CyberTech
-                </div>
-            </div>
-            <div class="header-icons">
-                <i class="fas fa-video"></i>
-                <i class="fas fa-phone"></i>
-                <i class="fas fa-ellipsis-v"></i>
-            </div>
-        </div>
-        <!-- ... rest of chat content ... -->
+    <header>
+  <nav>
+    <!-- PNG Logo that links to homepage -->
+    <a href="index.html" class="logo" aria-label="Homepage">
+      <img src="cyber.png" alt="Cyber Logo" class="logo-img">
+    </a>
+  </nav
     </div>
-</body>
+    </div>
+  
+  <nav id="navbar">
+    <a href="cyber ai.html">Cyber ai</a>
+    <!-- Programs -->
+    <div class="dropdown">
+      <div class="dropdown-btn">Programs</div>
+      <div class="dropdown-content">
+        <a href="nexus.html">Dcyberx Nexus Academy</a>
+        <a href="#">Gumroad products</a>
+      </div>
+    </div>
 
+    <!-- Subscriptions -->
+    <a href="recaptcha.html">Subscriptions</a>
+
+    <!-- Socials -->
+    <div class="dropdown">
+      <div class="dropdown-btn">Socials</div>
+      <div class="dropdown-content">
+        <a href="https://www.instagram.com/dcyberx.1" target="_blank">Instagram</a>
+        <a href="https://github.com/Dcyberx" target="_blank">GitHub</a>
+        <a href="https://discord.gg/FyJYcpaS" target="_blank">CyberTech Discord</a>
+        <a href="mailto:Dcyberx@proton.me">email</a>
+      </div>
+    </div>
+
+    <!-- Policies -->
+    <div class="dropdown">
+      <div class="dropdown-btn">Policies</div>
+      <div class="dropdown-content">
+        <a href="privacy policy.html">Privacy Policy</a>
+        <a href="copyright.html">Copyright</a>
+        <a href="subscription.html">Subscription policy</a>
+      </div>
+    </div>
+
+    
+    <!-- About -->
+    <div class="dropdown">
+      <div class="dropdown-btn">About</div>
+      <div class="dropdown-content">
+        <a href="aboutme.html">Dcyberx</a>
+        <a href="aboutsite.html">CyberTech</a>
+          </div>
+        </div>
+        
+    <!--More -->
+    <div class="dropdown">
+      <div class="dropdown-btn">More</div>
+      <div class="dropdown-content">
+        <a href="playlist.html">Playlist</a>
+        <a href="motivation.html">Motivation</a>
+      </div>
+    </div>
+    
+
+    <a href="pay.html" class="cta-btn">Donate</a>
+    <div class="theme-toggle" onclick="toggleTheme()">🌙/☀️</div>
+  </nav>
+</header>
     <div class="chat-container">
 
         <div class="chat-header">
