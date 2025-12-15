@@ -1,5 +1,5 @@
 // ==================== CONFIG ====================
-const API_URL = 'https://dcyberx-github-9ii00atnn-dcyberxs-projects.vercel.app/'; //  Vercel URL
+const API_URL = 'https://dcyberx.github.io'; //  Vercel URL
 const RATE_LIMIT = 10;
 const WINDOW_MS = 60 * 1000;
 const ipStore = new Map();
