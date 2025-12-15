@@ -1,59 +1,81 @@
-const RATE_LIMIT = 10; // requests
-const WINDOW_MS = 60 * 1000; // 1 minute
+// ==================== CONFIG ====================
+const API_URL = 'https://dcyberx-github-9ii00atnn-dcyberxs-projects.vercel.app/'; //  Vercel URL
+const RATE_LIMIT = 10;
+const WINDOW_MS = 60 * 1000;
 const ipStore = new Map();
 
-export default async function handler(req, res) {
-  // ------------------------------------------------------------
-  // 🔒 CORS
-  // ------------------------------------------------------------
-  const ALLOWED_ORIGIN = 'https://dcyberx.github.io/cyber';
-  res.setHeader('Access-Control-Allow-Origin', ALLOWED_ORIGIN);
-  res.setHeader('Vary', 'Origin');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+// ==================== ELEMENTS ====================
+const chatInput = document.getElementById('chatInput');
+const sendBtn = document.getElementById('sendBtn');
+const chatMessages = document.getElementById('chatMessages');
+const typingIndicator = document.getElementById('typingIndicator');
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+// ==================== FUNCTIONS ====================
+function addMessage(text, type) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message', type);
 
-  // ------------------------------------------------------------
-  // 🚦 Rate limiting
-  // ------------------------------------------------------------
-  const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress || 'unknown';
-  const now = Date.now();
-  const entry = ipStore.get(ip) || { count: 0, start: now };
-  if (now - entry.start > WINDOW_MS) { entry.count = 0; entry.start = now; }
-  entry.count++;
-  ipStore.set(ip, entry);
-  if (entry.count > RATE_LIMIT) return res.status(429).json({ error: 'Too many requests' });
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('message-content');
+    contentDiv.textContent = text;
 
-  // ------------------------------------------------------------
-  // 🧠 Serve GitHub HTML and include API key
-  // ------------------------------------------------------------
-  try {
-    const { prompt, conversationId } = req.body;
-    if (!prompt || typeof prompt !== 'string') {
-      return res.status(400).json({ error: 'Invalid prompt' });
-    }
+    const timeDiv = document.createElement('div');
+    timeDiv.classList.add('message-time');
+    timeDiv.textContent = 'Just now';
 
-    // Use your Vercel-stored API key
-    const apiKey = process.env.SIM_API_KEY; // example
-    if (!apiKey) return res.status(500).json({ error: 'API key missing' });
-
-    // Fetch your GitHub HTML
-    const githubUrl = 'https://raw.githubusercontent.com/Dcyberx/YOUR-REPO/main/cyber_ai.html';
-    const response = await fetch(githubUrl);
-    if (!response.ok) return res.status(500).json({ error: 'Failed to fetch GitHub file' });
-
-    let htmlContent = await response.text();
-
-    // Inject API key (securely, only server-side)
-    // Example: replace a placeholder in HTML with the key
-    htmlContent = htmlContent.replace('{{API_KEY}}', apiKey);
-
-    return res.status(200).json({ content: htmlContent });
-
-  } catch (e) {
-    console.error('Error serving GitHub HTML:', e);
-    return res.status(500).json({ content: 'Backend error. Contact Dcyberx@proton.me' });
-  }
+    msgDiv.appendChild(contentDiv);
+    msgDiv.appendChild(timeDiv);
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+function rateLimitCheck(ip) {
+    const now = Date.now();
+    const entry = ipStore.get(ip) || { count: 0, start: now };
+    if (now - entry.start > WINDOW_MS) { entry.count = 0; entry.start = now; }
+    entry.count++;
+    ipStore.set(ip, entry);
+    return entry.count <= RATE_LIMIT;
+}
+
+async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, 'user');
+    chatInput.value = '';
+    typingIndicator.classList.add('active');
+
+    try {
+        // Optional client-side IP rate limit (server-side still applies)
+        const ip = 'client'; // placeholder, server uses real IP
+        if (!rateLimitCheck(ip)) {
+            addMessage('Too many requests. Wait a moment.', 'bot');
+            typingIndicator.classList.remove('active');
+            return;
+        }
+
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: message })
+        });
+
+        const data = await res.json();
+        const botResponse = data.content || 'Sorry, I could not process that.';
+        addMessage(botResponse, 'bot');
+
+    } catch (err) {
+        console.error(err);
+        addMessage('Server error. Try again later.', 'bot');
+    } finally {
+        typingIndicator.classList.remove('active');
+    }
+}
+
+// ==================== EVENTS ====================
+sendBtn.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+
+// ==================== INITIAL WELCOME ====================
+addMessage("As-salamu alaykum! 👋 Welcome to The CyberTech. I'm Cyber Bot. Feel free to chat!", 'bot');
