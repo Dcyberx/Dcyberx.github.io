@@ -777,13 +777,6 @@ Feel free to have a chat...! 💻✨</div>
     <!-- chat header, messages, input, etc. -->
 </div>
 
-<!-- Include your chat.js -->
-<script src="chat.js"></script>
-
-                
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -895,6 +888,60 @@ Feel free to have a chat...! 💻✨</div>
   </script>
 </body>
 </html>
+
+
+
+<script type="module">
+  import { getBotResponse } from './chat.js';
+
+  const chatInput = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const chatMessages = document.getElementById("chatMessages");
+  const typingIndicator = document.getElementById("typingIndicator");
+
+  function getTime() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function addMessage(text, sender) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `message ${sender}`;
+
+    messageDiv.innerHTML = `
+      <div class="message-content">${text}</div>
+      <div class="message-time">${getTime()}</div>
+    `;
+
+    chatMessages.insertBefore(messageDiv, typingIndicator);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  async function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    addMessage(message, "user");
+    chatInput.value = "";
+
+    typingIndicator.classList.add("active");
+
+    try {
+      const response = await getBotResponse(message);
+      typingIndicator.classList.remove("active");
+      addMessage(response, "bot");
+    } catch (err) {
+      typingIndicator.classList.remove("active");
+      addMessage("⚠️ Error getting response.", "bot");
+    }
+  }
+
+  sendBtn.addEventListener("click", sendMessage);
+
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+</script>
+
 
 
 
