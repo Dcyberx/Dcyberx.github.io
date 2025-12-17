@@ -1,3 +1,107 @@
+// 1. **Sanitize User Input** to prevent XSS
+function sanitizeInput(input) {
+  // Use a browser-based way to escape potentially malicious input
+  const element = document.createElement('div');
+  element.textContent = input;  // This automatically escapes malicious HTML
+  return element.innerHTML;  // Returns the sanitized version of the input
+}
+
+// 2. **Prevent Sending Messages Too Fast (Rate Limiting)**
+let lastMessageTime = 0;
+const RATE_LIMIT = 3000;  // Minimum 3 seconds between messages to avoid spamming
+
+// 3. **Add Time for Displaying Message (For the UI)**
+function getTime() {
+  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// 4. **Add Message to Chat Interface**
+function addMessage(text, sender) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `message ${sender}`;
+
+  messageDiv.innerHTML = `
+    <div class="message-content">${text}</div>
+    <div class="message-time">${getTime()}</div>
+  `;
+
+  chatMessages.insertBefore(messageDiv, typingIndicator);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// 5. **Send Message (With Protection)**
+async function sendMessage() {
+  const now = Date.now();
+  // Rate limiting: Prevent user from spamming the system with requests
+  if (now - lastMessageTime < RATE_LIMIT) {
+    alert("You're sending messages too fast. Please wait a moment.");
+    return;
+  }
+
+  // 6. **Sanitize and Trim the Input**
+  const message = sanitizeInput(chatInput.value.trim());
+  if (!message) return; // Do not proceed if the message is empty
+
+  // Add user message to the chat
+  addMessage(message, "user");
+  chatInput.value = ""; // Clear the input field
+
+  // Show the typing indicator
+  typingIndicator.classList.add("active");
+
+  // 7. **Error Handling and Bot Response**
+  try {
+    // Get the bot's response using the sanitized message
+    const response = await getBotResponse(message);
+
+    // If no response, display a fallback message
+    if (!response) {
+      throw new Error("No response from the bot.");
+    }
+
+    // Remove typing indicator and display bot response
+    typingIndicator.classList.remove("active");
+    addMessage(response, "bot");
+
+    // Update the last message time for rate limiting
+    lastMessageTime = now;
+  } catch (err) {
+    typingIndicator.classList.remove("active");
+    console.error("Error getting response:", err);  // Log the error for debugging
+    addMessage("⚠️ Error getting response. Please try again.", "bot");
+  }
+}
+
+// 8. **Event Listeners for Send Button and Enter Key**
+sendBtn.addEventListener("click", sendMessage);
+
+chatInput.addEventListener("keypress", (e) => {
+  // Only trigger if 'Enter' is pressed
+  if (e.key === "Enter") sendMessage();
+});
+
+// 9. **Basic Bot Response Function Example (For API Calls)**
+export async function getBotResponse(message) {
+  try {
+    // Example of sending a request to a server (replace with actual API endpoint)
+    const response = await fetch("https://your-api-endpoint.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message })
+    });
+
+    if (!response.ok) throw new Error("Failed to get response from the bot.");
+
+    const data = await response.json();
+    return data.reply;  // Adjust this based on your API response structure
+  } catch (err) {
+    console.error("Error in getBotResponse:", err);
+    throw err;  // Throw error to be handled by sendMessage
+  }
+}
+
+
+
 // Levenshtein Distance function to calculate the similarity score
 const levenshtein = (a, b) => {
   const tmp = [];
