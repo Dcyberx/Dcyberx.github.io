@@ -1,40 +1,30 @@
-// chat.js
-
 export async function getBotResponse(userMessage) {
-  // You can replace this with API calls later
+  // Predefined responses
   const responses = {
     "Assalam alaikum": "Wa-alaikum salam warahmatullahi wabarakatuh.",
-    "good morning": "good morning too dear",
-    "good afternoon": "good afternoon too dear",
-    "good evening": "good evening too dear",
+    "good morning": "Good morning too, dear!",
+    "good afternoon": "Good afternoon too, dear!",
+    "good evening": "Good evening too, dear!",
     "hi": "Hello 👋 How can I help you?",
     "hello": "Hi there! 😊",
     "who are you": "I'm Cyber Bot 🤖, your CyberTech AI assistant.",
-    "help": "Sure! tell me what i can help with, if under my ability",
+    "help": "Sure! Tell me what I can help with, if it's under my ability.",
     "how are you": "I'm doing great ⚡ Ready to help you with anything tech-related!",
-    "who are you": "I'm Cyber Bot 🤖, your CyberTech AI assistant.",
     "thank you": "You're welcome! 🙌 If you need anything else, I'm here.",
     "thanks": "Anytime 😄 Happy to help!",
     "bye": "Goodbye 👋 Stay safe and keep learning!",
     "goodbye": "See you soon 🚀 Have a great day!",
     "who is dcyberx": "Dcyberx is my father, a teen Muslim digital creator passionate about tech, AI, and cyber-culture. His motto is: *Mindset is success* 💡",
     "about dcyberx": "Dcyberx is the founder of CyberTech — a creative tech hub built from passion, resilience, and love for computers and innovation 🚀",
-    "what is his motto": "My motto is *Mindset is success* — because once the mindset changes, everything changes 🧠✨",
+    "what is his motto": "His motto is *Mindset is success* — because once the mindset changes, everything changes 🧠✨",
     "why did he start cybertech": "CyberTech started as a meaningful project born from passion for technology and the desire to inspire others to explore the cyber-tech future ❤️",
-    "what inspires him": "Technology inspires him. Every time he sits at a computer, he feel alive — that’s where his true passion exists 💻🔥",
-    "what inspired him": "Technology inspires him. Every time he sat at a computer, he felt alive — that’s where his true passion exists 💻🔥",
+    "what inspires him": "Technology inspires him. Every time he sits at a computer, he feels alive — that’s where his true passion exists 💻🔥",
     "what is his mission": "His mission is to design tools and platforms that empower people to innovate, create, and grow in the digital world 🌍",
-    "is he a student": "Yes!  a teen creator and learner at Kitebi Secondary School, always exploring new tech, ideas, and futuristic experiences 📚⚡",
-    "what programs does he offer": "Through Dcyberx Programs and DIY projects, he aims to push boundaries and inspire creativity and digital innovation 🛠️✨",
-    "why tech": "At first he felt like a loser, but he realized computers are his hyperactive domain — tech is where he truly belongs 💙",
-    "Does he have a girlfriend / gf,": "What i know he does not have yet but the one will be blessed to have him",
     "about cybertech": "CyberTech is a digital hub that blends creativity, innovation, and cyber-culture into one immersive experience 🌐✨",
     "what is cybertech": "CyberTech is more than a website — it’s a platform for exploration, creativity, and determination in the digital future 🚀",
-    "what can i do on cybertech": "You can explore tech ideas, interactive programs, futuristic ideas, and become part of a growing tech community 💻🤖",
-    "is cybertech a community": "Yes! CyberTech is community-driven, built to connect creators, learners, and innovators together 🤝",
-    "does cybertech use ai": "Absolutely. CyberTech integrates AI-powered tools like me designed to push the boundaries of what’s possible online 🧠⚡",
-    "why was cybertech created": "CyberTech was created to inspire creativity, innovation, and self-reliance through technology and courage 💡",
+    "privacy policy": "CyberTech respects your privacy 🔐. We collect only minimal data needed to improve your experience.",
     "how can i support cybertech": "You can support CyberTech through subscriptions, donations, or by engaging with and sharing the platform ❤️",
+    "subscription policy": "Dcyberx Nexus Academy subscriptions are open to anyone interested in technology, including beginners and tech enthusiasts 🎓",
     "what makes cybertech different": "CyberTech isn’t just a site — it’s a portal into creativity, innovation, and a vision of a connected future 🔮",
     "is cybertech futuristic": "Yes. Every page is designed with a cyber-tech aesthetic to reflect a futuristic and connected digital world 🖥️✨",
     "privacy policy": "CyberTech respects your privacy 🔐. We collect only minimal data needed to improve your experience.",
@@ -58,29 +48,65 @@ export async function getBotResponse(userMessage) {
     "why are these rules enforced": "These rules ensure fair use, security, and efficient service between users, Dcyberx, and CyberTech 🤝",
     "where can i report abuse": "Any suspected abuse or illegal activity should be reported directly to Dcyberx for immediate action 📩",
     "subscription policy": "Dcyberx Nexus Academy subscriptions are open to anyone interested in technology, including beginners and tech enthusiasts 🎓",
-   "who can join the academy": "Anyone can join Dcyberx Nexus Academy — no prior tech knowledge is required to get started 💡",
-   "what subscription plans are available": "We offer Daily, Weekly, and Monthly passes with affordable pricing and early-qualifier discounts 💼",
-   "daily pass details": "The Daily Pass lasts 1 day and costs 10,000 UGX, with a 10% discount for the first 10 qualifiers ⏱️",
-   "weekly pass details": "The Weekly Pass runs for 5 days at 50,000 UGX and includes a 10% discount for early qualifiers 📅",
-   "monthly pass details": "The Monthly Pass runs about 20–23 days and costs 200,000 UGX, with a 10% discount for early qualifiers 🗓️",
-   "how can i pay": "Payments are accepted via mobile money, cash, or approved digital wallets such as credit cards 💳",
-   "what do subscribers get": "Subscribers receive training in computer basics, design, Linux, Python, hands-on projects, community access, and free consultations 🧠",
-   "are refunds available": "Yes. All plans are prepaid and refundable, with renewals and refunds handled directly by Dcyberx ❌",
-   "how do i cancel my subscription": "You can request cancellation or termination anytime via email or direct request by filling out a refund form 📜",
-   "what is dcyberx nexus": "Dcyberx Nexus is a learning program offering both physical and online lessons in technology, design, and digital creativity 🎓",
-   "what do you teach at dcyberx nexus": "We teach graphic design, office tools, CAD, operating systems, programming basics, and creative tech skills 💻",
-   "do you offer graphic design lessons": "Yes. We offer training in graphic design using tools like Krita and other creative software 🎨",
-   "do you teach microsoft office": "Yes. We provide lessons in Microsoft Word and PowerPoint for beginners and practical use 📄",
-   "what cad tools do you teach": "We teach CAD tools such as FreeCAD, Tinkercad, and Blender for design and modeling 🧩",
-   "do you teach linux": "Yes. Dcyberx Nexus offers Linux basics and fundamentals for understanding operating systems 🐧",
-   "do you teach programming": "Yes. We teach programming basics including Python and scripting for beginners 🐍",
-   "are lessons online or physical": "Lessons are available both online and physically, depending on the program and schedule 🌐",
-   "do you offer diy design services": "Yes. We offer DIY compound designing and artificial architecture services tailored to your ideas 🏗️",
-   "can i hire you for design work": "Yes. Clients can hire Dcyberx to design their spaces and bring their imagination to life through creative architecture ✨",
-   "play list": "CyberTech has a playlist for the best of motivation and relaxation. found on website. more.",
-   "motivational qoutes": "The motivational qoutes are at homepage website, more. they are not just qoutes but his own perspective of success",
+    "who can join the academy": "Anyone can join Dcyberx Nexus Academy — no prior tech knowledge is required to get started 💡",
+    "what subscription plans are available": "We offer Daily, Weekly, and Monthly passes with affordable pricing and early-qualifier discounts 💼",
+    "daily pass details": "The Daily Pass lasts 1 day and costs 10,000 UGX, with a 10% discount for the first 10 qualifiers ⏱️",
+    "weekly pass details": "The Weekly Pass runs for 5 days at 50,000 UGX and includes a 10% discount for early qualifiers 📅",
+    "monthly pass details": "The Monthly Pass runs about 20–23 days and costs 200,000 UGX, with a 10% discount for early qualifiers 🗓️",
+    "how can i pay": "Payments are accepted via mobile money, cash, or approved digital wallets such as credit cards 💳",
+    "what do subscribers get": "Subscribers receive training in computer basics, design, Linux, Python, hands-on projects, community access, and free consultations 🧠",
+    "are refunds available": "Yes. All plans are prepaid and refundable, with renewals and refunds handled directly by Dcyberx ❌",
+    "how do i cancel my subscription": "You can request cancellation or termination anytime via email or direct request by filling out a refund form 📜",
+    "what is dcyberx nexus": "Dcyberx Nexus is a learning program offering both physical and online lessons in technology, design, and digital creativity 🎓",
+    "what do you teach at dcyberx nexus": "We teach graphic design, office tools, CAD, operating systems, programming basics, and creative tech skills 💻",
+    "do you offer graphic design lessons": "Yes. We offer training in graphic design using tools like Krita and other creative software 🎨",
+    "do you teach microsoft office": "Yes. We provide lessons in Microsoft Word and PowerPoint for beginners and practical use 📄",
+    "what cad tools do you teach": "We teach CAD tools such as FreeCAD, Tinkercad, and Blender for design and modeling 🧩",
+    "do you teach linux": "Yes. Dcyberx Nexus offers Linux basics and fundamentals for understanding operating systems 🐧",
+    "do you teach programming": "Yes. We teach programming basics including Python and scripting for beginners 🐍",
+    "are lessons online or physical": "Lessons are available both online and physically, depending on the program and schedule 🌐",
+    "do you offer diy design services": "Yes. We offer DIY compound designing and artificial architecture services tailored to your ideas 🏗️",
+    "can i hire you for design work": "Yes. Clients can hire Dcyberx to design their spaces and bring their imagination to life through creative architecture ✨",
+    "play list": "CyberTech has a playlist for the best of motivation and relaxation. found on website. more.",
+    "dcyberx girlfriend": "What i know he does not have yet but the one will be blessed to have him",
+    "his girlfriend":"What i know he does not have yet but the one will be blessed to have him",
+    "dcyberx's favourite colour":"green",
+    "dcyberx's hobbies":" he really likes budminton, camping, creative writing, target practise, eagles and chicks",
+    "motivational qoutes": "The motivational qoutes are at homepage website, more. they are not just qoutes but his own perspective of success",
+    "where does he live": "for now, its Kitebi"
+    // More responses...
   };
 
-  const key = userMessage.toLowerCase();
-  return responses[key] || "🤔  Can you rephrase please ?";
+  // Preprocessing the user message to normalize text
+  const normalizeText = (text) => {
+    return text.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "");
+  };
+
+  // Simple semantic match using phrase similarity
+  const getBestMatch = (userMessage) => {
+    const normalizedUserMessage = normalizeText(userMessage);
+    let highestScore = 0;
+    let bestMatch = null;
+
+    // Check for the best matching sentence or phrase
+    for (let key in responses) {
+      const normalizedKey = normalizeText(key);
+      
+      // A simple way to match sentences by checking the number of words in common
+      const commonWords = normalizedUserMessage.split(" ").filter(word => normalizedKey.includes(word));
+      const score = commonWords.length / normalizedKey.split(" ").length;
+
+      // If the score is higher than the previous best match, update the best match
+      if (score > highestScore) {
+        highestScore = score;
+        bestMatch = responses[key];
+      }
+    }
+
+    // If no good match is found, return a fallback response
+    return bestMatch || "🤔 Can you rephrase, please?";
+  };
+
+  // Return the best match
+  return getBestMatch(userMessage);
 }
