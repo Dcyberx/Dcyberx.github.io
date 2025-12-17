@@ -8,87 +8,64 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>About Me - Dcyberx Nexus</title>
+  <title>Copyright Policy</title>
   <style>
     body {
-      background: #000;
+      background-color: #0d0d0d;
       color: #00ff99;
       font-family: monospace;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      background: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
-    nav { display: flex; gap: 15px; }
-    nav a { text-decoration: none; color: #00ff99; font-weight: 500; }
-    nav a:hover { text-decoration: underline; }
-
-    .container {
-      max-width: 800px;
-      margin: 80px auto;
       padding: 20px;
-      text-align: center;
     }
-    h1 { color: #39ff14; }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-      color: #00ff99;
+    h1, h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .highlight {
-      color: #39ff14;
-      font-weight: bold;
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: #00ff99;
+    }
+    .section {
+      margin-bottom: 20px;
     }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header.html")
+  fetch("header")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
     });
 </script>
 
+
 </head>
 <body>
+  <h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+    </svg>
+    ⚖️ Copyright Policy
+  </h1>
 
-
-  <!-- 🔹 ABOUT ME CONTENT -->
-  <div class="container">
-    <h1>About Me</h1>
-    <p>
-      Welcome to the <span class="highlight">CyberTech</span> — a hub where technology, creativity, and innovation converge.  
-      I am <span class="highlight">Dcyberx</span>, with a motto, 'Mindset is success' a teen, moslem digital creator passionate about building futuristic experiences that blend  
-      <span class="highlight">creativity, AI, and cyber‑culture</span>.  
-      <p>At first i really felt that i am really alooser, but i realised that computer is my hyperactive domain.<p></p>
-      <p>I really feel the love for tech stuff and everytime i come onto a computer, thats where i really feel my passion</p>
-      <p>So desighning this site is not only a project but a thing of much meaning to me </p>
-    </p>
-    <p>
-      My mission is to design tools and platforms that empower people to explore new dimensions of innovation,  
-      creativity, and digital awareness. Whether it’s through the <span class="highlight">Dcyberx Programs</span>, or any other programs,  
-      like the DIY projects, I aim to push boundaries and inspire others to embrace the cyber‑tech future.
-    </p>
-    <p>
-      The <a href="https://Dcyberx.github.io/aboutsite.html"> CyberTech </a> is more than just a space — it’s a movement.  
-      A place for inspirasion, coding, and developing new ideas to connect, share, and evolve together.  
-      Join me on this journey as we unlock the next frontier of digital innovation.
-    </p>
+  <div class="section">
+    <h2>🔒 Ownership</h2>
+    <p>All content, code, graphics, and designs on this site are © CyberTech. by the root Dcyberx. Unauthorized use, reproduction, or distribution is strictly prohibited.</p>
   </div>
 
+  <div class="section">
+    <h2>📂 Fair Use</h2>
+    <p>Limited use of excerpts for educational or non-commercial purposes is permitted, provided proper attribution is given by Dcyberx</p>
+  </div>
+
+  <div class="section">
+    <h2>🚫 Violations</h2>
+    <p>Any scaming, unauthorised root access, phishing or any other illegal acitivity on this site is highly unacceptable and immediate action will be enforced.</p>
+    <p> This is undertaken for the best of service between the User, Dcyberx  and CyberTech site efficiency. as in the <a href="https://Dcyberx.github.io/privacy policy"> privacy policy </a> </p>
+  </div>
 </body>
 </html>
 
@@ -183,7 +160,6 @@
   </script>
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -295,7 +271,5 @@
   </script>
 </body>
 </html>
-
-
 
 

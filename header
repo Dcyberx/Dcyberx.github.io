@@ -188,22 +188,22 @@
 
 <header>
   <!-- Logo left -->
-  <a href="index.html" class="logo" aria-label="Homepage">
+  <a href="index" class="logo" aria-label="Homepage">
     <img src="cyber.png" alt="Cyber Logo" class="logo-img">
   </a>
 
   <!-- Nav right -->
   <nav id="navbar">
-    <a href="cyber ai.html">Cyber ai</a>
+    <a href="cyber ai">Cyber ai</a>
     <div class="dropdown">
       <div class="dropdown-btn">Programs</div>
       <div class="dropdown-content">
-        <a href="nexus.html">Dcyberx Nexus Academy</a>
+        <a href="nexus">Dcyberx Nexus Academy</a>
         <a href="#">Gumroad products</a>
       </div>
     </div>
 
-    <a href="recaptcha.html">Subscriptions</a>
+    <a href="recaptcha">Subscriptions</a>
 
     <div class="dropdown">
       <div class="dropdown-btn">Socials</div>
@@ -218,34 +218,34 @@
     <div class="dropdown">
       <div class="dropdown-btn">Policies</div>
       <div class="dropdown-content">
-        <a href="privacy policy.html">Privacy Policy</a>
-        <a href="copyright.html">Copyright</a>
-        <a href="subscription.html">Subscription policy</a>
+        <a href="privacy policy">Privacy Policy</a>
+        <a href="copyright">Copyright</a>
+        <a href="subscription">Subscription policy</a>
       </div>
     </div>
 
     <div class="dropdown">
       <div class="dropdown-btn">About</div>
       <div class="dropdown-content">
-        <a href="aboutme.html">Dcyberx</a>
-        <a href="aboutsite.html">CyberTech</a>
+        <a href="aboutme">Dcyberx</a>
+        <a href="aboutsite">CyberTech</a>
       </div>
     </div>
 
     <div class="dropdown">
       <div class="dropdown-btn">More</div>
       <div class="dropdown-content">
-        <a href="playlist.html">Playlist</a>
-        <a href="motivation.html">Motivation</a>
+        <a href="playlist">Playlist</a>
+        <a href="motivation">Motivation</a>
       </div>
     </div>
     
     <div class="link">
       <div class="link-content">
-        <a href="index.html">Home</a>
+        <a href="index">Home</a>
         
 
-    <a href="recaptcha.html" class="cta-btn">Donate</a>
+    <a href="recaptcha" class="cta-btn">Donate</a>
   </nav>
   
   

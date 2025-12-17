@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -9,53 +9,56 @@
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>About Site - Dcyberx Nexus</title>
+  <title>Dcyberx Nexus Subscription Policy</title>
   <style>
     body {
-      background: #000;
+      background-color: #0d0d0d;
       color: #00ff99;
       font-family: monospace;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      background: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
-    nav { display: flex; gap: 15px; }
-    nav a { text-decoration: none; color: #00ff99; font-weight: 500; }
-    nav a:hover { text-decoration: underline; }
-
-    .container {
-      max-width: 800px;
-      margin: 80px auto;
       padding: 20px;
-      text-align: center;
     }
-    h1 { color: #39ff14; }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-      color: #00ff99;
+    h1, h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: #00ff99;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #00ff99;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #111;
     }
     .highlight {
-      color: #39ff14;
+      color: #00ccff;
       font-weight: bold;
+    }
+    .footer {
+      margin-top: 30px;
+      padding: 15px;
+      border-top: 1px dashed #00ff99;
+      font-size: 14px;
+      color: #7fffd4;
     }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header.html")
+  fetch("header")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
@@ -65,34 +68,92 @@
 
 </head>
 <body>
+  <h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2l7 4v5c0 5-3.5 9-7 11-3.5-2-7-6-7-11V6l7-4z"/>
+    </svg>
+    📜 Dcyberx Nexus Academy Subscription Policy
+  </h1>
 
-
-
-  <!-- 🔹 ABOUT SITE CONTENT -->
-  <div class="container">
-    <h1>About This Site</h1>
-    <p>
-      The <span class="highlight">CyberTech</span> is a digital hub designed to merge  
-      <span class="highlight">creativity, innovation, and cyber‑culture</span> into one immersive experience.  
-      It is more than just a website — it is a platform for exploration, creativity, and determination.
-    </p>
-    <p>
-      Here you’ll find the <span class="highlight">desire</span> for further involvement,  
-      interactive programs that showcase futuristic technology, and AI‑powered tools that push the boundaries  
-      of what’s possible online.
-    </p>
-    <p>
-      The site is built to be <span class="highlight">community‑driven</span>, offering infromative ideas,  
-      subscription options, and opportunities to support innovation through donations.  
-      Every page is crafted with a cyber‑tech aesthetic to reflect the vision of a connected future.
-    </p>
-    <p>
-      Whether you’re here to enjoy, explore AI, or join the movement,  
-      the <span class="highlight">Nexus</span> is your gateway to the next frontier of digital creativity.
-    <p> <a href="https://Dcyberx.github.io/aboutme.html"> Dcyberx </a>, didnot buld just a site but a portal to the thoughts of creativity, innovation and self reliance on courage.
-    </p>
+  <div class="section">
+    <h2>🎓 Eligibility</h2>
+    <p>Subscriptions are open to all people interested in technlogy basics and also tech enthuists.</p>
+    <p>The program is user friendly so even  if one has no prior knowledge about technology.
   </div>
 
+  <div class="section">
+    <h2>💼 Subscription Plans</h2>
+    <table>
+      <tr>
+        <th>Plan Type</th>
+        <th>Duration</th>
+        <th>Price (UGX)</th>
+        <th>Access Includes</th>
+      </tr>
+      <tr>
+        <td>Daily Pass</td>
+        <td>1 Day</td>
+        <td>10,000 UGX</td>
+        <td>10% discount for the first 10 qualifiers</td>
+      </tr>
+      <tr>
+        <td>Weekly Pass</td>
+        <td>5 Days</td>
+        <td>50,000 UGX</td>
+        <td>10% discount for the first 10 qualifiers</td>
+      </tr>
+      <tr>
+        <td>≈ Monthly Pass</td>
+        <td>20-23 Days</td>
+        <td>200,000 UGX</td>
+        <td>10% discount for the first 10 qualifiers</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>💳 Payments & Billing</h2>
+    <p>Payments are accepted via mobile money, cash, or approved digital wallets eg credit cards. All plans are prepaid and can be refundable. Renewal is kindly notified by Dcyberx.</p>
+  </div>
+
+  <div class="section">
+    <h2>📦 What You Get</h2>
+    <p>Subscribers gain access to:</p>
+    <ul>
+      <li>Online and physical training in computer basics, graphic design, CAD, Linux, Python, etc.</li>
+      <li>Hands-on simulations  and projects.</li>
+      <li>Access to a community forum for peer support.</li>
+      <li>Free consultations and discussions.</li>
+      <li>DIY architecture and compound designing by Dcyberx.
+        - You  contact me , i come and desighn your imagination for the best.</li>
+      <li>Exclusive updates.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🔐 Privacy & Data</h2>
+    <p>Subscriber data is stored securely and never shared with third parties. We collect only essential information for service delivery. See my <a href="https://dcyberx.github.io/privacy%20policy">Privacy Policy</a> for full details.</p>
+  </div>
+
+  <div class="section"></div>
+    <h2>🚫 Rules and regulations</h2>
+    <p>- Impersonating is highly breach and leads to burn or termination.
+    <p>- Avoiding plagiarism / cheating is the best for one's gain.
+    <p>- Uploading sexually explicit images and illeagal activities is not accepted.
+
+  <div class="section">
+    <h2>❌ Cancellation & Termination</h2>
+    <p>Subscribers may request for a  cancel/termination anytime   via <a href="mailto:Dcyberx@proton.me">email</a> or direct request by also filling out a refund form. Dcyberx Nexus reserves the right to suspend access for misuse, fraud, or violation of community rules.</p>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ Support & Contact</h2>
+    <p>For help, reach out via WhatsApp, <a href="mailto:Dcyberx@proton.me">email</a>, or in-person during academy hours. Response time is typically within 24–48 hours.</p>
+  </div>
+
+  <div class="footer">
+    🎉 <span class="highlight">Special Offer:</span> The first <strong>15 qualifiers</strong> receive a <span class="highlight">10% discount</span> on any subscription plan. Join early and unlock your technology learning journey with Dcyberx Nexus!
+  </div>
 </body>
 </html>
 

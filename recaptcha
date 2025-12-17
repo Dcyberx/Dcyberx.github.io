@@ -8,96 +8,116 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>About Me - Dcyberx Nexus</title>
+  <title>CyberTech Subscription Puzzle</title>
   <style>
-    body {
-      background: #000;
-      color: #00ff99;
-      font-family: monospace;
-      margin: 0;
-      padding: 0;
+    body { background:#0d0d0d; color:#00ff99; font-family:monospace; padding:20px; }
+    h1 { display:flex; align-items:center; gap:10px; }
+    .card { background:#111; border:1px solid #00ff99; border-radius:10px; padding:20px; max-width:500px; margin:auto; }
+    .puzzle { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:15px; }
+    .tile {
+      background:#0c1116; border:1px solid #00ff99; border-radius:8px;
+      height:80px; display:flex; align-items:center; justify-content:center;
+      font-size:28px; cursor:pointer; transition:0.2s;
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      background: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    .tile.selected { background:#00ff99; color:#000; }
+    button {
+      margin-top:15px; width:100%; padding:12px; border:1px solid #00ff99;
+      background:#0c1116; color:#00ff99; border-radius:8px; cursor:not-allowed;
     }
-    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
-    nav { display: flex; gap: 15px; }
-    nav a { text-decoration: none; color: #00ff99; font-weight: 500; }
-    nav a:hover { text-decoration: underline; }
-
-    .container {
-      max-width: 800px;
-      margin: 80px auto;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 { color: #39ff14; }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-      color: #00ff99;
-    }
-    .highlight {
-      color: #39ff14;
-      font-weight: bold;
-    }
+    button.enabled { cursor:pointer; box-shadow:0 0 10px #00ff99; }
+    .status { margin-top:10px; font-size:14px; }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header.html")
+  fetch("header")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
     });
 </script>
 
+
 </head>
 <body>
+  <h1>🛡Prove your not a robot</h1>
 
 
-  <!-- 🔹 ABOUT ME CONTENT -->
-  <div class="container">
-    <h1>Dcyberx motivation</h1>
-    <p>
-  <div class="container">
-    <h1>Motto:Mindset is success</h1>
-    <p>
-      <span class="highlight">Cores</span> — a hub where technology, creativity, and innovation converge.  
-      <p>Believing in God.<p></p>
-      <p>Attitude and goals</p>
-      <p>Self hardwork </p>
-      <p>Family and relatives</p>
-      <p>Friends and neighbours<p></p>
-      <p>     Success       <p></p>
-    </p>
-    <p>
-       <p>Never give time to useless things, time is wealth.</p>
-        <p>Once disrespected, calm down and breathe in and out, even diamond can be coated with mud. </p>
-        <p>Always keep low in every situation and environment, value is always valuable and wisdom and wealth are always silent.</p>
-        <p>Always respect all people but more listen to actions than the words.</p>
-        <p>Not evry smiling face is happy for you, alwyays ask God for protection.</p>
-        <p>If you have enemies, competitors and people who admire you, your doing something successful in life</p>
-        <p>Always mind origin, family and friends, also never forget anyone who provided a brick in your success, they are alwyas the pillars you are standing on.</p>
-        <p>If you fell valueless or taken valueless, alwyas change position, gold cannot be used as food</p>
-        <p>Always follow your best talent, success is passion.</p>
-        <p>No need for proving wealth, power, authority and intelligence, character is always the indicator, intelligent and powerful are those who treat there subjects well without using authoruty and power </p>
-        <p>Live the real you, love will always search and find the diffrence in you.</p>
-        <p>Always defend and withstand your mental perspective</p>
-    </p>
+      <form id="subscribe-form">
+      <p>🧩🔐 Recaptcha: Pick 2 items which go in a <strong>book, door, or bicycle</strong></p>
+      <div class="puzzle" id="puzzle"></div>
+      <div id="status" class="status"></div>
+      <button id="submit" type="submit" disabled>Continue</button>
+    </form>
   </div>
 
+<script>
+  // Puzzle sets: each has a target container and the correct pair
+  const puzzles = [
+    { container:"book", pair:["✒️","✏️"], label:"Pen + Pencil → Book" },
+    { container:"door", pair:["🔑","💳"], label:"Key + Card → Door" },
+    { container:"bicycle", pair:["🚴","🚲"], label:"Two Tyres → Bicycle" }
+  ];
 
+  // Pick random puzzle
+  const puzzle = puzzles[Math.floor(Math.random()*puzzles.length)];
+  document.querySelector("p").innerHTML = `🧩 recaptcha Pick 2 items which go in a <strong>${puzzle.container}</strong>`;
+
+  // Distractors
+  const distractors = ["🍎","🐱","🦅","💻","🎧","📦","🔋","🕹️"];
+  const items = [...puzzle.pair];
+  while(items.length<9){
+    items.push(distractors[Math.floor(Math.random()*distractors.length)]);
+  }
+  items.sort(()=>Math.random()-0.5);
+
+  const puzzleEl=document.getElementById("puzzle");
+  const tiles=[];
+  items.forEach(emoji=>{
+    const tile=document.createElement("div");
+    tile.className="tile";
+    tile.textContent=emoji;
+    tile.addEventListener("click",()=>{
+      tile.classList.toggle("selected");
+      validate();
+    });
+    puzzleEl.appendChild(tile);
+    tiles.push(tile);
+  });
+
+  const statusEl=document.getElementById("status");
+  const submitBtn=document.getElementById("submit");
+
+  function validate(){
+    const selected=tiles.filter(t=>t.classList.contains("selected")).map(t=>t.textContent);
+    if(selected.length===2){
+      if(selected.includes(puzzle.pair[0]) && selected.includes(puzzle.pair[1])){
+        statusEl.textContent="✅ Correct! You may continue.";
+        submitBtn.disabled=false;
+        submitBtn.classList.add("enabled");
+      } else {
+        statusEl.textContent="❌ Wrong pair. Try again.";
+        submitBtn.disabled=true;
+        submitBtn.classList.remove("enabled");
+      }
+    } else {
+      statusEl.textContent="Select exactly two items.";
+      submitBtn.disabled=true;
+      submitBtn.classList.remove("enabled");
+    }
+  }
+
+  document.getElementById("subscribe-form").addEventListener("submit",e=>{
+    e.preventDefault();
+    if(!submitBtn.disabled){
+      // Redirect to pay.html when puzzle solved
+      window.location.href="pay";
+    } else {
+      alert("Solve the puzzle first!");
+    }
+  });
+</script>
 </body>
 </html>
 
@@ -304,7 +324,5 @@
   </script>
 </body>
 </html>
-
-
 
 

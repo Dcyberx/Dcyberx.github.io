@@ -9,32 +9,75 @@
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>Privacy Policy</title>
+  <title>Image Zoom-In with Popup on Hover/Tap</title>
   <style>
-    body {
-      background-color: #0d0d0d;
-      color: hsl(125, 76%, 31%);
-      font-family: monospace;
-      padding: 20px;
-    }
-    h1, h2 {
-      display: flex;
-      align-items: center;
+    /* Container to hold images near the left margin */
+    .image-container {
+      padding: 3px 5px 4px 5px;
+      display: flex; /* Align images horizontally */
+      justify-content: flex-start; /* Align to the left */
       gap: 10px;
+      margin-left: 10px; /* Adjust the left margin */
     }
-    svg {
-      width: 24px;
-      height: 24px;
-      fill: #00ccff;
+
+    /* Style for images in the container */
+    .image-container img {
+      margin: 0 5px;
+      border: 5px solid transparent;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
     }
-    .section {
-      margin-bottom: 20px;
+
+    /* Hover/tap effect for images */
+    .image-container img:hover {
+      transform: scale(1.8); /* Zoom in to 80% bigger */
+      border-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Popup style (hidden by default) */
+    .popup {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* To make sure it's on top */
+    }
+
+    .popup img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+
+    /* Close button style */
+    .popup .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #fff;
+      border: none;
+      font-size: 18px;
+      color: #79e0ab;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
     }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header.html")
+  fetch("header")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
@@ -44,34 +87,51 @@
 
 </head>
 <body>
-  <h1>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M12 2C8 2 5 5 5 9V13C5 17 8 20 12 22C16 20 19 17 19 13V9C19 5 16 2 12 2Z"/>
-    </svg>
-    🔐 Privacy Policy
-  </h1>
 
-  <div class="section">
-    <h2>📊 Data Collection</h2>
-    <p>We collect minimal data necessary to improve user experience. No personal data is sold or shared without consent.</p>
+  <!-- Image Container -->
+  <div class="image-container">
+    <img src="image1.png" alt="Image 1" class="zoom-image" id="img1" style="width: 165px; height: 155px;">
+    <img src="image2.png" alt="Image 2" class="zoom-image" id="img2" style="width: 165px; height: 155px;">
   </div>
 
-  <div class="section">
-    <h2>🛡️ Security</h2>
-    <p>Your information is protected using industry-standard encryption and secure protocols.eg http & https</p>
-    <p>If you encouter or suspect any threat or insecurity aspect on this website, immediately contact Dcyberx for imediate action
+  <!-- Popup Container -->
+  <div class="popup" id="popup">
+    <button class="close-btn" id="close-btn">X</button>
+    <img id="popup-img" src="" alt="Zoomed-in Image">
   </div>
 
-  <div class="section">
-    <h2>⚙️ User Control</h2>
-    <p>You may request desubscribe through Dcyberx at any time. But i kindly garantee the best service delivery</p>
-    <p>The time of desubscription is 24 hrs from the subscription time.
-    <p>The refund is averaged to the reason inrelation to participation statistics. As in the <a href="https://Dcyberx.github.io/subscription.html">Subcription policy</a>
-  </div>
-</body>
-</html>
+  <script>
+    // Get elements
+    const images = document.querySelectorAll('.zoom-image');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const closeBtn = document.getElementById('close-btn');
 
-<!DOCTYPE html>
+    // Function to open popup
+    images.forEach(image => {
+      image.addEventListener('mouseenter', (e) => {
+        // Open popup and display the hovered image in zoomed form
+        popup.style.display = 'block';
+        popupImg.src = e.target.src; // Set the image source for popup
+      });
+    });
+
+    // Close the popup when close button is clicked
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none'; // Hide the popup
+    });
+
+    // Close popup when clicking outside of the image in popup
+    window.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none'; // Hide the popup if clicked outside the image
+      }
+    });
+   </script> 
+   </body>
+   </html>
+
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -234,6 +294,9 @@
 </head>
 <body>
  
+
+  
+
   <script>
     // Function to sanitize and escape user input
     function sanitizeInput(input) {
