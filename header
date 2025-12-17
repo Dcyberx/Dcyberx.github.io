@@ -188,7 +188,7 @@
 
 <header>
   <!-- Logo left -->
-  <a href="index" class="logo" aria-label="Homepage">
+  <a href="index.html" class="logo" aria-label="Homepage">
     <img src="cyber.png" alt="Cyber Logo" class="logo-img">
   </a>
 
@@ -242,7 +242,7 @@
     
     <div class="link">
       <div class="link-content">
-        <a href="index">Home</a>
+        <a href="index.html">Home</a>
         
 
     <a href="recaptcha" class="cta-btn">Donate</a>
