@@ -276,7 +276,7 @@ export async function getBotResponse(userMessage) {
       phrases: [
         "subscription plans","dcyberx nexus subscription plans","nexus subscritption plans","nexus program subscription plans"
       ],
-      response: "Dcyberx nexus Subscription plans are available: daily, weekly  and monthly. with a 10% discount for first 10 qualifiers on all packages"
+      response: "Dcyberx nexus Subscription plans are available: daily, weekly  and monthly. with a 10% discount for first 15 qualifiers on all packages"
     },
     {
       intent: "who_can_join_the_program",
