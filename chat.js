@@ -320,7 +320,7 @@ export async function getBotResponse(userMessage) {
         phrases: [
             "what are dcyberx's hobbies","what are his favourites","what does dcyberx like","dcyberx hobbies","his favourites"
         ],
-        response: "he really likes green, budminton, camping, creative writing, target practise, eagles and chicks"
+        response: "he really likes green, budminton, camping, creative writing, target practise, eagles and chicks, warm bodies movie"
     },
     {
         intent: "where_does_dcyberx_or_he_live",
@@ -343,7 +343,224 @@ export async function getBotResponse(userMessage) {
         ],
         response: "Dcyberx studied from African Academy Nursery and primary school-kitebi"
     },
-    
+    {
+    intent: "tell_me_a_software_joke_1",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why do programmers prefer dark mode? Because light attracts bugs!"
+},
+{
+    intent: "tell_me_a_software_joke_2",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why do Java developers wear glasses? Because they can’t C#."
+},
+{
+    intent: "tell_me_a_software_joke_3",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "How many programmers does it take to change a light bulb? None, that’s a hardware problem."
+},
+{
+    intent: "tell_me_a_software_joke_4",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why was the JavaScript developer sad? Because he didn't 'null' his feelings."
+},
+{
+    intent: "tell_me_a_software_joke_5",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why do programmers hate nature? It has too many bugs."
+},
+{
+    intent: "tell_me_a_software_joke_6",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What’s a programmer’s favorite hangout place? The Foo Bar."
+},
+{
+    intent: "tell_me_a_software_joke_7",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "I wrote a book on reverse engineering... but I can't seem to finish it."
+},
+{
+    intent: "tell_me_a_software_joke_8",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why don’t programmers like to go outside? Because they don’t like the ‘bugs’ in the environment."
+},
+{
+    intent: "tell_me_a_software_joke_9",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What do you call 8 hobbits? A hobbyte."
+},
+{
+    intent: "tell_me_a_software_joke_10",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why do programmers prefer Linux? Because Windows always have too many pop-ups!"
+},
+{
+    intent: "tell_me_a_software_joke_11",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A SQL query walks into a bar, walks up to two tables and asks, 'Can I join you?'"
+},
+{
+    intent: "tell_me_a_software_joke_12",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What do you get when you cross a computer with an elephant? Lots of memory!"
+},
+{
+    intent: "tell_me_a_software_joke_13",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why was the developer's code always angry? It had too many exceptions."
+},
+{
+    intent: "tell_me_a_software_joke_14",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "I told my computer I needed a break, and now it won’t stop sending me pop-up ads."
+},
+{
+    intent: "tell_me_a_software_joke_15",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why do programmers always mix up Christmas and Halloween? Because Oct 31 == Dec 25."
+},
+{
+    intent: "tell_me_a_software_joke_16",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why don't programmers like to play hide and seek? Because good luck hiding when you can always find a bug."
+},
+{
+    intent: "tell_me_a_software_joke_17",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why did the developer go broke? Because he used up all his cache."
+},
+{
+    intent: "tell_me_a_software_joke_18",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "I asked the database to give me more details... but it left me in the dark."
+},
+{
+    intent: "tell_me_a_software_joke_19",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why did the coder get kicked out of school? Because he was caught using 'class' in the playground."
+},
+{
+    intent: "tell_me_a_software_joke_20",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What’s the most annoying programming language? C because it’s a ‘pointer’ to nowhere!"
+},
+{
+    intent: "tell_me_a_software_joke_21",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why don’t programmers ever tell secrets? Because they always end up in a log file."
+},
+{
+    intent: "tell_me_a_software_joke_22",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What’s a programmer’s favorite type of music? Algo-rhythm!"
+},
+{
+    intent: "tell_me_a_software_joke_23",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A programmer’s life is full of loops… and bugs."
+},
+{
+    intent: "tell_me_a_software_joke_24",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "How do you comfort a JavaScript bug? You console it."
+},
+{
+    intent: "tell_me_a_software_joke_25",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "Why did the Python programmer get frustrated? Because he couldn't find the right 'indentation'."
+},
+{
+    intent: "tell_me_a_joke_7",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A man walks into his house with a duck under his arm. His wife looks at him in disbelief and says, 'Where did you get that pig?' The man smiles and says, 'This isn’t a pig, it’s a duck!' His wife shakes her head and says, 'I was talking to the duck.'"
+},
+{
+    intent: "tell_me_a_joke_8",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A dyslexic man walks into a bra…"
+},
+{
+    intent: "tell_me_a_joke_9",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A priest, a minister, and a rabbi walk into a bar. The bartender looks up and says, 'Is this some kind of joke?'"
+},
+{
+    intent: "tell_me__joke_10",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "A man goes to the doctor and says, 'Every time I touch my arm, it hurts. When I touch my leg, it hurts. My head, it hurts!' The doctor replies, 'Sir, you’ve broken your finger.'"
+},
+{
+    intent: "tell_me_a_joke_11",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "I tried to start a hot air balloon business, but it never took off."
+},
+{
+    intent: "tell_me_a_joke_12",
+    phrases: [
+        "tell me a joke","make me laugh","be me funny"
+    ],
+    response: "What do you call a deer with no eyes? No idea! (Get it? No eye-deer)"
+}
+
  
     // More intents and responses...
   ];
