@@ -343,14 +343,8 @@ export async function getBotResponse(userMessage) {
         ],
         response: "Dcyberx studied from African Academy Nursery and primary school-kitebi"
     },
-    {
-        intent: "what_time_is_it",
-        phrases: [
-            "what is the time","how do you make it","what is the time right now","what is the current time","tell me the time"
-        ],
-        response:  "The time is: ${getCurrentTime()}"
-    }
-
+    
+ 
     // More intents and responses...
   ];
 
