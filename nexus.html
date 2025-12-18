@@ -8,91 +8,130 @@
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>About Me - Dcyberx Nexus</title>
+  <title>Image Zoom-In with Popup on Hover/Tap</title>
   <style>
-    body {
-      background: #000;
-      color: #00ff99;
-      font-family: monospace;
-      margin: 0;
-      padding: 0;
+    /* Container to hold images near the left margin */
+    .image-container {
+      padding: 3px 5px 4px 5px;
+      display: flex; /* Align images horizontally */
+      justify-content: flex-start; /* Align to the left */
+      gap: 10px;
+      margin-left: 10px; /* Adjust the left margin */
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      background: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
-    nav { display: flex; gap: 15px; }
-    nav a { text-decoration: none; color: #00ff99; font-weight: 500; }
-    nav a:hover { text-decoration: underline; }
 
-    .container {
-      max-width: 800px;
-      margin: 80px auto;
+    /* Style for images in the container */
+    .image-container img {
+      margin: 0 5px;
+      border: 5px solid transparent;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    /* Hover/tap effect for images */
+    .image-container img:hover {
+      transform: scale(1.8); /* Zoom in to 80% bigger */
+      border-color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Popup style (hidden by default) */
+    .popup {
+      display: none; /* Initially hidden */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 20px;
-      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* To make sure it's on top */
     }
-    h1 { color: #39ff14; }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-      color: #00ff99;
+
+    .popup img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
     }
-    .highlight {
-      color: #39ff14;
-      font-weight: bold;
+
+    /* Close button style */
+    .popup .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #fff;
+      border: none;
+      font-size: 18px;
+      color: #79e0ab;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
     }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header")
+  fetch("header.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
     });
 </script>
 
+
 </head>
 <body>
 
-
-  <!-- 🔹 ABOUT ME CONTENT -->
-  <div class="container">
-    <h1>About Me</h1>
-    <p>
-      Welcome to the <span class="highlight">CyberTech</span> — a hub where technology, creativity, and innovation converge.  
-      I am <span class="highlight">Dcyberx</span>, with a motto, 'Mindset is success' a teen, moslem digital creator passionate about building futuristic experiences that blend  
-      <span class="highlight">creativity, AI, and cyber‑culture</span>.  
-      <p>At first i really felt that i am really alooser, but i realised that computer is my hyperactive domain.<p></p>
-      <p>I really feel the love for tech stuff and everytime i come onto a computer, thats where i really feel my passion</p>
-      <p>So desighning this site is not only a project but a thing of much meaning to me </p>
-    </p>
-    <p>
-      My mission is to design tools and platforms that empower people to explore new dimensions of innovation,  
-      creativity, and digital awareness. Whether it’s through the <span class="highlight">Dcyberx Programs</span>, or any other programs,  
-      like the DIY projects, I aim to push boundaries and inspire others to embrace the cyber‑tech future.
-    </p>
-    <p>
-      The <a href="https://Dcyberx.github.io/aboutsite"> CyberTech </a> is more than just a space — it’s a movement.  
-      A place for inspirasion, coding, and developing new ideas to connect, share, and evolve together.  
-      Join me on this journey as we unlock the next frontier of digital innovation.
-    </p>
+  <!-- Image Container -->
+  <div class="image-container">
+    <img src="image1.png" alt="Image 1" class="zoom-image" id="img1" style="width: 165px; height: 155px;">
+    <img src="image2.png" alt="Image 2" class="zoom-image" id="img2" style="width: 165px; height: 155px;">
   </div>
 
-</body>
-</html>
+  <!-- Popup Container -->
+  <div class="popup" id="popup">
+    <button class="close-btn" id="close-btn">X</button>
+    <img id="popup-img" src="" alt="Zoomed-in Image">
+  </div>
 
-<!DOCTYPE html>
+  <script>
+    // Get elements
+    const images = document.querySelectorAll('.zoom-image');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popup-img');
+    const closeBtn = document.getElementById('close-btn');
+
+    // Function to open popup
+    images.forEach(image => {
+      image.addEventListener('mouseenter', (e) => {
+        // Open popup and display the hovered image in zoomed form
+        popup.style.display = 'block';
+        popupImg.src = e.target.src; // Set the image source for popup
+      });
+    });
+
+    // Close the popup when close button is clicked
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none'; // Hide the popup
+    });
+
+    // Close popup when clicking outside of the image in popup
+    window.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none'; // Hide the popup if clicked outside the image
+      }
+    });
+   </script> 
+   </body>
+   </html>
+
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -183,7 +222,6 @@
   </script>
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -295,7 +333,6 @@
   </script>
 </body>
 </html>
-
 
 
 

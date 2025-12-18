@@ -1,7 +1,7 @@
 
 <div id="site-header"></div>
 <script>
-  fetch("header")
+  fetch("header.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
@@ -900,7 +900,7 @@ Feel free to have a chat...! 💻✨</div>
 
 
 <script type="module">
-  import { getBotResponse } from './chatting';
+  import { getBotResponse } from './chatting.html';
 
   const chatInput = document.getElementById("chatInput");
   const sendBtn = document.getElementById("sendBtn");

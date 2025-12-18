@@ -9,53 +9,32 @@
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self';">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-  <title>About Site - Dcyberx Nexus</title>
+  <title>Copyright Policy</title>
   <style>
     body {
-      background: #000;
+      background-color: #0d0d0d;
       color: #00ff99;
       font-family: monospace;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-      background: #000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo { font-weight: 700; font-size: 20px; color: #39ff14; }
-    nav { display: flex; gap: 15px; }
-    nav a { text-decoration: none; color: #00ff99; font-weight: 500; }
-    nav a:hover { text-decoration: underline; }
-
-    .container {
-      max-width: 800px;
-      margin: 80px auto;
       padding: 20px;
-      text-align: center;
     }
-    h1 { color: #39ff14; }
-    p {
-      line-height: 1.6;
-      font-size: 16px;
-      color: #00ff99;
+    h1, h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .highlight {
-      color: #39ff14;
-      font-weight: bold;
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: #00ff99;
+    }
+    .section {
+      margin-bottom: 20px;
     }
   </style>
   <div id="site-header"></div>
 <script>
-  fetch("header")
+  fetch("header.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("site-header").innerHTML = html;
@@ -65,34 +44,28 @@
 
 </head>
 <body>
+  <h1>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 2L15 8H9L12 2ZM12 22L9 16H15L12 22ZM2 12L8 15V9L2 12ZM22 12L16 9V15L22 12Z"/>
+    </svg>
+    ⚖️ Copyright Policy
+  </h1>
 
-
-
-  <!-- 🔹 ABOUT SITE CONTENT -->
-  <div class="container">
-    <h1>About This Site</h1>
-    <p>
-      The <span class="highlight">CyberTech</span> is a digital hub designed to merge  
-      <span class="highlight">creativity, innovation, and cyber‑culture</span> into one immersive experience.  
-      It is more than just a website — it is a platform for exploration, creativity, and determination.
-    </p>
-    <p>
-      Here you’ll find the <span class="highlight">desire</span> for further involvement,  
-      interactive programs that showcase futuristic technology, and AI‑powered tools that push the boundaries  
-      of what’s possible online.
-    </p>
-    <p>
-      The site is built to be <span class="highlight">community‑driven</span>, offering infromative ideas,  
-      subscription options, and opportunities to support innovation through donations.  
-      Every page is crafted with a cyber‑tech aesthetic to reflect the vision of a connected future.
-    </p>
-    <p>
-      Whether you’re here to enjoy, explore AI, or join the movement,  
-      the <span class="highlight">Nexus</span> is your gateway to the next frontier of digital creativity.
-    <p> <a href="https://Dcyberx.github.io/aboutme"> Dcyberx </a>, didnot buld just a site but a portal to the thoughts of creativity, innovation and self reliance on courage.
-    </p>
+  <div class="section">
+    <h2>🔒 Ownership</h2>
+    <p>All content, code, graphics, and designs on this site are © CyberTech. by the root Dcyberx. Unauthorized use, reproduction, or distribution is strictly prohibited.</p>
   </div>
 
+  <div class="section">
+    <h2>📂 Fair Use</h2>
+    <p>Limited use of excerpts for educational or non-commercial purposes is permitted, provided proper attribution is given by Dcyberx</p>
+  </div>
+
+  <div class="section">
+    <h2>🚫 Violations</h2>
+    <p>Any scaming, unauthorised root access, phishing or any other illegal acitivity on this site is highly unacceptable and immediate action will be enforced.</p>
+    <p> This is undertaken for the best of service between the User, Dcyberx  and CyberTech site efficiency. as in the <a href="https://Dcyberx.github.io/privacy policy.html"> privacy policy </a> </p>
+  </div>
 </body>
 </html>
 
@@ -187,7 +160,6 @@
   </script>
 </body>
 </html>
-
 
 <!DOCTYPE html>
 <html lang="en">
