@@ -80,25 +80,7 @@ chatInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
 });
 
-// 9. **Basic Bot Response Function Example (For API Calls)**
-export async function getBotResponse(message) {
-  try {
-    // Example of sending a request to a server (replace with actual API endpoint)
-    const response = await fetch("https://your-api-endpoint.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message })
-    });
 
-    if (!response.ok) throw new Error("Failed to get response from the bot.");
-
-    const data = await response.json();
-    return data.reply;  // Adjust this based on your API response structure
-  } catch (err) {
-    console.error("Error in getBotResponse:", err);
-    throw err;  // Throw error to be handled by sendMessage
-  }
-}
 
 
 
