@@ -316,7 +316,7 @@ export async function getBotResponse(userMessage) {
         phrases: [
                 "where does dcyberx live","where does he live","where does he reside","where is he","where is he living"
         ],
-        response: "for now, he lives at Kitebi"
+        response: "for now, he lives at Kitebi at his uncle's"
     },
     {
         intent: "where_does_he_study_or_is_he_studying",
