@@ -494,7 +494,7 @@ export async function getBotResponse(userMessage) {
     return normalizeText(text).split(' ');
   };
 
-  const getBestMatch = (message, responses, minMatchTokens = 3) => {
+  const getBestMatch = (message, responses, minMatchTokens = 2) => {
     const userTokens = tokenizeText(message);
     let bestResponse = null;
     let maxMatchingTokens = 0;
