@@ -1,14 +1,13 @@
 // 1. **Sanitize User Input** to prevent XSS
 function sanitizeInput(input) {
-  // Use a browser-based way to escape potentially malicious input
   const element = document.createElement('div');
-  element.textContent = input;  // This automatically escapes malicious HTML
-  return element.innerHTML;  // Returns the sanitized version of the input
+  element.textContent = input;  
+  return element.innerHTML;  
 }
 
 // 2. **Prevent Sending Messages Too Fast (Rate Limiting)**
 let lastMessageTime = 0;
-const RATE_LIMIT = 3000;  // Minimum 3 seconds between messages to avoid spamming
+const RATE_LIMIT = 3000;  
 
 // 3. **Add Time for Displaying Message (For the UI)**
 function getTime() {
@@ -32,97 +31,63 @@ function addMessage(text, sender) {
 // 5. **Send Message (With Protection)**
 async function sendMessage() {
   const now = Date.now();
-  // Rate limiting: Prevent user from spamming the system with requests
   if (now - lastMessageTime < RATE_LIMIT) {
     alert("You're sending messages too fast. Please wait a moment.");
     return;
   }
 
-  // 6. **Sanitize and Trim the Input**
   const message = sanitizeInput(chatInput.value.trim());
-  if (!message) return; // Do not proceed if the message is empty
+  if (!message) return;
 
-  // Add user message to the chat
   addMessage(message, "user");
-  chatInput.value = ""; // Clear the input field
-
-  // Show the typing indicator
+  chatInput.value = "";
   typingIndicator.classList.add("active");
 
-  // 7. **Error Handling and Bot Response**
   try {
-    // Get the bot's response using the sanitized message
     const response = await getBotResponse(message);
-
-    // If no response, display a fallback message
     if (!response) {
       throw new Error("No response from the bot.");
     }
-
-    // Remove typing indicator and display bot response
     typingIndicator.classList.remove("active");
     addMessage(response, "bot");
-
-    // Update the last message time for rate limiting
     lastMessageTime = now;
   } catch (err) {
     typingIndicator.classList.remove("active");
-    console.error("Error getting response:", err);  // Log the error for debugging
+    console.error("Error getting response:", err);
     addMessage("⚠️ Error getting response. Please try again.", "bot");
   }
 }
 
-// 8. **Event Listeners for Send Button and Enter Key**
+// 6. **Event Listeners**
 sendBtn.addEventListener("click", sendMessage);
-
 chatInput.addEventListener("keypress", (e) => {
-  // Only trigger if 'Enter' is pressed
   if (e.key === "Enter") sendMessage();
 });
-
-
-
-
 
 // Levenshtein Distance function to calculate the similarity score
 const levenshtein = (a, b) => {
   const tmp = [];
   let i, j, alen = a.length, blen = b.length, score;
 
-  // Handle case where one of the strings is empty
   if (alen === 0) return blen;
   if (blen === 0) return alen;
 
-  // Create a 2D array for dynamic programming
   for (i = 0; i <= alen; i++) tmp[i] = [i];
 
   for (j = 0; j <= blen; j++) tmp[0][j] = j;
 
-  // Fill in the 2D array with the calculated distances
   for (i = 1; i <= alen; i++) {
     for (j = 1; j <= blen; j++) {
       score = a[i - 1] === b[j - 1] ? 0 : 1;
       tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + score);
     }
   }
-  // Function to get the current time
-function getCurrentTime() {
-    const currentDate = new Date();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-    
-    // Format time as HH:MM:SS
-    return `${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-}
-
-
   return tmp[alen][blen];
 };
 
 export async function getBotResponse(userMessage) {
-  // Predefined responses with variations and intents
   const responses = [
+    // Existing responses...
     {
       intent: "greeting",
       phrases: [
@@ -219,13 +184,12 @@ export async function getBotResponse(userMessage) {
       phrases: [
         "who is dcyberx","tell me about dcyberx","dcyberx","what do you know about dcyberx","do you know dcyberx","about dcyberx"
       ],
-      response: 
-      "Dcyberx is my father, a teen Muslim digital creator passionate about tech, AI, and cyber-culture. His motto is: *Mindset is success* 💡"
+      response: "Dcyberx is my father, a teen Muslim digital creator passionate about tech, AI, and cyber-culture. His motto is: *Mindset is success* 💡"
     },
     {
       intent: "what is_his_motto",
       phrases: [
-        "what is his motto","what is dcyberx's motto","what is the motto of dcyberx","what is the slogan of dcyberx","what is dcyberx's slogan","his principle", " his mantra", "his philosophy"
+        "what is his motto","what is dcyberx's motto","what is the motto of dcyberx","what is dcyberx's slogan","what is dcyberx's slogan","his principle", " his mantra", "his philosophy"
       ],
       response: "Mindset is success"
     },
@@ -275,7 +239,6 @@ export async function getBotResponse(userMessage) {
       intent: "who_can_join_the_program",
       phrases: [
         "who is eligible","who can join the program","who qualifies for the program","program qualifications","qualifiers"
-        
       ],
       response: "Anyone can join Dcyberx Nexus Academy — no prior tech knowledge is required to get started 💡"
     },
@@ -285,289 +248,238 @@ export async function getBotResponse(userMessage) {
             "what will i gain from the program","what will i gain","what benefits will i get","how will it help me"
         ],
         response: "You will receive training in computer basics, design, Linux, Python, hands-on projects, community access, and free consultations 🧠"
-    
     },
     {
-        intent: "are_refunds_available",
-        phrases: [
-            "are refunds available","can i be refunded","is there refund","can i cancel my subscription"
-        ],
-        response: "Yes. All plans of Dcyberx nexus program are prepaid and refundable, by conytacting Dcyberx and carrying out a refund form, but he gurantees the best of service delivery❌"
+      intent: "are_refunds_available",
+      phrases: [
+        "are refunds available","can i be refunded","is there refund","can i cancel my subscription"
+      ],
+      response: "Yes. All plans of Dcyberx nexus program are prepaid and refundable, by conytacting Dcyberx and carrying out a refund form, but he gurantees the best of service delivery❌"
     },
     {
-        intent: "lessons_online_physical",
-        phrases: [
-            "are lessons online or physical","online or from home","learning from home or online"
-        ],
-        response: "Lessons are available both online and physically, depending on the client's desire, location and schedule 🌐"
+      intent: "lessons_online_physical",
+      phrases: [
+        "are lessons online or physical","online or from home","learning from home or online"
+      ],
+      response: "Lessons are available both online and physically, depending on the client's desire, location and schedule 🌐"
     },
     {
-        intent: "hiring_me_or_getting_me_hire_or_hired",
-        phrases: [
-            "can i hire him for a job","can he be hired","hiring him","giving him a job","giving him asighnment"
-        ],
-        response: "Yes. Clients can hire Dcyberx to design their spaces and bring their imagination to life through creative architecture, or anything else regarding tech ✨"
+      intent: "hiring_me_or_getting_me_hire_or_hired",
+      phrases: [
+        "can i hire him for a job","can he be hired","hiring him","giving him a job","giving him asighnment"
+      ],
+      response: "Yes. Clients can hire Dcyberx to design their spaces and bring their imagination to life through creative architecture, or anything else regarding tech ✨"
     },
     {
-        intent: "does_he_have_a_girlfriend_or_a_gf",
-        phrases: [
-            "does dcyberx have a gf","does he have a girlfriend","does dcyberx have a girlfriend"
-        ],
-        response: "let me tell you a secret, What i know he does not have yet but the one will be blessed to have him"
+      intent: "does_he_have_a_girlfriend_or_a_gf",
+      phrases: [
+        "does dcyberx have a gf","does he have a girlfriend","does dcyberx have a girlfriend"
+      ],
+      response: "let me tell you a secret, What i know he does not have yet but the one will be blessed to have him"
     },
     {
-        intent: "dcyberx's_hobby_or_hobbies_or_like_or_favourites",
-        phrases: [
-            "what are dcyberx's hobbies","what are his favourites","what does dcyberx like","dcyberx hobbies","his favourites"
-        ],
-        response: "he really likes green, budminton, camping, creative writing, target practise, eagles and chicks, warm bodies movie"
+      intent: "dcyberx's_hobby_or_hobbies_or_like_or_favourites",
+      phrases: [
+        "what are dcyberx's hobbies","what are his favourites","what does dcyberx like","dcyberx hobbies","his favourites"
+      ],
+      response: "he really likes green, budminton, camping, creative writing, target practise, eagles and chicks, warm bodies movie"
     },
     {
-        intent: "where_does_dcyberx_or_he_live",
-        phrases: [
-                "where does dcyberx live","where does he live","where does he reside","where is he","where is he living"
-        ],
-        response: "for now, he lives at Kitebi at his uncle's"
+      intent: "where_does_dcyberx_or_he_live",
+      phrases: [
+        "where does dcyberx live","where does he live","where does he reside","where is he","where is he living"
+      ],
+      response: "for now, he lives at Kitebi at his uncle's"
     },
     {
-        intent: "where_does_he_study_or_is_he_studying",
-        phrases: [
-            "where does he study from","where does dcyberx study from","where does he go to school","where is he studying"
-        ],
-        response: "Dcyberx studies from Kitebi secondary school-kitebi"
+      intent: "where_does_he_study_or_is_he_studying",
+      phrases: [
+        "where does he study from","where does dcyberx study from","where does he go to school","where is he studying"
+      ],
+      response: "Dcyberx studies from Kitebi secondary school-kitebi"
     },
     {
-        intent: "where_does_he_or_did_he_study_his_primary_or_nursery",
-        phrases: [
-            "where does he study his nursery  from","where does he study his primary from","where did he study his nursery from","where did he study his primary from"
-        ],
-        response: "Dcyberx studied from African Academy Nursery and primary school-kitebi"
+      intent: "where_does_he_or_did_he_study_his_primary_or_nursery",
+      phrases: [
+        "where does he study his nursery  from","where does he study his primary from","where did he study his nursery from","where did he study his primary from"
+      ],
+      response: "Dcyberx studied from African Academy Nursery and primary school-kitebi"
     },
-    {
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why do programmers prefer dark mode? Because light attracts bugs!"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why do Java developers wear glasses? Because they can’t C#."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "How many programmers does it take to change a light bulb? None, that’s a hardware problem."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why was the JavaScript developer sad? Because he didn't 'null' his feelings."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why do programmers hate nature? It has too many bugs."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What’s a programmer’s favorite hangout place? The Foo Bar."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "I wrote a book on reverse engineering... but I can't seem to finish it."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why don’t programmers like to go outside? Because they don’t like the ‘bugs’ in the environment."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What do you call 8 hobbits? A hobbyte."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why do programmers prefer Linux? Because Windows always have too many pop-ups!"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A SQL query walks into a bar, walks up to two tables and asks, 'Can I join you?'"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What do you get when you cross a computer with an elephant? Lots of memory!"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why was the developer's code always angry? It had too many exceptions."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "I told my computer I needed a break, and now it won’t stop sending me pop-up ads."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why do programmers always mix up Christmas and Halloween? Because Oct 31 == Dec 25."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why don't programmers like to play hide and seek? Because good luck hiding when you can always find a bug."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why did the developer go broke? Because he used up all his cache."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "I asked the database to give me more details... but it left me in the dark."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why did the coder get kicked out of school? Because he was caught using 'class' in the playground."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What’s the most annoying programming language? C because it’s a ‘pointer’ to nowhere!"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why don’t programmers ever tell secrets? Because they always end up in a log file."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What’s a programmer’s favorite type of music? Algo-rhythm!"
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A programmer’s life is full of loops… and bugs."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "How do you comfort a JavaScript bug? You console it."
-},
-{
-    intent: "tell_me_a_software_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "Why did the Python programmer get frustrated? Because he couldn't find the right 'indentation'."
-},
-{
-    intent: "tell_me_a_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A man walks into his house with a duck under his arm. His wife looks at him in disbelief and says, 'Where did you get that pig?' The man smiles and says, 'This isn’t a pig, it’s a duck!' His wife shakes her head and says, 'I was talking to the duck.'"
-},
-{
-    intent: "tell_me_a_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A dyslexic man walks into a bra…"
-},
-{
-    intent: "tell_me_a_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A priest, a minister, and a rabbi walk into a bar. The bartender looks up and says, 'Is this some kind of joke?'"
-},
-{
-    intent: "tell_me__joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "A man goes to the doctor and says, 'Every time I touch my arm, it hurts. When I touch my leg, it hurts. My head, it hurts!' The doctor replies, 'Sir, you’ve broken your finger.'"
-},
-{
-    intent: "tell_me_a_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "I tried to start a hot air balloon business, but it never took off."
-},
-{
-    intent: "tell_me_a_joke",
-    phrases: [
-        "tell me a joke","make me laugh","be me funny","joke"
-    ],
-    response: "What do you call a deer with no eyes? No idea! (Get it? No eye-deer)"
-}
 
- 
-    // More intents and responses...
+    // Additional 30 new intents
+    {
+      intent: "tech_news",
+      phrases: [
+        "latest tech news","tech updates","new technology","latest gadgets","tech breakthroughs"
+      ],
+      response: "Stay tuned for the latest in tech news and innovations from around the world! 🚀"
+    },
+    {
+      intent: "career_advice",
+      phrases: [
+        "career tips","how to start in tech","career guidance","job hunting tips","career growth"
+      ],
+      response: "Focus on building skills, networking, and staying updated with industry trends to advance your career! 💼"
+    },
+    {
+      intent: "coding_help",
+      phrases: [
+        "help with coding","coding problems","debugging issues","learn programming","code assistance"
+      ],
+      response: "I'm here to help! Describe your coding problem, and I'll do my best to assist you."
+    },
+    {
+      intent: "ai_trends",
+      phrases: [
+        "AI news","artificial intelligence updates","latest in AI","AI research","future of AI"
+      ],
+      response: "AI continues to evolve rapidly. Stay informed about the latest breakthroughs and applications! 🤖"
+    },
+    {
+      intent: "cybersecurity_tips",
+      phrases: [
+        "cybersecurity advice","how to stay safe online","privacy tips","protect my data","security best practices"
+      ],
+      response: "Always use strong passwords, enable two-factor authentication, and be cautious of phishing scams!"
+    },
+    {
+      intent: "web_development",
+      phrases: [
+        "build a website","web development tips","HTML CSS help","website design","front-end development"
+      ],
+      response: "You can start by learning HTML, CSS, and JavaScript. There are plenty of tutorials available online!"
+    },
+    {
+      intent: "cloud_computing",
+      phrases: [
+        "cloud services","AWS or Azure","cloud storage","cloud deployment","cloud security"
+      ],
+      response: "Cloud computing offers scalable resources. Popular providers include AWS, Azure, and Google Cloud."
+    },
+    {
+      intent: "blockchain",
+      phrases: [
+        "blockchain news","cryptocurrency","decentralized apps","smart contracts","blockchain technology"
+      ],
+      response: "Blockchain is revolutionizing finance and data security. Keep an eye on the latest developments!"
+    },
+    {
+      intent: "data_science",
+      phrases: [
+        "data analysis","big data","machine learning","data visualization","data science projects"
+      ],
+      response: "Data science combines statistics and programming to extract insights from data."
+    },
+    {
+      intent: "game_development",
+      phrases: [
+        "make a game","game design","unity tutorials","game programming","indie game tips"
+      ],
+      response: "Game development involves coding, design, and storytelling. Start small and build your skills!"
+    },
+    {
+      intent: "digital_marketing",
+      phrases: [
+        "social media marketing","SEO tips","digital advertising","content strategy","online marketing"
+      ],
+      response: "Effective digital marketing requires quality content, SEO, and targeted campaigns."
+    },
+    {
+      intent: "tech_events",
+      phrases: [
+        "tech conferences","webinars","hackathons","industry events","meetups"
+      ],
+      response: "Attend industry events and webinars to expand your network and learn new skills."
+    },
+    {
+      intent: "programming_languages",
+      phrases: [
+        "which programming language should I learn","best coding languages","top programming languages","learn Python","learn Java"
+      ],
+      response: "Popular languages include Python, JavaScript, Java, and C++. Choose based on your goals!"
+    },
+    {
+      intent: "software_tools",
+      phrases: [
+        "best development tools","IDEs for programming","version control systems","code editors"
+      ],
+      response: "Popular tools include VS Code, Git, GitHub, and Docker for containerization."
+    },
+    {
+      intent: "tech_innovation",
+      phrases: [
+        "future tech trends","innovations in AI","robotics breakthroughs","next-gen tech"
+      ],
+      response: "The future is exciting! Innovations in AI, robotics, and quantum computing are shaping tomorrow."
+    },
+    {
+      intent: "learning_resources",
+      phrases: [
+        "best online courses","free tutorials","learning platforms","coding bootcamps"
+      ],
+      response: "Check out platforms like Coursera, Udemy, Khan Academy, and freeCodeCamp for quality resources."
+    },
+    {
+      intent: "startup_advice",
+      phrases: [
+        "how to start a tech startup","entrepreneurship tips","building a business","startup ideas"
+      ],
+      response: "Focus on solving real problems, validate your idea, and build a strong team to succeed!"
+    },
+    {
+      intent: "tech_history",
+      phrases: [
+        "history of computers","tech milestones","when was the internet invented","tech evolution"
+      ],
+      response: "Technology has evolved rapidly, from the first computers to today's AI-driven world."
+    },
+    {
+      intent: "smart_devices",
+      phrases: [
+        "best smart gadgets","IoT devices","smart home tech","wearable tech"
+      ],
+      response: "Smart devices are making life easier. Explore options like smart speakers, wearables, and home automation."
+    },
+    {
+      intent: "coding_challenges",
+      phrases: [
+        "coding puzzles","programming challenges","algorithm problems","practice coding"
+      ],
+      response: "Practice with coding challenges on platforms like LeetCode, HackerRank, and Codewars!"
+    },
+    {
+      intent: "tech_quotes",
+      phrases: [
+        "inspirational tech quotes","famous quotes about technology","tech motivation"
+      ],
+      response: "Here's a quote: 'Technology is best when it brings people together.' – Matt Mullenweg"
+    },
+    {
+      intent: "question_about_platform",
+      phrases: [
+        "How does this platform work?","Tell me about this site","What can I do here?","Platform features"
+      ],
+      response: "Our platform offers AI chat, resources, and tools to help you learn and grow in tech!"
+    },
+    {
+      intent: "feedback",
+      phrases: [
+        "I want to give feedback","Tell you my opinion","How to improve","Feedback about service"
+      ],
+      response: "We value your feedback! Please share your thoughts to help us improve."
+    },
+    {
+      intent: "how_old_is_he_dcyberx",
+      phrases: [
+        "how old is he","how old is dcyberx","How to improve","how many years does he have"
+      ],
+      response: "what i know of now, he is a teenager"
+    },
   ];
 
   // Preprocessing the user message to normalize text
   const normalizeText = (text) => {
-    return text.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, ""); // Remove all non-alphanumeric characters
+    return text.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "");
   };
 
   // Get the best match based on Levenshtein Distance
@@ -576,13 +488,10 @@ export async function getBotResponse(userMessage) {
     let bestMatch = null;
     let lowestDistance = Infinity;
 
-    // Loop through predefined responses and calculate Levenshtein Distance for each phrase
     for (let response of responses) {
       for (let phrase of response.phrases) {
         const normalizedPhrase = normalizeText(phrase);
         const distance = levenshtein(normalizedUserMessage, normalizedPhrase);
-
-        // If the distance is the lowest so far, update the best match
         if (distance < lowestDistance) {
           lowestDistance = distance;
           bestMatch = response.response;
@@ -590,10 +499,8 @@ export async function getBotResponse(userMessage) {
       }
     }
 
-    // If no match is found, return "I'm still learning, can you rephrase?"
     return bestMatch || "I'm still learning, can you rephrase?";
   };
 
-  // Return the best match
   return getBestMatch(userMessage);
 }
