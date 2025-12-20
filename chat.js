@@ -1,4 +1,3 @@
-
 // 1. **Sanitize User Input** to prevent XSS
 function sanitizeInput(input) {
   const element = document.createElement('div');
@@ -8,9 +7,9 @@ function sanitizeInput(input) {
 
 // 2. **Prevent Sending Messages Too Fast (Rate Limiting)**
 let lastMessageTime = 0;
-const RATE_LIMIT = 3000;  // in milliseconds
+const RATE_LIMIT = 3000;  
 
-// 3. **Get Current Time for Display**
+// 3. **Add Time for Displaying Message (For the UI)**
 function getTime() {
   return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
@@ -65,7 +64,7 @@ chatInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
 });
 
-// Levenshtein Distance function for fallback or advanced matching (if needed)
+// Levenshtein Distance function to calculate the similarity score
 const levenshtein = (a, b) => {
   const tmp = [];
   let i, j, alen = a.length, blen = b.length, score;
@@ -74,36 +73,36 @@ const levenshtein = (a, b) => {
   if (blen === 0) return alen;
 
   for (i = 0; i <= alen; i++) tmp[i] = [i];
+
   for (j = 0; j <= blen; j++) tmp[0][j] = j;
 
   for (i = 1; i <= alen; i++) {
     for (j = 1; j <= blen; j++) {
       score = a[i - 1] === b[j - 1] ? 0 : 1;
-      tmp[i][j] = Math.min(
-        tmp[i - 1][j] + 1,
-        tmp[i][j - 1] + 1,
-        tmp[i - 1][j - 1] + score
-      );
+      tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + score);
     }
   }
   return tmp[alen][blen];
 };
 
-// 7. **Main Response Logic with Enhanced Matching**
 export async function getBotResponse(userMessage) {
   const responses = [
-    // Your existing response objects...
+    // Existing responses...
     {
       intent: "greeting",
-      phrases: ["hi", "hello", "hey", "hiya", "what's up", "howdy", "yo", "whats up", "how is everything"],
+      phrases: [
+        "hi", "hello","hey","hiya","what's up","howdy","yo","whats up","how is everything"
+      ],
       response: "Hello 👋 How can I help you?"
     },
     {
       intent: "greeting_salam",
-      phrases: ["Assalam alikum", "Assalam alaikum warahmatullahi wabarakatuh", "Assalam alykum"],
-      response: "wa-alikum salam warahmatullah wabarakatuh"
+      phrases: [
+        "Assalam alikum","Assalam alaikum warahmatullahi wabarakatuh","Assalam alykum"
+      ],
+      response: "wa-alikum salam warahmatullahu wabarakatuh"
     },
-     {
+    {
       intent: "greeting_morning",
       phrases: [
         "good morning","morning","how is your morning","morning to you"
@@ -478,42 +477,30 @@ export async function getBotResponse(userMessage) {
     },
   ];
 
-    // ... (other intents)
-  
-
-  // Helper functions for tokenizing and matching
+  // Preprocessing the user message to normalize text
   const normalizeText = (text) => {
-    return text
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-zA-Z0-9 ]/g, '') // Remove punctuation
-      .replace(/\s+/g, ' '); // Collapse spaces
+    return text.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "");
   };
 
-  const tokenizeText = (text) => {
-    return normalizeText(text).split(' ');
-  };
-
-  const getBestMatch = (message, responses, minMatchTokens = 2) => {
-    const userTokens = tokenizeText(message);
-    let bestResponse = null;
-    let maxMatchingTokens = 0;
+  // Get the best match based on Levenshtein Distance
+  const getBestMatch = (userMessage) => {
+    const normalizedUserMessage = normalizeText(userMessage);
+    let bestMatch = null;
+    let lowestDistance = Infinity;
 
     for (let response of responses) {
       for (let phrase of response.phrases) {
-        const phraseTokens = tokenizeText(phrase);
-        const commonTokens = phraseTokens.filter(token => userTokens.includes(token));
-        if (commonTokens.length >= minMatchTokens && commonTokens.length > maxMatchingTokens) {
-          maxMatchingTokens = commonTokens.length;
-          bestResponse = response.response;
+        const normalizedPhrase = normalizeText(phrase);
+        const distance = levenshtein(normalizedUserMessage, normalizedPhrase);
+        if (distance < lowestDistance) {
+          lowestDistance = distance;
+          bestMatch = response.response;
         }
       }
     }
-    return bestResponse || "I'm still learning, can you rephrase?";
+
+    return bestMatch || "I'm still learning, can you rephrase?";
   };
 
-  // Normalize user message
-  const normalizedMsg = normalizeText(userMessage);
-  // Find best match based on token overlap
-  return getBestMatch(normalizedMsg, responses);
+  return getBestMatch(userMessage);
 }
