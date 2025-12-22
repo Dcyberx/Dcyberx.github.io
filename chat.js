@@ -473,7 +473,49 @@ export async function getBotResponse(userMessage) {
       phrases: [
         "how old is he","how old is dcyberx","How to improve","how many years does he have"
       ],
-      response: "what i know of now, he is a teenager"
+      response: "what_i_know_of_now_he_is_a_teenager"
+    },
+    {
+      intent: "what_is_your_importance",
+      phrases: [
+        "what is your importance","what do  you do","what is your aim","what do you help","what is your objective","what reaaly do  you do"
+      ],
+      response: "I am always here to help upon the best service at cybertech."
+    },
+    {
+      itnent: "what_is_the_aim_of_dcyerx",
+      phrases:[
+        "what is his aim","what is the aim of dcyberx","what is he aiming","what is  dcyberx aiming","what are the aims of dcyberx"
+      ],
+      response: "Dcyberx's aim is  to  make the better thing and servcie of cybertech which impliments his best vision"
+    },
+    {
+      intent: "why_did_he_use_the_dark_theme",
+      phrases:[
+        "why did dcyberx use the dark theme","why did  he use this theme","why did he in all themes use  this one","why did he choose this theme"
+      ],
+      response: "Dcyberx choose that theme beacause its  theoe which attracted and showedlove for the est of layout and appearance"
+    },
+    {
+      intent:  "what_really_put_ito_that",
+      phrases:[
+        "whatispired dcyberx  into this of technology","what inspired dcyberx into tech","what made dcyberx love this carrier"
+      ],
+      response: "cyberx loved and loves tech  / this arrier because its where he feels the best of love and encouragement"
+    },
+    {
+      intent: "what_things_inpire_him",
+      phrases:[
+        "what  inspires him","what makes him like tech","what makes dcyberx love","what puts dcyberx into  this"
+      ],
+      response: "the IOT devices, the way things and networks work, mostly the love to protect others online ( cyber security ) inspires dcyberx into this"
+    },
+    {
+      intent: "what_best_can_i_get_from_here",
+      phrases:[
+        "what  more super diffrent","what more interresting","what extraordinary can i get from this site"
+      ],
+      response: "This website atleast provides a wider best experince of a cyber futuristic aspect of technology, through like  me, the programs and all other services"
     },
   ];
 
